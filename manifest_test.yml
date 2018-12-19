@@ -1,0 +1,6 @@
+---
+applications:
+- name: ithubbs_test
+  instances: 1
+  buildpack: staticfile_buildpack
+
