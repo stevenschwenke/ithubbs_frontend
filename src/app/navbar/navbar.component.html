@@ -1,0 +1,62 @@
+<div class="navbar row">
+  <nav class="navbar navbar-expand-xl navbar-light">
+
+    <a class="navbar-brand" routerLink="current">
+      <img src="../../assets/images/logo_ithubbs.svg" width="117" height="73">
+    </a>
+
+    <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed">
+      <fa-icon [icon]=faBars></fa-icon>
+    </button>
+
+    <!-- Content shown when navbar is collapsed -->
+    <div *ngIf="isCollapsed">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="current">Aktuelles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="gruppen">Gruppen</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="orga">Für Organisatoren</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="use">How to use</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mission">Mission Statement</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="impressum">Impressum</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Content shown when navbar isn't collapsed -->
+    <div id="collapseEvent" [collapse]="isCollapsed">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="current">Aktuelles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="gruppen">Gruppen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="orga">Für Organisatoren</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="use">How to use</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="mission">Mission Statement</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="impressum">Impressum</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

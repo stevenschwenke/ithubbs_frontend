@@ -1,0 +1,23 @@
+= Use of Bootstrap for styling the views
+
+= Status: accepted
+
+= Context
+Bootstrap is successfully used by lots of companies and projects and provides more than just styling (e.g. burger menus). There are three options:
+
+1. Add Bootstrap manually. 
+1. https://ng-bootstrap.github.io/#/home[ng-Bootstrap]
+1. https://github.com/valor-software/ngx-bootstrap[ngx-Bootstrap]
+
+According to https://stevenschwenke.de/addingBootstrapToAnAngularApplicationThatGotGeneratedWithJHipster[this analyzis] it's clear that options 2 and 3 are to favor.
+
+Compared to ngx-bootstrap, ng-Bootstrap is the older library. However, there has been a long pause in the development during which ngx-bootstrap was developed as a replacement / successor. After development of ng-bootstrap continued, both of these options are pretty equal.
+
+Experts like Maximilian Schwarzmüller and Angular-Schule don't have any preferences.  
+
+
+= Decision
+ngx-bootstrap is chosen because it the library with the most continuous development.
+
+= Consequences
+None known.
