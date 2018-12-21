@@ -6,7 +6,7 @@ This is the frontend to http://www.ithubbs.de[ithubbs.de]
 1. Open terminal in project root
 1. Transpile TypeScript to JavaScript, write to to dist-folder:
 
-    ng build --prod
+    ng build --prod --output-path dist\ithubbs\public
 
 1. Login to PCF
 

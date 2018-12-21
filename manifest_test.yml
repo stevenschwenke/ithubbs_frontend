@@ -2,5 +2,5 @@
 applications:
 - name: ithubbs_test
   instances: 1
-  buildpack: staticfile_buildpack
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
 
