@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  eventsUrl: 'http://localhost:8090/ithubbs/api/events/'
+  eventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/events/'
 };
 
 /*
