@@ -17,6 +17,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CollapseModule} from 'ngx-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {APP_BASE_HREF} from '@angular/common';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -42,6 +43,9 @@ describe('AppComponent', () => {
         UpcomingEventsComponent,
         FooterComponent
       ],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'},
+      ]
     }).compileComponents();
   }));
 
