@@ -1,15 +1,46 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {FooterComponent} from './footer/footer.component';
+import {CurrentCampaignsComponent} from './current-campaigns/current-campaigns.component';
+import {CurrentEverythingComponent} from './current-everything/current-everything.component';
+import {LocalGroupsComponent} from './local-groups/local-groups.component';
+import {ImprintComponent} from './imprint/imprint.component';
+import {UsageComponent} from './usage/usage.component';
+import {JourFixesComponent} from './jour-fixes/jour-fixes.component';
+import {MissionStatementComponent} from './mission-statement/mission-statement.component';
+import {RegionalConferencesComponent} from './regional-conferences/regional-conferences.component';
+import {UpcomingEventsComponent} from './upcoming-events/upcoming-events.component';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {CollapseModule} from 'ngx-bootstrap';
+import {AppRoutingModule} from './app-routing.module';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        HttpClientModule,
+        BrowserModule,
+        CollapseModule.forRoot(),
+        AppRoutingModule,
+        FontAwesomeModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent,
+        CurrentCampaignsComponent,
+        CurrentEverythingComponent,
+        LocalGroupsComponent,
+        ImprintComponent,
+        UsageComponent,
+        JourFixesComponent,
+        MissionStatementComponent,
+        RegionalConferencesComponent,
+        UpcomingEventsComponent,
+        FooterComponent
       ],
     }).compileComponents();
   }));
@@ -20,16 +51,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ithubbs'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ithubbs');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ithubbs!');
-  });
 });

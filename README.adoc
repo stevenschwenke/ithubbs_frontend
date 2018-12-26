@@ -1,5 +1,7 @@
 = IT-Hub Braunschweig Fronted
 
+image:https://travis-ci.org/stevenschwenke/ithubbs_frontend.svg?branch=master["Build Status", link="https://travis-ci.org/stevenschwenke/ithubbs_frontend"]
+
 This is the frontend to http://www.ithubbs.de[ithubbs.de]
 
 == Deploy to PCF
