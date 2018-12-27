@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import {AuthServerProvider} from '../auth/auth-jwt.service';
 import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class LoginService {
@@ -11,7 +12,8 @@ export class LoginService {
   constructor(
     private authServerProvider: AuthServerProvider,
     private localStorage: LocalStorageService,
-    private sessionStorage: SessionStorageService) {
+    private sessionStorage: SessionStorageService,
+    private router: Router) {
 
     // If application refreshed with F5, the LoginService "forgets" that it has been logged in. Hence, have a look if we have a token:
     if (!!this.userLoggedIn) {
@@ -32,6 +34,7 @@ export class LoginService {
           return cb();
         },
         err => {
+          console.log('Wrong credentials!');
           this.logout();
           reject(err);
           return cb(err);
@@ -43,5 +46,6 @@ export class LoginService {
   logout() {
     this.userLoggedIn.next(false);
     this.authServerProvider.logout().subscribe();
+    this.router.navigate(['']);
   }
 }

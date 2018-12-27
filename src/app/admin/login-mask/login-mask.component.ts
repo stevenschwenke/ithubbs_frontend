@@ -1,9 +1,8 @@
-import {Component, ElementRef, OnInit, Renderer} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {faLightbulb} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {LoginService} from '../core/login/login.service';
-import {UserService} from '../../shared/user.service';
+import {UserService} from '../shared/user.service';
 
 @Component({
   selector: 'app-login-mask',
@@ -21,7 +20,6 @@ export class LoginMaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.logout();
   }
 
   onLogin(form: NgForm) {

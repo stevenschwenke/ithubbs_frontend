@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminEventService} from '../shared/admin.event.service';
+import {UserService} from '../shared/user.service';
+import {LoginService} from '../core/login/login.service';
 
 @Component({
   selector: 'app-events',
@@ -8,7 +10,11 @@ import {AdminEventService} from '../shared/admin.event.service';
 })
 export class AdminEventsComponent implements OnInit {
 
-  constructor(private adminEventService: AdminEventService) { }
+  loginUser: string;
+
+  constructor(private adminEventService: AdminEventService,
+              private userService: UserService,
+              private loginService: LoginService) { }
 
   events: Event[];
 
@@ -16,6 +22,10 @@ export class AdminEventsComponent implements OnInit {
     this.adminEventService.getAllIdeas().subscribe((events) => {
       this.events = events;
     });
+    this.loginUser = this.userService.getUsername();
   }
 
+  logout() {
+    this.loginService.logout();
+  }
 }
