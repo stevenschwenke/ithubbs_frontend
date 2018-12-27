@@ -1,0 +1,31 @@
+<form (ngSubmit)="onLogin(f)" #f="ngForm">
+  <div class="container">
+
+    <h1>Please log in</h1>
+
+    <label class="col" for="username">Username</label>
+    <input class="col"
+           type="text"
+           id="username"
+           size="30"
+           pInputText name="username"
+           title="Benutzername"
+           autocomplete="username"
+           ngModel>
+
+    <label class="col" for="password">Password</label>
+    <input class="col"
+           type="password"
+           id="password"
+           size="30"
+           pInputText name="password"
+           title="Passwort"
+           autocomplete="current-password"
+           ngModel>
+    <button class="col" style="height:50px; width:250px;font-size: 20px; background-color: #0b6e38;color:white">
+      Login
+    </button>
+  </div>
+</form>
+
+

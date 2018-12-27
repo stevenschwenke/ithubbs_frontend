@@ -5,7 +5,12 @@
 export const environment = {
   production: false,
 
-  eventsUrl: 'http://localhost:8090/ithubbs/api/events/'
+  authenticateUrl: 'http://localhost:8090/ithubbs/api/authenticate',
+
+  adminUrl: 'http://localhost:8090/ithubbs/api/admin',
+  adminEventsUrl: 'http://localhost:8090/ithubbs/api/admin/events',
+
+  eventsUrl: 'http://localhost:8090/ithubbs/api/events'
 };
 
 /*

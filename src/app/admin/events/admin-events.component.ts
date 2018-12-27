@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminEventService} from '../shared/admin.event.service';
 
 @Component({
   selector: 'app-events',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminEventsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminEventService: AdminEventService) { }
+
+  events: Event[];
 
   ngOnInit() {
+    this.adminEventService.getAllIdeas().subscribe((events) => {
+      this.events = events;
+    });
   }
 
 }

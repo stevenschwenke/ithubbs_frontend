@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,7 +17,11 @@ import {UsageComponent} from './usage/usage.component';
 import {CollapseModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {EventService} from './shared/event.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {LocalStorageService, Ng2Webstorage, SessionStorageService} from 'ngx-webstorage';
+import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
+import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
+import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,11 +43,31 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     CollapseModule.forRoot(),
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'})
   ],
   providers: [
-    EventService
+    EventService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+      deps: [LocalStorageService, SessionStorageService]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true,
+      deps: [Injector]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoginMaskInterceptor,
+      multi: true,
+      deps: [Injector]
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
