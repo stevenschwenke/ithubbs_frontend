@@ -14,7 +14,10 @@ const routes = [
   { path: 'orga', component: JourFixesComponent},
   { path: 'use', component: UsageComponent},
   { path: 'mission', component: MissionStatementComponent},
-  { path: 'impressum', component: ImprintComponent}
+  { path: 'impressum', component: ImprintComponent},
+  {
+    path: 'admin', loadChildren: './admin/admin.module#AdminModule'
+  }
 ];
 
 @NgModule({
