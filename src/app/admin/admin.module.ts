@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { EventsComponent } from './events/events.component';
+import { AdminEventsComponent } from './events/admin-events.component';
 
 @NgModule({
-  declarations: [EventsComponent],
+  declarations: [AdminEventsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule
