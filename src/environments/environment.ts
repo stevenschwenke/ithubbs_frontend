@@ -9,6 +9,7 @@ export const environment = {
 
   adminUrl: 'http://localhost:8090/ithubbs/api/admin',
   adminEventsUrl: 'http://localhost:8090/ithubbs/api/admin/events',
+  adminGroupsUrl: 'http://localhost:8090/ithubbs/api/admin/groups',
 
   eventsUrl: 'http://localhost:8090/ithubbs/api/events'
 };

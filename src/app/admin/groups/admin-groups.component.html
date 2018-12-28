@@ -9,16 +9,18 @@
   </button>
 </p>
 
-<h1>Admin-Ansicht der Events</h1>
+<h1>Admin-Ansicht der Gruppen</h1>
 
 <table class="table table-responsive">
   <tr>
-    <th>Datum</th>
-    <th>Event</th>
+    <th>Name</th>
+    <th>URL</th>
+    <th>Beschreibung</th>
   </tr>
-  <tr *ngFor="let event of events">
-    <td>{{event.date | date:'dd.MM.yyyy'}}</td>
-    <td><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
+  <tr *ngFor="let group of groups">
+    <td>{{group.name}</td>
+    <td><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
+    <td>{{group.description}}</td>
   </tr>
 </table>
 <p>
