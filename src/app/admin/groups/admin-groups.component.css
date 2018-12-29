@@ -1,7 +1,13 @@
 button {
-  height: 40px; width:250px; background-color: #0b6e38; color:white; margin-top: 10px
+  height: 40px;
+  width:250px;
+  background-color: #69a17c;
+  color:black;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 button:disabled {
+  font-weight: normal;
   background-color: darkgray;
 }
