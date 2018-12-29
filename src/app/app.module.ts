@@ -22,6 +22,7 @@ import {LocalStorageService, Ng2Webstorage, SessionStorageService} from 'ngx-web
 import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
 import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
 import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor'
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     CollapseModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,

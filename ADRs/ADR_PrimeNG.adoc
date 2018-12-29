@@ -1,0 +1,25 @@
+= Use of PrimeNG as main UI library
+
+= Status: accepted
+
+= Context
+
+PrimeNG is a well-known UI component library under MIT licence.
+
+Also, it is under active development: The last commit in the Github repository is just a few days back.
+
+The article https://codeburst.io/why-not-primeng-852a9dfca6bc[Why not PrimeNG] actually included some really good thoughts why PrimeNG is a good choice: "Should you still consider PrimeNG for your upcoming projects? Definitely yes […] if you [don't] need more customization and event bindings". The article https://medium.com/@preethi.s/why-should-you-choose-primeng-for-angular-ui-components-ea5e918e582e[Why should you choose PrimeNG for Angular UI components?] added some aspects to that, for example that there are different themes available.
+
+Searching for reasons why not to use PrimeNG, the already mentioned article “Why not PrimeNG” lists some reasons, for example missing methods and attributes that make reacting to certain events harder / impossible. One of the many commentaries under the article is from a PrimeNG commiter and states that these are “places to be improved”. Because that discussion is already a little bit older, most of the negative aspects have been fixed now. The author himself commented: "One of the reasons some of the issues from the article have been fixed is the article itself - see their lead's response to the article :) But to be honest, PrimeNG is awesome and still the best UI component lib out there for Angular."
+
+Multiple blogs and comments agreed to PrimeNG having missing documentation.
+
+The only real alternative to PrimeNG we could find is https://material.angular.io[Angular Material]. Since Angular 6, https://medium.com/codingthesmartway-com-blog/angular-material-and-angular-6-material-design-for-angular-6b1a3ee476f0[integrating this library has become easier].
+
+Because there is no real unique feature between those options, we had a look at the components both offered. PrimeNG seems to be more useful with its 63 components, whereas Angular Material “only” offers 34 components.
+
+= Decision
+We couldn’t find any real reason to not chose PrimeNG, so we continued using it. However, it is good to have researched alternatives to make a reasonable decision about which library to use.
+
+= Consequences
+None known.

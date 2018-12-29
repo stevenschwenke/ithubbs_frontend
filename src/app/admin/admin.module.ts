@@ -6,8 +6,11 @@ import {AdminEventsComponent} from './events/admin-events.component';
 import {LoginMaskComponent} from './login-mask/login-mask.component';
 import {FormsModule} from '@angular/forms';
 import {AdminEventService} from './shared/admin.event.service';
-import { AdminGroupsComponent } from './groups/admin-groups.component';
+import {AdminGroupsComponent} from './groups/admin-groups.component';
 import {AdminGroupService} from './shared/admin.group.service';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {MessageService, OverlayPanelModule} from 'primeng/primeng';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import {AdminGroupService} from './shared/admin.group.service';
   imports: [
     CommonModule,
     FormsModule,
-    AdminRoutingModule
+    FontAwesomeModule,
+    AdminRoutingModule,
+    OverlayPanelModule,
+    ToastModule
   ],
   providers: [
     AdminEventService,
-    AdminGroupService
+    AdminGroupService,
+    MessageService
   ]
 })
 export class AdminModule { }

@@ -1,8 +1,9 @@
+<p-toast></p-toast>
+
 <p align="right">
   <button
     (click)="logout()"
-    style="background-color: crimson; padding: 3px; margin: 10px"
-  >
+    style="background-color: salmon; padding: 3px; margin: 10px">
     <span style="font-weight: bold">
       Logout {{loginUser}}
     </span>
@@ -11,6 +12,58 @@
 
 <h1>Admin-Ansicht der Gruppen</h1>
 
+<p-overlayPanel
+  #overlay
+  [showCloseIcon]="true"
+  [dismissable]="true">
+    <h1>Neue Gruppe</h1>
+      <form (ngSubmit)="onAddNewGroup($event, newGroupForm, overlay)" #newGroupForm="ngForm">
+        <div class="container">
+          <label for="newGroupName">Name</label>
+          <input class="col"
+                 type="text"
+                 id="newGroupName"
+                 size="100"
+                 pInputText name="newGroupName"
+                 title="Name"
+                 ngModel>
+
+          <label for="newGroupURL" style="margin-top: 10px">URL</label>
+          <input class="col"
+                 type="text"
+                 id="newGroupURL"
+                 size="300"
+                 pInputText name="newGroupURL"
+                 title="URL"
+                 ngModel>
+
+          <label for="newGroupDescription" style="margin-top: 10px">Beschreibung</label>
+          <input class="col"
+                 type="text"
+                 id="newGroupDescription"
+                 size="2000"
+                 pInputText name="newGroupDescription"
+                 title="Description"
+                 ngModel>
+
+          <button style="height: 40px; width:250px; background-color: #0b6e38; color:white; margin-top: 10px">
+            Speichern
+          </button>
+        </div>
+    </form>
+</p-overlayPanel>
+
+<button
+  (click)="overlay.toggle($event)"
+  style="background-color: #69a17c; padding: 3px; margin: 10px">
+
+  <fa-icon [icon]="faPlusSquare"></fa-icon>
+
+  <span style="font-weight: bold">
+      Neue Gruppe anlegen
+    </span>
+</button>
+
 <table class="table table-responsive">
   <tr>
     <th>Name</th>
@@ -18,7 +71,7 @@
     <th>Beschreibung</th>
   </tr>
   <tr *ngFor="let group of groups">
-    <td>{{group.name}</td>
+    <td>{{group.name}}</td>
     <td><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td>{{group.description}}</td>
   </tr>
