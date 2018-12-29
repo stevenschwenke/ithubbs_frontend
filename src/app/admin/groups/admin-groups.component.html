@@ -17,36 +17,39 @@
   [showCloseIcon]="true"
   [dismissable]="true">
     <h1>Neue Gruppe</h1>
-      <form (ngSubmit)="onAddNewGroup($event, newGroupForm, overlay)" #newGroupForm="ngForm">
+      <form [formGroup]="newGroupForm" (ngSubmit)="onAddNewGroup($event, newGroupForm, overlay)">
         <div class="container">
-          <label for="newGroupName">Name</label>
+          <label for="newGroupName" style="margin-top: 10px">Name</label>
+          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupName'].valid&&newGroupForm.controls['newGroupName'].dirty"></p-message>
           <input class="col"
                  type="text"
                  id="newGroupName"
                  size="100"
-                 pInputText name="newGroupName"
+                 formControlName="newGroupName"
                  title="Name"
-                 ngModel>
+                 placeholder="Pflichtfeld">
 
           <label for="newGroupURL" style="margin-top: 10px">URL</label>
+          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupURL'].valid&&newGroupForm.controls['newGroupURL'].dirty"></p-message>
           <input class="col"
                  type="text"
                  id="newGroupURL"
                  size="300"
-                 pInputText name="newGroupURL"
+                 formControlName="newGroupURL"
                  title="URL"
-                 ngModel>
+                 placeholder="Pflichtfeld">
 
           <label for="newGroupDescription" style="margin-top: 10px">Beschreibung</label>
+          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupDescription'].valid&&newGroupForm.controls['newGroupDescription'].dirty"></p-message>
           <input class="col"
                  type="text"
                  id="newGroupDescription"
                  size="2000"
-                 pInputText name="newGroupDescription"
+                 formControlName="newGroupDescription"
                  title="Description"
-                 ngModel>
+                 placeholder="Pflichtfeld">
 
-          <button style="height: 40px; width:250px; background-color: #0b6e38; color:white; margin-top: 10px">
+          <button [disabled]="!newGroupForm.valid">
             Speichern
           </button>
         </div>

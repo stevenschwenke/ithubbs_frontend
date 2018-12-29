@@ -1,0 +1,7 @@
+button {
+  height: 40px; width:250px; background-color: #0b6e38; color:white; margin-top: 10px
+}
+
+button:disabled {
+  background-color: darkgray;
+}

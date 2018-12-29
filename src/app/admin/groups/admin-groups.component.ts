@@ -3,17 +3,18 @@ import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
-import {
-  faPlusSquare as faPlusSquare
-} from '@fortawesome/free-solid-svg-icons';
-import {NgForm} from '@angular/forms';
+import {faPlusSquare as faPlusSquare} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, OverlayPanel} from 'primeng/primeng';
 
 @Component({
   selector: 'app-admin-groups',
-  templateUrl: './admin-groups.component.html'
+  templateUrl: './admin-groups.component.html',
+  styleUrls: ['./admin-groups.component.css']
 })
 export class AdminGroupsComponent implements OnInit {
+
+  newGroupForm: FormGroup;
 
   faPlusSquare = faPlusSquare;
 
@@ -21,13 +22,21 @@ export class AdminGroupsComponent implements OnInit {
 
   groups: Group[];
 
-  constructor(private adminGroupService: AdminGroupService,
+  constructor(private formBuilder: FormBuilder,
+              private adminGroupService: AdminGroupService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService) {
   }
 
   ngOnInit() {
+
+    this.newGroupForm = this.formBuilder.group({
+      'newGroupName': new FormControl('', Validators.required),
+      'newGroupURL': new FormControl('', Validators.required),
+      'newGroupDescription': new FormControl('', Validators.required)
+    });
+
     this.adminGroupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
     });
@@ -38,7 +47,7 @@ export class AdminGroupsComponent implements OnInit {
     this.loginService.logout();
   }
 
-  onAddNewGroup(event, newGroupForm: NgForm, overlay: OverlayPanel) {
+  onAddNewGroup(event, newGroupForm: FormGroup, overlay: OverlayPanel) {
 
     const newGroup = new Group(
       newGroupForm.value.newGroupName,
