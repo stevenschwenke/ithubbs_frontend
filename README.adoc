@@ -20,3 +20,11 @@ This is the frontend to http://www.ithubbs.de[ithubbs.de]
     cd dist\ithubbs
     cf push -f ..\..\manifest_test.yml
 
+== Running on PCF
+
+The following configuration is sufficient to run on Pivotal Cloudfoundry:
+
+* instances: 1
+* Memory Allocated: 64 MB
+* Disk Allocated: 64 MB
+* Price per month on Pivotal Cloudfoundry: *< $2,70*
