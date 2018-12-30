@@ -3,7 +3,9 @@
 <p align="right">
   <button
     (click)="logout()"
-    style="background-color: salmon; padding: 3px; margin: 10px">
+    class="btn btn-primary background-attention"
+    style="margin-right: 10px"
+  >
     <span style="font-weight: bold">
       Logout {{loginUser}}
     </span>
@@ -49,7 +51,7 @@
                  title="Description"
                  placeholder="Pflichtfeld">
 
-          <button [disabled]="!newGroupForm.valid">
+          <button class="btn btn-primary" [disabled]="!newGroupForm.valid">
             Speichern
           </button>
         </div>
@@ -58,7 +60,7 @@
 
 <button
   (click)="overlay.toggle($event)"
-  style="background-color: #69a17c; padding: 3px; margin: 10px">
+  class="btn btn-primary">
 
   <fa-icon [icon]="faPlusSquare"></fa-icon>
 
@@ -69,11 +71,68 @@
 
 <table class="table table-responsive">
   <tr>
+    <th></th>
+    <th>id</th>
     <th>Name</th>
     <th>URL</th>
     <th>Beschreibung</th>
   </tr>
+
+  <p-overlayPanel
+    #overlayEditGroup
+    [showCloseIcon]="true"
+    [dismissable]="true">
+    <h1>Gruppe editieren</h1>
+    <form [formGroup]="editGroupForm" (ngSubmit)="onSaveEditedGroup($event, editGroupForm, overlayEditGroup)">
+      <div class="container">
+        <input [hidden]="true"
+              formControlName="existingGroupId">
+        <label for="existingGroupName" style="margin-top: 10px">Name</label>
+        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupName'].valid&&editGroupForm.controls['existingGroupName'].dirty"></p-message>
+        <input class="col"
+               type="text"
+               id="existingGroupName"
+               size="100"
+               formControlName="existingGroupName"
+               title="Name"
+               placeholder="Pflichtfeld">
+
+        <label for="existingGroupURL" style="margin-top: 10px">URL</label>
+        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupURL'].valid&&editGroupForm.controls['existingGroupURL'].dirty"></p-message>
+        <input class="col"
+               type="text"
+               id="existingGroupURL"
+               size="300"
+               formControlName="existingGroupURL"
+               title="URL"
+               placeholder="Pflichtfeld">
+
+        <label for="existingGroupDescription" style="margin-top: 10px">Beschreibung</label>
+        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupDescription'].valid&&editGroupForm.controls['existingGroupDescription'].dirty"></p-message>
+        <input class="col"
+               type="text"
+               id="existingGroupDescription"
+               size="2000"
+               formControlName="existingGroupDescription"
+               title="Description"
+               placeholder="Pflichtfeld">
+
+        <button class="btn btn-primary" [disabled]="!editGroupForm.valid">
+          Speichern
+        </button>
+      </div>
+    </form>
+  </p-overlayPanel>
+
   <tr *ngFor="let group of groups">
+    <td>
+      <button (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
+      class="btn btn-primary"
+      style="margin-top: -5px">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+    </td>
+    <td>{{group.id}}</td>
     <td>{{group.name}}</td>
     <td><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td>{{group.description}}</td>

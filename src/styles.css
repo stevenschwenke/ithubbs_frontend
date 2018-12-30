@@ -27,12 +27,12 @@
 .nav-link:hover {
   background-color: #237c4c;
   border: 1px solid #69a17c;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .navbar-toggler:hover {
   background-color: #237c4c;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 /* General Stylings */
@@ -45,6 +45,42 @@ a {
 a:hover {
   color: #533f03 !important;
   font-weight: bold;
+}
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #0b6e38;
+  font-weight: bold;
+  border: 1px solid #237c4c;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  color: #533f03;
+  background-color: #237c4c;
+  border: 1px solid #69a17c;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:focus {
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  color: #fff;
+  background-color: #0b6e38;
+  font-weight: normal;
+  border: 1px solid #237c4c;
+}
+
+.background-attention {
+  background-color: #6e160b;
+}
+
+.background-attention:hover {
+  background-color: rgba(110, 22, 11, 0.63);
 }
 
 h1 {
@@ -70,10 +106,6 @@ h3 {
   font-weight: 700
 }
 
-.btn-primary, .btn-primary:active, .btn-primary:hover, .btn-primary:visited {
-  background-color: #1c7430 !important
-}
-
 p {
   margin-left: 10px;
 }
@@ -82,16 +114,27 @@ p {
   padding-bottom: 20px;
 }
 
+/* Overlay-Panes */
+
+.ui-overlaypanel-close {
+  background-color: #6e160b !important;
+}
+
+.ui-overlaypanel-close-icon {
+  color: #fff !important;
+}
+
 /* Tables */
 
 .table tr:hover {
   background-color: #e8f4ed;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .table td, .table th {
   border-top: 0;
   border-bottom: 1px solid #dee2e6;
+  vertical-align: middle
 }
 
 .table th {
