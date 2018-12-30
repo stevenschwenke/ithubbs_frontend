@@ -3,7 +3,7 @@ import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
-import {faPlusSquare as faPlusSquare, faEdit as faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faPlusSquare as faPlusSquare, faEdit as faEdit, faSignOutAlt as faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService, OverlayPanel} from 'primeng/primeng';
 
@@ -18,6 +18,7 @@ export class AdminGroupsComponent implements OnInit {
 
   faPlusSquare = faPlusSquare;
   faEdit = faEdit;
+  faSignOutAlt = faSignOutAlt;
 
   loginUser: string;
 

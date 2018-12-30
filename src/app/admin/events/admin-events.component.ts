@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminEventService} from '../shared/admin.event.service';
 import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
+import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-events',
@@ -9,6 +10,8 @@ import {LoginService} from '../core/login/login.service';
   styleUrls: ['./admin-events.component.css']
 })
 export class AdminEventsComponent implements OnInit {
+
+  faSignOutAlt = faSignOutAlt;
 
   loginUser: string;
 
