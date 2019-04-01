@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+
+  eventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/events/'
 };
