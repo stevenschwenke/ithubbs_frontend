@@ -35,7 +35,8 @@ export class LoginService {
         },
         err => {
           console.log('Wrong credentials!');
-          this.logout();
+          this.userLoggedIn.next(false);
+          this.authServerProvider.logout().subscribe();
           reject(err);
           return cb(err);
         }
