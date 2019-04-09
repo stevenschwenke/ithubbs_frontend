@@ -74,7 +74,7 @@
     </span>
 </button>
 
-<table class="table table-responsive">
+<table class="grouptable table table-responsive">
   <tr>
     <th></th>
     <th>id</th>
@@ -122,7 +122,9 @@
                title="Description"
                placeholder="Pflichtfeld">
 
-        <button class="btn btn-primary" [disabled]="!editGroupForm.valid">
+        <button
+          id="existingGroupSubmitButton"
+          class="btn btn-primary" [disabled]="!editGroupForm.valid">
           Speichern
         </button>
       </div>
@@ -131,13 +133,15 @@
 
   <tr *ngFor="let group of groups">
     <td>
-      <button (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
+      <button
+        id="editExistingGroupButton_{{group.id}}"
+        (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
       class="btn btn-primary"
       style="margin-top: -5px">
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
     </td>
-    <td>{{group.id}}</td>
+    <td class="grouptableidcolumn">{{group.id}}</td>
     <td>{{group.name}}</td>
     <td><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td>{{group.description}}</td>
