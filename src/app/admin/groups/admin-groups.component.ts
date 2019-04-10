@@ -24,7 +24,7 @@ export class AdminGroupsComponent implements OnInit {
   loginUser: string;
 
   groups: Group[];
-  private displayGroupEditDialog: boolean;
+  displayGroupEditDialog: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
