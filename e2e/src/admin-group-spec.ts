@@ -1,5 +1,5 @@
 import {AppPage} from './app.po';
-import {$$, browser, by, element} from 'protractor';
+import {browser, by, element} from 'protractor';
 
 describe('Admin/group area', () => {
   let page: AppPage;
@@ -18,7 +18,7 @@ describe('Admin/group area', () => {
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
   });
 
-  it('should allow creation of new group', function () {
+  it('should allow creation of new group', async function () {
 
     browser.get('http://localhost:4200/admin/groups');
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/groups');
@@ -63,25 +63,27 @@ describe('Admin/group area', () => {
     expect(element(by.id('newGroupSubmitButton')).isPresent()).toBeFalsy();
 
     // all values are present in table
-    // TODO
-    expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeTruthy();
+
+    const groupID = await extractGroupIDForGroupWithURI('https://newgroup.com');
+    expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
+    expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
+    expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
   });
 
-  it('should allow editing of existing group', async ()  => {
+  it('should allow editing of existing group', async () => {
 
     browser.get('http://localhost:4200/admin/groups');
-    expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeTruthy(); // (created in former test)
+
+    // formerly created group exists with old values
+
+    const groupID = await extractGroupIDForGroupWithURI('https://newgroup.com');
+
+    expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
+    expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
+    expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
 
     // open overlay-panel
 
-    const tableDataWithURI = element.all(by.css('.grouptable tr td')).filter(function(elem, index) {
-      return elem.getText().then(function(text) {
-        return text === 'https://newgroup.com';
-      });
-    }).first();
-    const tableRow = tableDataWithURI.element(by.xpath('..'));
-    const groupID = await tableRow.element(by.css('.grouptableidcolumn')).getText();
-// TODO Das "await" in Verbindung mit dem "async" oben hat bewirkt, dass auf Promisses gewartet wird und man sie nicht mehr selbst mit then() abholen muss
     element(by.id('editExistingGroupButton_' + groupID)).click();
 
     // change values
@@ -89,21 +91,15 @@ describe('Admin/group area', () => {
     browser.waitForAngular();
 
     const existingGroupNameInput = element(by.id('existingGroupName'));
-    expect(existingGroupNameInput.isPresent()).toBeTruthy();
-    const existingGroupURLInput = element(by.id('existingGroupURL'));
-    expect(existingGroupURLInput.isPresent()).toBeTruthy();
-    const existingGroupDescriptionInput = element(by.id('existingGroupDescription'));
-    expect(existingGroupDescriptionInput.isPresent()).toBeTruthy();
-    const existingGroupSubmitButton = element(by.id('existingGroupSubmitButton'));
-    expect(existingGroupSubmitButton.isPresent()).toBeTruthy();
-
     existingGroupNameInput.clear();
     existingGroupNameInput.sendKeys('Edited Group\'s Name');
+    const existingGroupURLInput = element(by.id('existingGroupURL'));
     existingGroupURLInput.clear();
     existingGroupURLInput.sendKeys('https://newgroup_EDITED.com');
+    const existingGroupDescriptionInput = element(by.id('existingGroupDescription'));
     existingGroupDescriptionInput.clear();
     existingGroupDescriptionInput.sendKeys('Edited Group\'s Description');
-
+    const existingGroupSubmitButton = element(by.id('existingGroupSubmitButton'));
     existingGroupSubmitButton.click();
 
     // overlay-panel is closed
@@ -121,4 +117,20 @@ describe('Admin/group area', () => {
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup_EDITED.com');
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('Edited Group\'s Description');
   });
+
+  /**
+   * Extracts the ID of a group with the given URI from the group-table.
+   *
+   * @param uri of group
+   * @return ID of group
+   */
+  async function extractGroupIDForGroupWithURI(uri: string) {
+    const tableDataWithURI = element.all(by.css('.grouptable tr td')).filter(function (elem, index) {
+      return elem.getText().then(function (text) {
+        return text === uri;
+      });
+    }).first();
+    const tableRow = tableDataWithURI.element(by.xpath('..'));
+    return await tableRow.element(by.css('.grouptableidcolumn')).getText();
+  }
 });
