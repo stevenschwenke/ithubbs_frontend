@@ -1,0 +1,32 @@
+<p-toast></p-toast>
+<form (ngSubmit)="onLogin(f)" #f="ngForm">
+  <div class="container">
+
+    <h1>Please log in</h1>
+
+    <label for="username">Username</label>
+    <input class="col"
+           type="text"
+           id="username"
+           size="30"
+           pInputText name="username"
+           title="Benutzername"
+           autocomplete="username"
+           ngModel>
+
+    <label for="password" style="margin-top: 10px">Password</label>
+    <input class="col"
+           type="password"
+           id="password"
+           size="30"
+           pInputText name="password"
+           title="Passwort"
+           autocomplete="current-password"
+           ngModel>
+    <button id="loginbutton" class="btn btn-primary">
+      Login
+    </button>
+  </div>
+</form>
+
+

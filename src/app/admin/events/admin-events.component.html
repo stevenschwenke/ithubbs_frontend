@@ -1,0 +1,28 @@
+<p align="right">
+  <button
+    id="logoutbutton"
+    (click)="logout()"
+    class="btn btn-primary background-attention"
+    style="margin-right: 10px"
+  >
+    <span style="font-weight: bold">
+      <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      Logout {{loginUser}}
+    </span>
+  </button>
+</p>
+
+<h1>Admin-Ansicht der Events</h1>
+
+<table class="table table-responsive">
+  <tr>
+    <th>Datum</th>
+    <th>Event</th>
+  </tr>
+  <tr *ngFor="let event of events">
+    <td>{{event.date | date:'dd.MM.yyyy'}}</td>
+    <td><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
+  </tr>
+</table>
+<p>
+</p>
