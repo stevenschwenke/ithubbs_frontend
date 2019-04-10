@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Group} from '../../shared/group';
 import {Observable} from 'rxjs';
@@ -21,6 +21,18 @@ export class AdminGroupService {
 
   editGroup(newGroup: Group): Observable<Group> {
     return this.http.post<Group>(environment.adminGroupsUrl + '/edit', newGroup);
+  }
+
+  deleteGroup(group: Group): Observable<Group> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: group.id
+      }
+    };
+    return this.http.delete<Group>(environment.adminGroupsUrl + '/delete', options);
   }
 
 }

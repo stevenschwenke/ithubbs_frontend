@@ -9,7 +9,7 @@ import {AdminEventService} from './shared/admin.event.service';
 import {AdminGroupsComponent} from './groups/admin-groups.component';
 import {AdminGroupService} from './shared/admin.group.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {MessageModule, MessageService, OverlayPanelModule} from 'primeng/primeng';
+import {ConfirmationService, ConfirmDialogModule, DialogModule, MessageModule, MessageService, OverlayPanelModule} from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
 
 @NgModule({
@@ -26,12 +26,15 @@ import {ToastModule} from 'primeng/toast';
     FontAwesomeModule,
     AdminRoutingModule,
     OverlayPanelModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule,
+    DialogModule
   ],
   providers: [
     AdminEventService,
     AdminGroupService,
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class AdminModule { }

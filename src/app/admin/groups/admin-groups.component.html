@@ -76,18 +76,20 @@
 
 <table class="grouptable table table-responsive">
   <tr>
-    <th></th>
     <th>id</th>
     <th>Name</th>
     <th>URL</th>
     <th>Beschreibung</th>
+    <th>Actions</th>
   </tr>
 
-  <p-overlayPanel
+  <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+  <p-dialog
     #overlayEditGroup
-    [showCloseIcon]="true"
-    [dismissable]="true">
-    <h1>Gruppe editieren</h1>
+    header="Gruppe editieren"
+    [transitionOptions]="'0ms'"
+    [(visible)]="displayGroupEditDialog">
     <form [formGroup]="editGroupForm" (ngSubmit)="onSaveEditedGroup($event, editGroupForm, overlayEditGroup)">
       <div class="container">
         <input [hidden]="true"
@@ -129,22 +131,29 @@
         </button>
       </div>
     </form>
-  </p-overlayPanel>
+  </p-dialog>
 
   <tr *ngFor="let group of groups">
-    <td>
-      <button
-        id="editExistingGroupButton_{{group.id}}"
-        (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
-      class="btn btn-primary"
-      style="margin-top: -5px">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-    </td>
     <td class="grouptableidcolumn">{{group.id}}</td>
     <td id="groupName_{{group.id}}">{{group.name}}</td>
     <td id="groupURL_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
+    <td>
+      <button
+        id="editExistingGroupButton_{{group.id}}"
+        (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
+        class="btn btn-primary"
+        style="margin-top: -5px">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+      <button
+        id="deleteExistingGroupButton_{{group.id}}"
+        (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
+        class="btn btn-primary background-attention"
+        style="margin-top: -5px; margin-left: 10px">
+        <fa-icon [icon]="faRadiation"></fa-icon>
+      </button>
+    </td>
   </tr>
 </table>
 <p>

@@ -1,5 +1,5 @@
 import {AppPage} from './app.po';
-import {browser, by, element} from 'protractor';
+import {browser, by, element, protractor} from 'protractor';
 
 describe('Admin/group area', () => {
   let page: AppPage;
@@ -27,7 +27,7 @@ describe('Admin/group area', () => {
 
     expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeFalsy();
 
-    // overlay-panel for creating new group is closed
+    // overlay dialog for creating new group is closed
 
     const newGroupNameInput = element(by.id('newGroupName'));
     expect(newGroupNameInput.isPresent()).toBeFalsy();
@@ -38,7 +38,7 @@ describe('Admin/group area', () => {
     const newGroupSubmitButton = element(by.id('newGroupSubmitButton'));
     expect(newGroupSubmitButton.isPresent()).toBeFalsy();
 
-    // open overlay-panel to create new group
+    // open overlay dialog to create new group
 
     element(by.id('createNewGroupButton')).click();
 
@@ -53,7 +53,7 @@ describe('Admin/group area', () => {
 
     newGroupSubmitButton.click();
 
-    // overlay-panel for creation is closed again
+    // overlay dialog for creation is closed again
 
     browser.waitForAngular();
 
@@ -70,7 +70,7 @@ describe('Admin/group area', () => {
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
   });
 
-  it('should allow editing of existing group', async () => {
+  it('should allow deletion of existing group', async () => {
 
     browser.get('http://localhost:4200/admin/groups');
 
@@ -82,7 +82,7 @@ describe('Admin/group area', () => {
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
 
-    // open overlay-panel
+    // open overlay dialog
 
     element(by.id('editExistingGroupButton_' + groupID)).click();
 
@@ -102,7 +102,7 @@ describe('Admin/group area', () => {
     const existingGroupSubmitButton = element(by.id('existingGroupSubmitButton'));
     existingGroupSubmitButton.click();
 
-    // overlay-panel is closed
+    // overlay dialog is closed
 
     browser.waitForAngular();
 
@@ -117,6 +117,27 @@ describe('Admin/group area', () => {
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup_EDITED.com');
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('Edited Group\'s Description');
   });
+
+  it('should allow deleting existing group', async () => {
+
+    browser.get('http://localhost:4200/admin/groups');
+
+    // formerly created group exists with old values
+
+    expect(element(by.linkText('https://newgroup_EDITED.com')).isPresent()).toBeTruthy();
+    const groupID = await extractGroupIDForGroupWithURI('https://newgroup_EDITED.com');
+
+    // open confirmation dialog and delete group
+
+    expect(element(by.id('confirmationDialog')).isDisplayed()).toBeFalsy();
+    element(by.id('deleteExistingGroupButton_' + groupID)).click();
+    expect(element(by.id('confirmationDialog')).isPresent()).toBeTruthy();
+
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+
+    expect(element(by.linkText('https://newgroup_EDITED.com')).isPresent()).toBeFalsy();
+  });
+
 
   /**
    * Extracts the ID of a group with the given URI from the group-table.

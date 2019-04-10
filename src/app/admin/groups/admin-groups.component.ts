@@ -3,9 +3,9 @@ import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
-import {faPlusSquare as faPlusSquare, faEdit as faEdit, faSignOutAlt as faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faRadiation as faRadiation, faPlusSquare as faPlusSquare, faEdit as faEdit, faSignOutAlt as faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MessageService, OverlayPanel} from 'primeng/primeng';
+import {ConfirmationService, MessageService, OverlayPanel} from 'primeng/primeng';
 
 @Component({
   selector: 'app-admin-groups',
@@ -17,18 +17,21 @@ export class AdminGroupsComponent implements OnInit {
   editGroupForm: FormGroup;
 
   faPlusSquare = faPlusSquare;
+  faRadiation = faRadiation;
   faEdit = faEdit;
   faSignOutAlt = faSignOutAlt;
 
   loginUser: string;
 
   groups: Group[];
+  private displayGroupEditDialog: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
               private userService: UserService,
               private messageService: MessageService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
@@ -77,7 +80,8 @@ export class AdminGroupsComponent implements OnInit {
   }
 
   onEditGroup($event: MouseEvent, overlayEditGroup: OverlayPanel, editGroupForm: FormGroup, group: Group) {
-    overlayEditGroup.toggle(event);
+    this.displayGroupEditDialog = true;
+
     editGroupForm.setValue({
       existingGroupId: group.id,
       existingGroupName: group.name,
@@ -95,7 +99,7 @@ export class AdminGroupsComponent implements OnInit {
 
     this.adminGroupService.editGroup(newGroup).subscribe(() => {
 
-      overlayEditGroup.hide();
+      this.displayGroupEditDialog = false;
 
       const changedGroup = this.groups.find(g => g.id === newGroup.id);
       changedGroup.name = newGroup.name;
@@ -109,6 +113,27 @@ export class AdminGroupsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
+    });
+  }
+
+  onDeleteGroup($event: MouseEvent, overlayEditGroup: HTMLElement, editGroupForm: FormGroup, group: Group) {
+    this.confirmationService.confirm({
+      message: 'Gruppe wirklich löschen? Achtung: Sie ist dann wirklich, wirklich weg!',
+      accept: () => {
+        this.adminGroupService.deleteGroup(group).subscribe(() => {
+
+          const deletedGroup = this.groups.find(g => g.id === group.id);
+          this.groups.splice(this.groups.indexOf(deletedGroup), 1);
+
+          this.messageService.add({severity: 'info', summary: 'Löschen erfolgreich', detail: 'Gruppe gelöscht.'});
+        }, (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Server-Fehler',
+            detail: 'Gruppe konnte nicht gelöscht werden: \n' + error.message
+          });
+        });
+      }
     });
   }
 }
