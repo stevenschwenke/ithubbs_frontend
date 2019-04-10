@@ -14,24 +14,20 @@ describe('Admin/group area', () => {
 
     element(by.id('username')).sendKeys('steven');
     element(by.id('password')).sendKeys('steven');
-    const loginButton = element(by.id('loginbutton'));
-    loginButton.click();
+    element(by.id('loginbutton')).click();
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
-  });
-
-  afterEach(() => {
-    browser.waitForAngularEnabled(true);
-    browser.get('http://localhost:4200/admin/groups');
-    element(by.id('logoutbutton')).click();
   });
 
   it('should allow creation of new group', function () {
 
     browser.get('http://localhost:4200/admin/groups');
-
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/groups');
 
+    // group to be created doesn't exist yet
+
     expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeFalsy();
+
+    // overlay-panel for creating new group is closed
 
     const newGroupNameInput = element(by.id('newGroupName'));
     expect(newGroupNameInput.isPresent()).toBeFalsy();
@@ -41,6 +37,8 @@ describe('Admin/group area', () => {
     expect(newGroupDescriptionInput.isPresent()).toBeFalsy();
     const newGroupSubmitButton = element(by.id('newGroupSubmitButton'));
     expect(newGroupSubmitButton.isPresent()).toBeFalsy();
+
+    // open overlay-panel to create new group
 
     element(by.id('createNewGroupButton')).click();
 
@@ -55,6 +53,8 @@ describe('Admin/group area', () => {
 
     newGroupSubmitButton.click();
 
+    // overlay-panel for creation is closed again
+
     browser.waitForAngular();
 
     expect(element(by.id('newGroupName')).isPresent()).toBeFalsy();
@@ -62,15 +62,17 @@ describe('Admin/group area', () => {
     expect(element(by.id('newGroupDescription')).isPresent()).toBeFalsy();
     expect(element(by.id('newGroupSubmitButton')).isPresent()).toBeFalsy();
 
+    // all values are present in table
+    // TODO
     expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeTruthy();
   });
 
-  it('should allow editing of existing group', function () {
+  it('should allow editing of existing group', async ()  => {
 
     browser.get('http://localhost:4200/admin/groups');
     expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeTruthy(); // (created in former test)
 
-    // Open edit-overlay:
+    // open overlay-panel
 
     const tableDataWithURI = element.all(by.css('.grouptable tr td')).filter(function(elem, index) {
       return elem.getText().then(function(text) {
@@ -78,13 +80,12 @@ describe('Admin/group area', () => {
       });
     }).first();
     const tableRow = tableDataWithURI.element(by.xpath('..'));
-    const idField = tableRow.element(by.css('.grouptableidcolumn'));
-    idField.getText().then( function(id) {
-      console.log('id of group to edit = ' + id);
-      element(by.id('editExistingGroupButton_' + id)).click();
-    } );
+    const groupID = await tableRow.element(by.css('.grouptableidcolumn')).getText();
+// TODO Das "await" in Verbindung mit dem "async" oben hat bewirkt, dass auf Promisses gewartet wird und man sie nicht mehr selbst mit then() abholen muss
+    element(by.id('editExistingGroupButton_' + groupID)).click();
 
-    // Change values:
+    // change values
+
     browser.waitForAngular();
 
     const existingGroupNameInput = element(by.id('existingGroupName'));
@@ -105,7 +106,7 @@ describe('Admin/group area', () => {
 
     existingGroupSubmitButton.click();
 
-    // Make sure edit-overlay closed
+    // overlay-panel is closed
 
     browser.waitForAngular();
 
@@ -114,10 +115,10 @@ describe('Admin/group area', () => {
     expect(element(by.id('newGroupDescription')).isPresent()).toBeFalsy();
     expect(element(by.id('newGroupSubmitButton')).isPresent()).toBeFalsy();
 
-    // TODO Make sure new values are displayed in table
-    // TODO copy-paste to test above - it's missing there!
-    expect(element(by.linkText('https://newgroup_EDITED.com')).isPresent()).toBeTruthy();
+    // all values are present in table
 
-
+    expect(element(by.id('groupName_' + groupID)).getText()).toBe('Edited Group\'s Name');
+    expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup_EDITED.com');
+    expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('Edited Group\'s Description');
   });
 });
