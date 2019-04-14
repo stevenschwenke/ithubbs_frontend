@@ -65,6 +65,7 @@ describe('Admin/group area', () => {
     // all values are present in table
 
     const groupID = await extractGroupIDForGroupWithURI('https://newgroup.com');
+    expect(element(by.id('groupID_' + groupID)).getText()).not.toBe('');
     expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');

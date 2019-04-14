@@ -134,7 +134,7 @@
   </p-dialog>
 
   <tr *ngFor="let group of groups">
-    <td class="grouptableidcolumn">{{group.id}}</td>
+    <td id="groupID_{{group.id}}" class="grouptableidcolumn">{{group.id}}</td>
     <td id="groupName_{{group.id}}">{{group.name}}</td>
     <td id="groupURL_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>

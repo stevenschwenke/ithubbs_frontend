@@ -66,8 +66,10 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.value.newGroupURL,
       newGroupForm.value.newGroupDescription);
 
-    this.adminGroupService.createNewGroup(newGroup).subscribe(() => {
+    this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
       overlay.hide();
+
+      newGroup.id = id;
       this.groups.push(newGroup);
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
     }, (error) => {

@@ -15,8 +15,8 @@ export class AdminGroupService {
     return this.http.get<Group[]>(environment.adminGroupsUrl);
   }
 
-  createNewGroup(newGroup: Group): Observable<Group> {
-    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
+  createNewGroup(newGroup: Group): Observable<String> {
+    return this.http.post<String>(environment.adminGroupsUrl, newGroup);
   }
 
   editGroup(newGroup: Group): Observable<Group> {

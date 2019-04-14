@@ -1,6 +1,6 @@
 export class Group {
 
-  id: string;
+  public id: string;
 
   name: string;
   url: string;
