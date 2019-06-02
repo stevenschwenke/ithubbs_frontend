@@ -43,8 +43,7 @@ import {ToastModule} from 'primeng/toast';
     AdminEventService,
     AdminGroupService,
     MessageService,
-    ConfirmationService,
-    DatePipe
+    ConfirmationService
   ]
 })
 export class AdminModule { }

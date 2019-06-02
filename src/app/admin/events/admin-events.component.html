@@ -132,11 +132,7 @@
 
   <tr *ngFor="let event of events">
     <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
-    <td id="eventDate_{{event.id}}">{{event.datetime}}</td>
-<!--    TODO Datum schön formatieren. Falls das mit der DatePipe nicht geht, diese wieder rausnehmen aus admin.module.ts ! -->
-<!--    <td id="eventDate_{{event.id}}">{{event.datetime | datetime:'yyyy-MM-ddThh:mm:ss'}}</td>-->
-<!--    <td id="eventDate_{{event.id}}">{{this.datePipe.transform(event.datetime, 'yyyy,MM,dd,hh,mm,ss')}}</td>-->
-<!--    <td id="eventDate_{{event.id}}">{{this.datePipe.transform(event.datetime, 'y,M,d,h,m,s')}}</td>-->
+    <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy hh:mm'}}</td>
     <td id="evenURL_{{event.id}}"><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
     <td>
       <button

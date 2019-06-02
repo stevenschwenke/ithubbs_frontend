@@ -35,8 +35,7 @@ export class AdminEventsComponent implements OnInit {
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
-              private confirmationService: ConfirmationService,
-              private datePipe: DatePipe) { }
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
 
