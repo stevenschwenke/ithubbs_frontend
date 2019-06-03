@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminEventsComponent} from './events/admin-events.component';
@@ -9,7 +9,15 @@ import {AdminEventService} from './shared/admin.event.service';
 import {AdminGroupsComponent} from './groups/admin-groups.component';
 import {AdminGroupService} from './shared/admin.group.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ConfirmationService, ConfirmDialogModule, DialogModule, MessageModule, MessageService, OverlayPanelModule} from 'primeng/primeng';
+import {
+  CalendarModule,
+  ConfirmationService,
+  ConfirmDialogModule,
+  DialogModule,
+  MessageModule,
+  MessageService,
+  OverlayPanelModule
+} from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
 
 @NgModule({
@@ -28,7 +36,8 @@ import {ToastModule} from 'primeng/toast';
     OverlayPanelModule,
     ToastModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    CalendarModule
   ],
   providers: [
     AdminEventService,

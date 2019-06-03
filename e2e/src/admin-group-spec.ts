@@ -64,20 +64,20 @@ describe('Admin/group area', () => {
 
     // all values are present in table
 
-    const groupID = await extractGroupIDForGroupWithURI('https://newgroup.com');
+    const groupID = await extractGroupIDForTableRowWithContent('https://newgroup.com');
     expect(element(by.id('groupID_' + groupID)).getText()).not.toBe('');
     expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
     expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
   });
 
-  it('should allow deletion of existing group', async () => {
+  it('should allow editing of existing group', async () => {
 
     browser.get('http://localhost:4200/admin/groups');
 
     // formerly created group exists with old values
 
-    const groupID = await extractGroupIDForGroupWithURI('https://newgroup.com');
+    const groupID = await extractGroupIDForTableRowWithContent('https://newgroup.com');
 
     expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
     expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
@@ -126,7 +126,7 @@ describe('Admin/group area', () => {
     // formerly created group exists with old values
 
     expect(element(by.linkText('https://newgroup_EDITED.com')).isPresent()).toBeTruthy();
-    const groupID = await extractGroupIDForGroupWithURI('https://newgroup_EDITED.com');
+    const groupID = await extractGroupIDForTableRowWithContent('https://newgroup_EDITED.com');
 
     // open confirmation dialog and delete group
 
@@ -141,15 +141,13 @@ describe('Admin/group area', () => {
 
 
   /**
-   * Extracts the ID of a group with the given URI from the group-table.
-   *
-   * @param uri of group
+   * @param content of group
    * @return ID of group
    */
-  async function extractGroupIDForGroupWithURI(uri: string) {
+  async function extractGroupIDForTableRowWithContent(content: string) {
     const tableDataWithURI = element.all(by.css('.grouptable tr td')).filter(function (elem, index) {
       return elem.getText().then(function (text) {
-        return text === uri;
+        return text === content;
       });
     }).first();
     const tableRow = tableDataWithURI.element(by.xpath('..'));

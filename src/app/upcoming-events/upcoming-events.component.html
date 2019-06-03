@@ -8,7 +8,7 @@
         <th>Event</th>
     </tr>
   <tr *ngFor="let event of events">
-    <td>{{event.date | date:'dd.MM.yyyy'}}</td>
+    <td>{{event.datetime}}</td>
     <td><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
   </tr>
 </table>
