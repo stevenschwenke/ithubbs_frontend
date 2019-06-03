@@ -20,7 +20,7 @@
   #overlay
   [showCloseIcon]="true"
   [dismissable]="true">
-  <h1>Neues Event</h1>
+  <h1 id="newEventHeader">Neues Event</h1>
   <form [formGroup]="newEventForm" (ngSubmit)="onAddNewEvent($event, newEventForm, overlay)">
     <div class="container">
       <label for="newEventName" style="margin-top: 10px">Name</label>
@@ -133,7 +133,7 @@
   <tr *ngFor="let event of events">
     <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
     <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy hh:mm'}}</td>
-    <td id="evenURL_{{event.id}}"><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
+    <td id="eventURL_{{event.id}}"><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
     <td>
       <button
         id="editExistingEventButton_{{event.id}}"
