@@ -6,10 +6,12 @@ import {JourFixesComponent} from './jour-fixes/jour-fixes.component';
 import {LocalGroupsComponent} from './local-groups/local-groups.component';
 import {CurrentEverythingComponent} from './current-everything/current-everything.component';
 import {UsageComponent} from './usage/usage.component';
+import {ConferenceComponent} from './conference/conference.component';
 
 const routes = [
   { path: '', component: CurrentEverythingComponent},
   { path: 'current', component: CurrentEverythingComponent},
+  { path: 'conference', component: ConferenceComponent},
   { path: 'gruppen', component: LocalGroupsComponent},
   { path: 'orga', component: JourFixesComponent},
   { path: 'use', component: UsageComponent},

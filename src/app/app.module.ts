@@ -18,6 +18,7 @@ import {CollapseModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {EventService} from './shared/event.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ConferenceComponent} from './conference/conference.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {HttpClientModule} from '@angular/common/http';
     MissionStatementComponent,
     RegionalConferencesComponent,
     UpcomingEventsComponent,
-    FooterComponent
+    FooterComponent,
+    ConferenceComponent
   ],
   imports: [
     HttpClientModule,
