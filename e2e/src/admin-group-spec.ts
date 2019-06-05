@@ -139,6 +139,72 @@ describe('Admin/group area', () => {
     expect(element(by.linkText('https://newgroup_EDITED.com')).isPresent()).toBeFalsy();
   });
 
+  it('should clear form for adding new group after usage', async function () {
+
+    browser.get('http://localhost:4200/admin/groups');
+    expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/groups');
+
+    // group to be created doesn't exist yet
+
+    expect(element(by.linkText('https://newgroup.com')).isPresent()).toBeFalsy();
+
+    // overlay dialog for creating new group is closed
+
+    let newGroupNameInput = element(by.id('newGroupName'));
+    expect(newGroupNameInput.isPresent()).toBeFalsy();
+    let newGroupURLInput = element(by.id('newGroupURL'));
+    expect(newGroupURLInput.isPresent()).toBeFalsy();
+    let newGroupDescriptionInput = element(by.id('newGroupDescription'));
+    expect(newGroupDescriptionInput.isPresent()).toBeFalsy();
+    const newGroupSubmitButton = element(by.id('newGroupSubmitButton'));
+    expect(newGroupSubmitButton.isPresent()).toBeFalsy();
+
+    // open overlay dialog to create new group
+
+    element(by.id('createNewGroupButton')).click();
+
+    expect(newGroupNameInput.isPresent()).toBeTruthy();
+    expect(newGroupURLInput.isPresent()).toBeTruthy();
+    expect(newGroupDescriptionInput.isPresent()).toBeTruthy();
+    expect(newGroupSubmitButton.isPresent()).toBeTruthy();
+
+    expect(newGroupNameInput.getText()).toBe('');
+
+    newGroupNameInput.sendKeys('New Group\'s Name');
+    newGroupURLInput.sendKeys('https://newgroup.com');
+    newGroupDescriptionInput.sendKeys('New Group\'s Description');
+
+    newGroupSubmitButton.click();
+
+    // overlay dialog for creation is closed again
+
+    browser.waitForAngular();
+
+    expect(element(by.id('newGroupName')).isPresent()).toBeFalsy();
+    expect(element(by.id('newGroupURL')).isPresent()).toBeFalsy();
+    expect(element(by.id('newGroupDescription')).isPresent()).toBeFalsy();
+    expect(element(by.id('newGroupSubmitButton')).isPresent()).toBeFalsy();
+
+    // all values are present in table
+
+    const groupID = await extractGroupIDForTableRowWithContent('https://newgroup.com');
+    expect(element(by.id('groupID_' + groupID)).getText()).not.toBe('');
+    expect(element(by.id('groupName_' + groupID)).getText()).toBe('New Group\'s Name');
+    expect(element(by.id('groupURL_' + groupID)).getText()).toBe('https://newgroup.com');
+    expect(element(by.id('groupDescription_' + groupID)).getText()).toBe('New Group\'s Description');
+
+    // open dialog again and check if input fields are empty
+
+    element(by.id('createNewGroupButton')).click();
+    browser.sleep(2000);
+    newGroupNameInput = element(by.id('newGroupName'));
+    newGroupURLInput = element(by.id('newGroupURL'));
+    newGroupDescriptionInput = element(by.id('newGroupDescription'));
+    expect(newGroupNameInput.getAttribute('value')).toEqual('');
+    expect(newGroupURLInput.getAttribute('value')).toEqual('');
+    expect(newGroupDescriptionInput.getAttribute('value')).toEqual('');
+  });
+
 
   /**
    * @param content of group

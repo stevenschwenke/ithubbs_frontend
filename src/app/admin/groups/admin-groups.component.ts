@@ -3,7 +3,12 @@ import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
-import {faRadiation as faRadiation, faPlusSquare as faPlusSquare, faEdit as faEdit, faSignOutAlt as faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {
+  faEdit as faEdit,
+  faPlusSquare as faPlusSquare,
+  faRadiation as faRadiation,
+  faSignOutAlt as faSignOutAlt
+} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService, MessageService, OverlayPanel} from 'primeng/primeng';
 
@@ -78,6 +83,9 @@ export class AdminGroupsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
+    }, () => {
+      // Reset form. If that is not done, the form will contain the last input when opened again.
+      newGroupForm.reset();
     });
   }
 

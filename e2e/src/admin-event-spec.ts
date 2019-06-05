@@ -136,6 +136,62 @@ describe('Admin/event area', () => {
     expect(element(by.linkText('Edited Event\'s Name')).isPresent()).toBeFalsy();
   });
 
+  it('should clear form for adding new event after usage', async function () {
+
+    browser.get('http://localhost:4200/admin/events');
+    expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
+
+    // group to be created doesn't exist yet
+
+    expect(element(by.linkText('https://newevent.com')).isPresent()).toBeFalsy();
+
+    // overlay dialog for creating new group is closed
+
+    let newEventNameInput = element(by.id('newEventName'));
+    expect(newEventNameInput.isPresent()).toBeFalsy();
+    let newEventURLInput = element(by.id('newEventURL'));
+    expect(newEventURLInput.isPresent()).toBeFalsy();
+    let newEventDateInput = element(by.id('newEventDate')).element(by.tagName('span')).element(by.tagName('input'));
+    expect(newEventDateInput.isPresent()).toBeFalsy();
+    const newEventSubmitButton = element(by.id('newEventSubmitButton'));
+    expect(newEventSubmitButton.isPresent()).toBeFalsy();
+
+    // open overlay dialog to create new group
+    element(by.id('createNewEventButton')).click();
+
+    expect(newEventNameInput.isPresent()).toBeTruthy();
+    expect(newEventURLInput.isPresent()).toBeTruthy();
+    expect(newEventDateInput.isPresent()).toBeTruthy();
+    expect(newEventSubmitButton.isPresent()).toBeTruthy();
+
+    newEventNameInput.sendKeys('New Event\'s Name');
+    newEventURLInput.sendKeys('https://newevent.com');
+    newEventDateInput.sendKeys('06/03/2019 11:55');
+
+    element(by.id('newEventHeader')).click();   // to deselect date chooser and close popup
+    browser.sleep(1000);
+    newEventSubmitButton.click();
+
+    // overlay dialog for creation is closed again
+
+    browser.waitForAngular();
+
+    expect(element(by.id('newEventName')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventURL')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventDescription')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventSubmitButton')).isPresent()).toBeFalsy();
+
+    // open dialog again and check if input fields are empty
+
+    element(by.id('createNewEventButton')).click();
+    browser.sleep(2000);
+    newEventNameInput = element(by.id('newEventName'));
+    newEventURLInput = element(by.id('newEventURL'));
+    newEventDateInput = element(by.id('newEventDate')).element(by.tagName('span')).element(by.tagName('input'));
+    expect(newEventNameInput.getAttribute('value')).toEqual('');
+    expect(newEventURLInput.getAttribute('value')).toEqual('');
+    expect(newEventDateInput.getAttribute('value')).toEqual('');
+  });
 
   /**
    * @param content of event

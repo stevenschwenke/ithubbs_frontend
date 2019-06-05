@@ -7,7 +7,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {OverlayPanel} from 'primeng/primeng';
 import {Event} from '../../shared/event';
-import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-events',
@@ -35,7 +34,8 @@ export class AdminEventsComponent implements OnInit {
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
-              private confirmationService: ConfirmationService) { }
+              private confirmationService: ConfirmationService) {
+  }
 
   ngOnInit() {
 
@@ -54,7 +54,7 @@ export class AdminEventsComponent implements OnInit {
 
     this.adminEventService.getAllEvents().subscribe((events: Event[]) => {
       events.every(event => {
-        const seconds: number = <number> (<unknown> event.datetime);
+        const seconds: number = <number>(<unknown>event.datetime);
         const date = new Date();
         date.setTime(seconds * 1000);
         event.datetime = date;
@@ -89,6 +89,9 @@ export class AdminEventsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Neues Event konnte nicht gespeichert werden: \n' + error.message
       });
+    }, () => {
+      // Reset form. If that is not done, the form will contain the last input when opened again.
+      newEventForm.reset();
     });
   }
 
