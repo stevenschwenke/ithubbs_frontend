@@ -24,6 +24,7 @@ import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.intercep
 import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
+import {ConferenceComponent} from './conference/conference.component';
 
 import localeDE from '@angular/common/locales/de';
 
@@ -42,7 +43,8 @@ registerLocaleData(localeDE);
     MissionStatementComponent,
     RegionalConferencesComponent,
     UpcomingEventsComponent,
-    FooterComponent
+    FooterComponent,
+    ConferenceComponent
   ],
   imports: [
     HttpClientModule,
