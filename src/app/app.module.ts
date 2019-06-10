@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {Injector, NgModule} from '@angular/core';
+import {Injector, LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,6 +23,11 @@ import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
 import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
 import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {registerLocaleData} from '@angular/common';
+
+import localeDE from '@angular/common/locales/de';
+
+registerLocaleData(localeDE);
 
 @NgModule({
   declarations: [
@@ -67,6 +72,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       useClass: LoginMaskInterceptor,
       multi: true,
       deps: [Injector]
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'de-DE'
     }
   ],
   bootstrap: [AppComponent]
