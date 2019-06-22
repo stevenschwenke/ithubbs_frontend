@@ -68,7 +68,7 @@ describe('Admin/event area', () => {
     const groupID = await extractEventIDForTableRowWithContent('New Event\'s Name');
     expect(element(by.id('eventID_' + groupID)).getText()).not.toBe('');
     expect(element(by.id('eventURL_' + groupID)).getText()).toBe('New Event\'s Name');
-    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Monday, 03.06.2019 11:55');
+    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Montag, 03.06.2019 11:55');
   });
 
   it('should allow editing of existing event', async () => {
@@ -80,7 +80,7 @@ describe('Admin/event area', () => {
     const groupID = await extractEventIDForTableRowWithContent('New Event\'s Name');
 
     expect(element(by.id('eventURL_' + groupID)).getText()).toBe('New Event\'s Name');
-    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Monday, 03.06.2019 11:55');
+    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Montag, 03.06.2019 11:55');
 
     // open overlay dialog
 
