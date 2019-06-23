@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
 
-  authenticateUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/authenticate',
+  authenticateUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/authenticate',
 
-  adminUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin',
-  adminEventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin/events',
-  adminGroupsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin/groups',
+  adminUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin',
+  adminEventsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin/events',
+  adminGroupsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin/groups',
 
-  eventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/events'
+  eventsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/events'
 };
 
 /*

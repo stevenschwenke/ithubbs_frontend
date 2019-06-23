@@ -1,5 +1,11 @@
 export const environment = {
   production: true,
 
-  eventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/events/'
+  authenticateUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/authenticate',
+
+  adminUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin',
+  adminEventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin/events',
+  adminGroupsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/admin/groups',
+
+  eventsUrl: 'https://ithubbsbackend.cfapps.io/ithubbs/api/events'
 };

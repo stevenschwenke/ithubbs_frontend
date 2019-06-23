@@ -1,6 +1,6 @@
 ---
 applications:
-- name: ithubbs
+- name: ithubbs_frontend
   instances: 1
   buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
 
