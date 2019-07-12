@@ -54,10 +54,8 @@ app-conference {
 
 .conference-banner-container {
   text-align: center;
-}
-
-.conference-banner {
   max-width: 80rem;
+  margin: auto;
 }
 
 /* General Stylings */
