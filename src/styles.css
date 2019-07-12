@@ -1,4 +1,3 @@
-
 /* Header and Navbar */
 
 .header {
@@ -35,11 +34,31 @@
   transition: all 0.3s ease;
 }
 
+/* Structure */
+
+app-current-everything,
+app-jour-fixes,
+app-local-groups,
+app-usage,
+app-mission-statement,
+app-imprint {
+  padding: 1rem;
+  display: block;
+}
+
+.conference-banner-container {
+  text-align: center;
+}
+
+.conference-banner {
+  width: 1141px;
+}
+
 /* General Stylings */
 
 a {
   color: #533f03 !important;
-  font-weight: bold ;
+  font-weight: bold;
 }
 
 a:hover {
