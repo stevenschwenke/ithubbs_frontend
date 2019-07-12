@@ -1,8 +1,19 @@
-= IT-Hub Braunschweig Fronted
+= IT-Hub Braunschweig Frontend
 
 image:https://travis-ci.org/stevenschwenke/ithubbs_frontend.svg?branch=master["Build Status", link="https://travis-ci.org/stevenschwenke/ithubbs_frontend"]
 
 This is the frontend to http://www.ithubbs.de[ithubbs.de]
+
+== Run locally
+1. build:
+
+    npm install
+
+1. run:
+
+    ng serve
+
+1. frontend available at localhost:4200
 
 == Deploy to PCF
 1. Open terminal in project root
