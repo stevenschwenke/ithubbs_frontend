@@ -76,7 +76,7 @@ img {
   margin-top: 1rem;
 }
 
-.tickets {
+.tickets, .team {
   background-image: url("/assets/images/background.svg");
   background-size: cover;
   color: white;
@@ -84,6 +84,39 @@ img {
   text-align: center;
 
   margin: 0 auto var(--section-spacing) auto;
+}
+
+.team {
+  padding: 1rem;
+  background-position-y: 600px;
+  margin-top: 5rem;
+}
+
+.team h2 {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.team ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team li {
+  display: inline-block;
+  max-width: 20%;
+  margin: 0 1.5rem;
+}
+
+.team figure {
+  margin-bottom: 0;
+}
+
+.team figcaption {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .sponsors {
