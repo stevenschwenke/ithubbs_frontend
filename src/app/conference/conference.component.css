@@ -27,76 +27,113 @@ h3 {
 
 
 :root {
-    --content-width: 60rem;
-    --section-spacing: 3rem;
+  --content-width: 60rem;
+  --section-spacing: 3rem;
 }
 
 body {
-    font-family: sans-serif;
-    margin: 0;
+  font-family: sans-serif;
+  margin: 0;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .banner {
-    z-index: 1;
-    width: 100%;
+  z-index: 1;
+  width: 100%;
 }
 
 .need-to-know {
-    color: black;
-    margin-top: 3rem;
-    margin-bottom: 5rem;
-    text-align: center;
+  color: black;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  text-align: center;
 }
 
 .conf-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-    margin: 0 auto var(--section-spacing) auto;
-    max-width: var(--content-width);
-    grid-gap: 1rem;
-    padding: 1rem;
+  margin: 0 auto var(--section-spacing) auto;
+  max-width: var(--content-width);
+  grid-gap: 1rem;
+  padding: 1rem;
 }
 
 .conf-content__tile p {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .conf-content__tile img {
-    max-height: 5rem;
-    display: block;
-    margin: auto;
+  max-height: 5rem;
+  display: block;
+  margin: auto;
 }
 
-.tickets {
-    background-image: url("/assets/images/background.svg");
-    background-size: cover;
-    color: white;
-    padding: 5rem;
-    text-align: center;
+.conf-content__tile h3 {
+  margin-top: 1rem;
+}
 
-    margin: 0 auto var(--section-spacing) auto;
+.tickets, .team {
+  background-image: url("/assets/images/background.svg");
+  background-size: cover;
+  color: white;
+  padding: 5rem;
+  text-align: center;
+
+  margin: 0 auto var(--section-spacing) auto;
+}
+
+.team {
+  padding: 1rem;
+  background-position-y: 600px;
+  margin-top: 5rem;
+}
+
+.team h2 {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.team ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team li {
+  display: inline-block;
+  max-width: 20%;
+  margin: 0 1.5rem;
+}
+
+.team figure {
+  margin-bottom: 0;
+}
+
+.team figcaption {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .sponsors {
-    max-width: var(--content-width);
-    margin: auto;
-    text-align: center;
+  max-width: var(--content-width);
+  margin: auto;
+  text-align: center;
 }
 
 @media only screen and (min-width: 577px) {
-    .conf-content {
-        grid-gap: 3rem;
+  .conf-content {
+    grid-gap: 3rem;
     grid-template-columns: 1fr 1fr 1fr;
-    }
+  }
 }
 
 @media only screen and (min-width: 993px) {
-    .conf-content {
-        grid-gap-column: 8rem;
-    }
+  .conf-content {
+    grid-gap-column: 8rem;
+  }
 }

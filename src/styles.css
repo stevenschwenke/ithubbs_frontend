@@ -1,4 +1,3 @@
-
 /* Header and Navbar */
 
 .header {
@@ -35,11 +34,40 @@
   transition: all 0.3s ease;
 }
 
+/* Structure */
+
+app-current-everything,
+app-jour-fixes,
+app-local-groups,
+app-usage,
+app-mission-statement,
+app-imprint,
+app-conference {
+  padding: 1rem;
+  display: block;
+}
+
+app-conference + app-footer {
+  /* hide the footer on the conference page */
+  display: none;
+}
+
+app-conference {
+  max-width: 82rem;
+  margin: auto;
+}
+
+.conference-banner-container {
+  text-align: center;
+  max-width: 80rem;
+  margin: auto;
+}
+
 /* General Stylings */
 
 a {
   color: #533f03 !important;
-  font-weight: bold ;
+  font-weight: bold;
 }
 
 a:hover {
