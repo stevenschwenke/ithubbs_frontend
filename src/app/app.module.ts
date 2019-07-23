@@ -10,7 +10,6 @@ import {ImprintComponent} from './imprint/imprint.component';
 import {JourFixesComponent} from './jour-fixes/jour-fixes.component';
 import {LocalGroupsComponent} from './local-groups/local-groups.component';
 import {MissionStatementComponent} from './mission-statement/mission-statement.component';
-import {RegionalConferencesComponent} from './regional-conferences/regional-conferences.component';
 import {UpcomingEventsComponent} from './upcoming-events/upcoming-events.component';
 import {FooterComponent} from './footer/footer.component';
 import {UsageComponent} from './usage/usage.component';
@@ -41,7 +40,6 @@ registerLocaleData(localeDE);
     UsageComponent,
     JourFixesComponent,
     MissionStatementComponent,
-    RegionalConferencesComponent,
     UpcomingEventsComponent,
     FooterComponent,
     ConferenceComponent
