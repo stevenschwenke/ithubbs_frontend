@@ -26,6 +26,7 @@ import {registerLocaleData} from '@angular/common';
 import {ConferenceComponent} from './conference/conference.component';
 
 import localeDE from '@angular/common/locales/de';
+import {AssociationComponent} from './association/association.component';
 
 registerLocaleData(localeDE);
 
@@ -42,7 +43,8 @@ registerLocaleData(localeDE);
     MissionStatementComponent,
     UpcomingEventsComponent,
     FooterComponent,
-    ConferenceComponent
+    ConferenceComponent,
+    AssociationComponent
   ],
   imports: [
     HttpClientModule,

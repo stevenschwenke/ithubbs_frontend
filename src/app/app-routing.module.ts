@@ -7,6 +7,7 @@ import {LocalGroupsComponent} from './local-groups/local-groups.component';
 import {CurrentEverythingComponent} from './current-everything/current-everything.component';
 import {UsageComponent} from './usage/usage.component';
 import {ConferenceComponent} from './conference/conference.component';
+import {AssociationComponent} from './association/association.component';
 
 const routes = [
   { path: '', component: CurrentEverythingComponent},
@@ -16,6 +17,7 @@ const routes = [
   { path: 'orga', component: JourFixesComponent},
   { path: 'use', component: UsageComponent},
   { path: 'mission', component: MissionStatementComponent},
+  { path: 'association', component: AssociationComponent},
   { path: 'impressum', component: ImprintComponent},
   {
     path: 'admin', loadChildren: './admin/admin.module#AdminModule'
