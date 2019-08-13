@@ -42,6 +42,22 @@ app-local-groups,
 app-usage,
 app-mission-statement,
 app-imprint,
+
+app-association {
+  padding: 1rem;
+  display: block;
+}
+
+app-association + app-footer {
+  /* hide the footer on the conference page */
+  display: none;
+}
+
+app-association {
+  max-width: 82rem;
+  margin: auto;
+}
+
 app-conference {
   padding: 1rem;
   display: block;
