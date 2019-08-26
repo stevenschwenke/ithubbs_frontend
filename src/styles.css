@@ -199,10 +199,6 @@ p {
   margin: 20px 10px;
 }
 
-.pretix-widget {
-  border: none;
-}
-
 .pretix-widget  h3 {
-  color: white !important;
+  display: none;
 }
