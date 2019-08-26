@@ -198,3 +198,7 @@ p {
   float: right;
   margin: 20px 10px;
 }
+
+.pretix-widget  h3 {
+  display: none;
+}
