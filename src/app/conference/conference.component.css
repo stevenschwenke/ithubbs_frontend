@@ -86,6 +86,39 @@ img {
   margin: 0 auto var(--section-spacing) auto;
 }
 
+.tickets {
+  padding: 3rem;
+}
+
+.sponsors {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.sponsors h2 {
+  color: black;
+}
+
+.sponsors__gold h3 {
+  font-size: 1.45em;
+}
+
+.sponsors ol {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.sponsors li {
+  max-width: 300px;
+  flex-grow: 1;
+  flex-basis: 300px;
+}
+
 .team {
   padding: 1rem;
   background-position-y: 600px;
