@@ -19,6 +19,14 @@ export class AdminGroupService {
     return this.http.post<String>(environment.adminGroupsUrl, newGroup);
   }
 
+  postNewLogo(groupId: number, logo: File): Observable<String> {
+    const formData = new FormData();
+    formData.append('groupID', groupId + '');
+    formData.append('file', logo);
+
+    return this.http.post<String>(environment.adminGroupsUrl + '/logo', formData);
+  }
+
   editGroup(newGroup: Group): Observable<Group> {
     return this.http.post<Group>(environment.adminGroupsUrl + '/edit', newGroup);
   }

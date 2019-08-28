@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminEventsComponent} from './events/admin-events.component';
@@ -14,6 +14,7 @@ import {
   ConfirmationService,
   ConfirmDialogModule,
   DialogModule,
+  FileUploadModule,
   MessageModule,
   MessageService,
   OverlayPanelModule
@@ -37,7 +38,8 @@ import {ToastModule} from 'primeng/toast';
     ToastModule,
     ConfirmDialogModule,
     DialogModule,
-    CalendarModule
+    CalendarModule,
+    FileUploadModule
   ],
   providers: [
     AdminEventService,

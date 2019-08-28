@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
@@ -10,7 +10,7 @@ import {
   faSignOutAlt as faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfirmationService, MessageService, OverlayPanel} from 'primeng/primeng';
+import {ConfirmationService, FileUpload, MessageService, OverlayPanel} from 'primeng/primeng';
 
 @Component({
   selector: 'app-admin-groups',
@@ -21,6 +21,8 @@ export class AdminGroupsComponent implements OnInit {
   newGroupForm: FormGroup;
   editGroupForm: FormGroup;
 
+  @ViewChild('logoUploaderNewGroup') logoUploaderNewGroup: FileUpload;
+
   faPlusSquare = faPlusSquare;
   faRadiation = faRadiation;
   faEdit = faEdit;
@@ -30,6 +32,7 @@ export class AdminGroupsComponent implements OnInit {
 
   groups: Group[];
   displayGroupEditDialog: boolean;
+  private currentFileUpload: File;
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
@@ -71,21 +74,26 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.value.newGroupURL,
       newGroupForm.value.newGroupDescription);
 
-    this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
-      overlay.hide();
+      this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
+        overlay.hide();
 
-      newGroup.id = id;
-      this.groups.push(newGroup);
-      this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
-    }, (error) => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Server-Fehler',
-        detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
+        newGroup.id = id;
+        this.groups.push(newGroup);
+        this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
+      }, (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Server-Fehler',
+          detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
+        });
+      }, () => {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+
+        // Reset form. If that is not done, the form will contain the last input when opened again.
+        newGroupForm.reset();
+        this.currentFileUpload = null;
+        this.logoUploaderNewGroup.clear();
       });
-    }, () => {
-      // Reset form. If that is not done, the form will contain the last input when opened again.
-      newGroupForm.reset();
     });
   }
 
@@ -145,5 +153,9 @@ export class AdminGroupsComponent implements OnInit {
         });
       }
     });
+  }
+
+  onUploadLogo(event) {
+    this.currentFileUpload = event.files[0];
   }
 }
