@@ -3,12 +3,12 @@ h2 {
   font-size: 1.5em;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   font-weight: bold;
   background-color: transparent;
-  border-radius: 0px;
-  margin-top: 0px;
+  border-radius: 0;
+  margin-top: 0;
   padding: 0;
 }
 
@@ -17,10 +17,10 @@ h3 {
   font-size: 1.17em;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   font-weight: bold;
-  margin-top: 0px;
+  margin-top: 0;
   margin-left: 10px;
   color: black;
 }
@@ -77,7 +77,7 @@ img {
 }
 
 .tickets, .team {
-  background-image: url("/assets/images/background.svg");
+  background-image: url("/assets/images/conference/background.svg");
   background-size: cover;
   color: white;
   padding: 5rem;
@@ -92,11 +92,12 @@ img {
 
 .sponsors {
   padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 1rem;
 }
 
 .sponsors h2 {
   color: black;
+  margin-bottom: 5rem;
 }
 
 .sponsors__gold h3 {
@@ -117,6 +118,15 @@ img {
   max-width: 300px;
   flex-grow: 1;
   flex-basis: 300px;
+}
+
+.sponsors__silver {
+  margin-top: 5rem;
+}
+
+.sponsors__silver li {
+  max-width: 150px;
+  flex-basis: 150px;
 }
 
 .team {
