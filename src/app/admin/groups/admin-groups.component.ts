@@ -131,6 +131,11 @@ export class AdminGroupsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
+    }, () => {
+      this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+        this.currentFileUpload = null;
+        this.logoUploaderNewGroup.clear();
+      });
     });
   }
 
