@@ -54,7 +54,7 @@ img {
 
 .conf-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 
   margin: 0 auto var(--section-spacing) auto;
   max-width: var(--content-width);
@@ -108,7 +108,7 @@ img {
   list-style-type: none;
   padding: 0;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   align-content: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -116,6 +116,7 @@ img {
 
 .sponsors li {
   max-width: 300px;
+  min-height: 150px;
   flex-grow: 1;
   flex-basis: 300px;
 }
@@ -148,6 +149,7 @@ img {
 .team li {
   display: inline-block;
   max-width: 20%;
+  min-width: 8rem;
   margin: 0 1.5rem;
 }
 
