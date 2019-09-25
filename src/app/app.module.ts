@@ -27,6 +27,7 @@ import {ConferenceComponent} from './conference/conference.component';
 
 import localeDE from '@angular/common/locales/de';
 import {AssociationComponent} from './association/association.component';
+import {CarouselModule} from 'primeng/carousel';
 
 registerLocaleData(localeDE);
 
@@ -53,7 +54,8 @@ registerLocaleData(localeDE);
     CollapseModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
-    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'})
+    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'}),
+    CarouselModule
   ],
   providers: [
     EventService,

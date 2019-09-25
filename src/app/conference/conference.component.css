@@ -179,3 +179,7 @@ img {
     grid-gap-column: 8rem;
   }
 }
+
+.talk-slider-speaker {
+  font-weight: bold;
+}
