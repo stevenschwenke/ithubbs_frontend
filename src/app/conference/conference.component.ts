@@ -14,6 +14,7 @@ class Talk {
 export class ConferenceComponent implements OnInit {
   talksBestPractice: Talk[];
   talksExpert: Talk[];
+  talksCommunity: Talk[];
 
   constructor() {
     this.talksBestPractice = [
