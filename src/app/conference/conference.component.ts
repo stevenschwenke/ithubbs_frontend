@@ -28,6 +28,7 @@ export class ConferenceComponent implements OnInit {
 
     this.talksExpert = [
       {portrait: 'stefan_henschke.jpg', speaker: 'Stefan Henschke ', text: 'In meiner Master-Arbeit habe ich mich mit <strong>evolutionärer Software-Architektur</strong> beschäftigt, das kann ich euch sehr gern näher bringen. Außerdem bin ich großer von von <strong>Heimautomatisierung mit OpenHAB</strong>.'},
+      {portrait: 'marius_seebach.jpg', speaker: 'Marius Seebach', text: 'Meine Begeisterung und jahrelange Erfahrung als Scrum-Master möchte ich gern mit euch teilen und biete deshalb die Themen <strong>The science behind agile</strong> und <strong>The story mapping game a method for agile teams</strong> an.'},
       {portrait: 'josha.png', speaker: 'Josha ', text: 'Ich würde gern über zwei Themen reden: Die von Heroku entwickelte <strong>12 Factor App</strong> ist heutzutage so wichtig, dass man sie kennen sollte. Warum und was es damit auf sich hat, möchte ich euch gern darlegen. Außerdem habe ich mich mit <strong>Ralley Driven Development</strong> beschäftigt. Ihr wisst nicht, was das ist? Super - lasst es mich euch erklären, wenn ihr mögt.'},
       {portrait: 'olli.png', speaker: 'Oliver Milke', text: 'Mein "<strong>Crypto 101</strong>" - Vortrag stößt immer wieder auf Beliebtheit, deshalb biete ich ihn auch auf dem Barcamp an. Ihr lernt die absoluten Grundlagen der Kryptographie im Alltag eines Softwareentwicklers. Zusätzlich würde ich gern über <strong>Jenkinsfiles</strong> sprechen und wie man Build Jobs as Code formuliert.'}
   ];
