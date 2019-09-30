@@ -90,9 +90,13 @@ img {
   padding: 3rem;
 }
 
-.sponsors {
+.sponsors, .social-media {
   padding-top: 5rem;
   padding-bottom: 1rem;
+
+  max-width: var(--content-width);
+  margin: auto;
+  text-align: center;
 }
 
 .sponsors h2 {
@@ -130,6 +134,24 @@ img {
   flex-basis: 150px;
 }
 
+.social-media {
+  padding-top: 3rem;
+}
+
+.social-media ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-media li {
+  display: inline;
+  margin: 0 3rem;
+}
+
+.social-media img {
+  max-height: 5rem;
+}
+
 .team {
   padding: 1rem;
   background-position-y: 600px;
@@ -161,12 +183,6 @@ img {
   margin-top: 1rem;
   font-size: 1.3rem;
   font-weight: bold;
-}
-
-.sponsors {
-  max-width: var(--content-width);
-  margin: auto;
-  text-align: center;
 }
 
 @media only screen and (min-width: 577px) {
