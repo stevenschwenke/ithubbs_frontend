@@ -1,0 +1,49 @@
+/**
+this file is necessary because angular won't let me
+change styles on the carousel component from the style of
+the conference component
+simple, good old, static css file is the hammer i need
+ */
+
+.topics .ui-carousel {
+  margin-top: 3rem;
+}
+
+.topics .ui-carousel .ui-carousel-header .ui-carousel-header-title {
+  display: none;
+}
+
+body .topics .ui-carousel .ui-carousel-header {
+  background: none;
+  border: none;
+  font-size: 180%;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+body .topics .ui-carousel .ui-carousel-viewport {
+  border: none;
+}
+
+.topics .ui-carousel .ui-carousel-viewport img {
+  display: block;
+  margin: auto auto 1rem;
+  border-radius: 100%;
+  max-height: 10rem;
+}
+
+body .topics .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
+  border: none;
+}
+
+.topics .ui-carousel-item .ui-grid-row:first-child {
+  /*height: 5rem;*/
+}
+
+.topics .ui-grid.ui-grid-responsive {
+  margin: 0 1rem;
+}
+
+.topics .ui-grid.ui-grid-responsive .ui-grid-row:nth-child(2) {
+  text-align: center;
+}
