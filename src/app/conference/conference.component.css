@@ -136,6 +136,10 @@ img {
   background-position-y: 320px;
 }
 
+.level2 {
+  filter: saturate(80%);
+}
+
 .topics__keynote {
   display: grid;
   grid-template:
