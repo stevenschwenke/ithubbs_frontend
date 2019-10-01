@@ -18,7 +18,7 @@ export class ConferenceComponent implements OnInit {
 
   constructor() {
     this.talksBestPractice = [
-      {portrait: 'Tim_Bourguignon.png', speaker: 'Tim Bourguignon ', text: 'Ich biete euch mein vielerorts durchgeführtes <strong>Mentoring Speeddating</strong> an. Nach kurzer Einführung in Mentoring gibt es schnell getaktete Gespräche (10 Minuten), in denen ihr interessante Ansprechpartner findet, aus denen sich vielleicht eine Mentor-Beziehung ergibt.'},
+      {portrait: 'Tim_Bourguignon.jpg', speaker: 'Tim Bourguignon ', text: 'Ich biete euch mein vielerorts durchgeführtes <strong>Mentoring Speeddating</strong> an. Nach kurzer Einführung in Mentoring gibt es schnell getaktete Gespräche (10 Minuten), in denen ihr interessante Ansprechpartner findet, aus denen sich vielleicht eine Mentor-Beziehung ergibt.'},
       {portrait: 'jens_schauder.jpg', speaker: 'Jens Schauder', text: 'Ich habe die Erfahrung gemacht, dass <strong>Kommunikation in IT-Projekten</strong> unglaublich wichtig ist. Darüber würde ich gern reden.'},
       {portrait: 'lisa_rosenberg.jpg', speaker: 'Lisa Rosenberg', text: 'Mit <strong>Continuous Delivery</strong> habe ich mich nicht nur im Projekt beschäftigt, sondern auch während meiner Bacholor-Arbeit. Das würde ich euch gern näher bringen!'},
       {portrait: 'stefan_henschke.jpg', speaker: 'Stefan Henschke ', text: 'Aufgrund meiner Erfahrungen kann ich jungen Entwicklern die <strong>Grundlagen der Software-Architektur</strong> näher bringen.'},

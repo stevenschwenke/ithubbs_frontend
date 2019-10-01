@@ -304,3 +304,8 @@ img {
   color: black;
   margin-bottom: 5rem;
 }
+
+.contact__socialmedia img {
+  max-height: 6rem;
+  margin: 1rem;
+}
