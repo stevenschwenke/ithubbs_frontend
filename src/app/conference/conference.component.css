@@ -1,3 +1,6 @@
+/* section spacing 3rem */
+/* content width 60rem */
+
 h2 {
   display: block;
   font-size: 1.5em;
@@ -25,12 +28,6 @@ h3 {
   color: black;
 }
 
-
-:root {
-  --content-width: 60rem;
-  --section-spacing: 3rem;
-}
-
 body {
   font-family: sans-serif;
   margin: 0;
@@ -56,8 +53,8 @@ img {
   display: grid;
   grid-template-columns: 1fr;
 
-  margin: 0 auto var(--section-spacing) auto;
-  max-width: var(--content-width);
+  margin: 0 auto 3rem auto;
+  max-width: 60rem;
   grid-gap: 1rem;
   padding: 1rem;
 }
@@ -76,18 +73,117 @@ img {
   margin-top: 1rem;
 }
 
-.tickets, .team {
+.single-header {
   background-image: url("/assets/images/conference/background.svg");
   background-size: cover;
   color: white;
-  padding: 5rem;
   text-align: center;
-
-  margin: 0 auto var(--section-spacing) auto;
+  padding: 3rem 3rem 1rem;
 }
 
-.tickets {
-  padding: 3rem;
+.tickets, .team, .topics-header {
+  margin: 0 auto 3rem auto;
+}
+
+.topics-header {
+  margin-top: 3rem;
+  background-position-y: 300px;
+}
+
+.topics {
+  padding: 1rem;
+}
+
+.topics__intro {
+  max-width: 40rem;
+  text-align: center;
+  margin: auto;
+}
+
+.topics h2 {
+  margin: 3rem auto 2rem;
+  text-align: center;
+  color: black;
+}
+
+.topics__track__title h2 {
+  color: white;
+  margin-top: 1rem;
+}
+
+.topics .topics__keynote__header, .topics__track__title {
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  background-position-y: 500px;
+  color: white;
+  padding: 1rem;
+}
+
+.topics__track__title {
+  padding-bottom: 2rem;
+  margin-top: 3rem;
+}
+
+.topics__track.junior .topics__track__title {
+  background-position-y: 440px;
+}
+
+.topics__track.expert .topics__track__title {
+  background-position-y: 380px;
+}
+
+.topics__track.community .topics__track__title {
+  background-position-y: 320px;
+}
+
+.level2 {
+  filter: saturate(80%);
+}
+
+.topics__keynote {
+  display: grid;
+  grid-template:
+    "portrait title"
+    "portrait desc";
+  grid-template-columns: 2fr 3fr;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.topics__keynote figure {
+  grid-area: portrait;
+  align-self: center;
+  margin: 0;
+}
+
+.topics__keynote h3 {
+  grid-area: title;
+}
+
+.topics__keynote p {
+  grid-area: desc;
+}
+
+.topics__track__desc {
+  margin: auto;
+  max-width: 40rem;
+}
+
+.topics__keynote img {
+  max-width: 10rem;
+}
+
+.topics__track__desc {
+  font-style: italic;
+}
+
+.topics__keynote figure {
+  text-align: center;
+  font-weight: bold;
+}
+
+.sponsors__header {
+  background-position-y: 250px;
 }
 
 .sponsors {
@@ -96,8 +192,11 @@ img {
 }
 
 .sponsors h2 {
-  color: black;
   margin-bottom: 5rem;
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  color: white;
+  padding: 1rem;
 }
 
 .sponsors__gold h3 {
@@ -132,7 +231,11 @@ img {
 
 .team {
   padding: 1rem;
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
   background-position-y: 600px;
+  color: white;
+  text-align: center;
 }
 
 .team h2 {
@@ -163,8 +266,12 @@ img {
   font-weight: bold;
 }
 
+.team img {
+  max-height: 12rem;
+}
+
 .sponsors {
-  max-width: var(--content-width);
+  max-width: 60rem;
   margin: auto;
   text-align: center;
 }
@@ -180,4 +287,27 @@ img {
   .conf-content {
     grid-gap-column: 8rem;
   }
+}
+
+.talk-slider-speaker {
+  font-weight: bold;
+}
+
+.contact {
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+  max-width: 60rem;
+  margin: auto;
+  text-align: center;
+  list-style-position: inside;
+}
+
+.contact h2 {
+  color: black;
+  margin-bottom: 5rem;
+}
+
+.contact__socialmedia img {
+  max-height: 6rem;
+  margin: 1rem;
 }

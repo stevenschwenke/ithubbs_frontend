@@ -64,15 +64,151 @@
       vernetzen und damit einen IT-Hub zu schaffen.
     </p>
   </div>
+  <div class="conf-content__tile">
+    <img src="/assets/images/conference/code.svg">
+    <h3>Verpflegung</h3>
+    <p>
+      Es ist für alles gesorgt! Nach einem langen Frühstücksbuffet gibt es zur Mittagszeit deftiges Chili con und sin carne. Während des gesamten Tages gibt es außerdem kostenfreie Heiß- und Kaltgetränke.
+    </p>
+  </div>
+  <div class="conf-content__tile">
+    <img src="/assets/images/conference/code.svg">
+    <h3>Räumlichkeiten</h3>
+    <p>
+      Das <a href="http://www.hdk-bs.de" target="_blank">Haus der Kulturen</a> bietet reichlich Räume, sodass wir mehrere Vorträge parallel anbieten können! Dabei gibt es auch sehr kleine Räume, in denen z.B. zu dritt etwas in Ruhe erarbeitet werden kann.
+    </p>
+  </div>
+  <div class="conf-content__tile">
+    <img src="/assets/images/conference/code.svg">
+    <h3>Barrierefreiheit</h3>
+    <p>
+      Leider ist unsere Location nicht vollständig barrierefrei. Das Untergeschoss des Hauses der Kulturen ist über Rampen erreichbar, hier findet der Großteil der Vorträge statt. Jedoch gibt es keinen Fahrtstuhl ins Obergeschoss, wo wir auch eine kleine Anzahl von Räumen gemietet haben. Falls du auf Barrierefreiheit angewiesen bist, kontaktiere uns doch sicherheitshalber vor der Konferenz unter <a href="mailto:vorstand@ithubbs.de">vorstand@ithubbs.de</a>
+    </p>
+  </div>
 </div>
 
-<section class="tickets">
+<section class="tickets single-header">
   <h2>Tickets</h2>
 </section>
 <div class="pretix-widget-compat" event="https://pretix.eu/ithubbs/BT19/"></div>
 
-<section class="sponsors">
+<section class="topics-header single-header">
+  <h2>Angebotene Themen</h2>
+</section>
+
+<section class="topics">
+  <p class="topics__intro">
+    Das Barcamp ist natürlich ein Barcamp! Ihr werdet also zu Beginn der Veranstaltung auswählen können, welche Themen
+    euch am meisten interessieren. Hier seht ihr bereits angemeldete Speaker und worüber sie sprechen möchten.
+    Kommt gern auf uns zu, falls ihr euer Thema hier ebenfalls schonmal auflisten möchtet!
+  </p>
+
+  <h2 class="topics__keynote__header level2">Keynote</h2>
+  <div class="topics__keynote">
+    <figure>
+      <img src="/assets/images/portraits/steven.png" alt="Steven">
+      <figcaption>Steven Schwenke</figcaption>
+    </figure>
+    <h3>Wir sehen uns bei der User Group! Ein Blick auf IT-Communities.</h3>
+    <p>
+      Es passiert immer wieder: In Gesprächen über meine Berufung, meinem Job als Software Craftsman, kommt man
+      früher oder später auf Communities zu sprechen. Ich bin dann oft nicht zu halten und schwärme davon, wie
+      wichtig diese sind und wie sie die Branche (mit) vorantreiben. Oft ernte ich verständnislose Blicke und muss
+      mich erklären, was nicht immer einfach ist. In diesem Vortrag berichte ich ganz konkret von meinen
+      Erfahrungen mit "bunten Hunden der Szene", warum Mentoring einer meiner Ultra-Hacks war und warum Community
+      und Wirtschaft zwingend zusammenarbeiten müssen.
+    </p>
+  </div>
+
+  <section class="topics__track junior">
+    <div class="topics__track__title level2">
+      <h2>Best Practice and Junior Track</h2>
+      <p class="topics__track__desc">
+        Du bist Student, Azubi oder Junior Developer? Perfekt! Diese Themen sind so geschnitten, dass du in kürzeren
+        Vorträgen spezifische, anwendbare Inhalte vermittelt bekommst und direkt nach der Konferenz ein
+        besserer Entwickler bist.
+      </p>
+    </div>
+
+    <p-carousel headerText="Best practice and junior track" [value]="talksBestPractice">
+      <ng-template let-talk pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><img src="assets/images/portraits/{{talk.portrait}}"></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><div class="talk-slider-speaker">{{talk.speaker}}</div></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12" [innerHTML]=talk.text></div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </section>
+
+  <section class="topics__track expert">
+    <div class="topics__track__title level2">
+      <h2>Expert Track</h2>
+      <p class="topics__track__desc">
+        Entwickler und Seniors lernen in längeren Vorträgen neue und komplexe Themen. Das ist im Prinzip das, was
+        du auf den anderen Fachkonferenzen auch findest.
+      </p>
+    </div>
+
+    <p-carousel headerText="Best practice and junior track" [value]="talksExpert">
+      <ng-template let-talk pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><img src="assets/images/portraits/{{talk.portrait}}"></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><div class="talk-slider-speaker">{{talk.speaker}}</div></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12" [innerHTML]=talk.text></div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </section>
+
+  <section class="topics__track community">
+    <div class="topics__track__title level2">
+      <h2>Commmunity Track</h2>
+      <p class="topics__track__desc">
+        Das Hub wäre ohne die Community ziemlich leer. Deshalb möchten wir alles, was mit diesem
+        wagen Begriff zu tun hat, hier einen eigenen Raum geben.
+      </p>
+    </div>
+
+    <p-carousel headerText="Best practice and junior track" [value]="talksCommunity">
+      <ng-template let-talk pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><img src="assets/images/portraits/{{talk.portrait}}"></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12"><div class="talk-slider-speaker">{{talk.speaker}}</div></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12" [innerHTML]=talk.text></div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </section>
+
+</section>
+
+<section class="sponsors__header single-header">
   <h2>Sponsoren</h2>
+</section>
+
+<section class="sponsors">
+  <p>
+    Wir danken unseren Sponsoren, die es uns ermöglichen, ein großartiges Event auf die Beine zu stellen!
+  </p>
   <section class="sponsors__gold">
     <h3>Gold</h3>
     <ol>
@@ -152,4 +288,26 @@
       </figure>
     </li>
   </ol>
+</section>
+
+<section class="contact">
+  <h2>Kontakt</h2>
+
+  <p>
+    Du hast Fragen, Anmerkungen, Vorschläge? Wir freuen uns darauf! Du erreichst uns
+    per Mail unter <a href="mailto:vorstand@ithubbs.de">vorstand@ithubbs.de</a>.
+  </p>
+  <p class="contact__socialmedia">
+    Oder du kontaktierst uns über unsere Social Media Kanäle:
+    <br>
+
+    <a href="https://twitter.com/ithubbs" target="_blank">
+      <img src="/assets/images/conference/twitter.svg" alt="Twitter">
+    </a>
+
+    <a href="//https://www.xing.com/communities/groups/it-hub-braunschweig-1113033" target="_blank">
+      <img src="/assets/images/conference/xing.svg" alt="xing">
+    </a>
+  </p>
+
 </section>
