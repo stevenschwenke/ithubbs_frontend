@@ -28,8 +28,9 @@ export class ConferenceComponent implements OnInit {
       ];
 
     this.talksExpert = [
-      {portrait: 'stefan_henschke.jpg', speaker: 'Stefan Henschke ', text: 'In meiner Arbeit habe ich mich mit <strong>evolutionärer Software-Architektur</strong> beschäftigt, das kann ich euch sehr gern näher bringen. Außerdem bin ich großer von von <strong>Heimautomatisierung mit OpenHAB</strong>.'},
-      {portrait: 'marius_seebach.jpg', speaker: 'Marius Seebach', text: 'Meine Begeisterung und jahrelange Erfahrung als Scrum-Master möchte ich gern mit euch teilen und biete deshalb die Themen <strong>The science behind agile</strong> und <strong>The story mapping game a method for agile teams</strong> an.'},
+      {portrait: 'stefan_henschke.jpg', speaker: 'Stefan Henschke ', text: 'In meiner Arbeit habe ich mich mit <strong>evolutionärer Software-Architektur</strong> beschäftigt, das kann ich euch sehr gern näher bringen. Außerdem bin ich großer Fan von <strong>Heimautomatisierung mit OpenHAB</strong>.'},
+      {portrait: 'marius_seebach.jpg', speaker: 'Marius Seebach', text: 'Meine Begeisterung und jahrelange Erfahrung als Scrum-Master möchte ich gern mit euch teilen und biete deshalb die Themen <strong>The science behind agile</strong> und <strong>The story mapping game – a method for agile teams</strong> an.'},
+	  {portrait: 'helena.jpg', speaker: 'Helena Schmidt', text: 'Die beiden wichtigsten Programmiersprachen für <strong>moderne Datenanalysen</strong> sind R und Python. Ich hätte Lust, die beiden relevantesten Bibliotheken für grafische Darstellungen vorzustellen. Worin liegt die Stärke von matplotlib mit Python und wo die von gglot2 mit R?'},
       {portrait: 'olli.png', speaker: 'Oliver Milke', text: 'Mein "<strong>Crypto 101</strong>" - Vortrag stößt immer wieder auf Beliebtheit, deshalb biete ich ihn auch auf dem Barcamp an. Ihr lernt die absoluten Grundlagen der Kryptographie im Alltag eines Softwareentwicklers. Zusätzlich würde ich gern über <strong>Jenkinsfiles</strong> sprechen und wie man Build Jobs as Code formuliert.'},
       {portrait: 'josha.png', speaker: 'Josha von Gizycki', text: 'Ich habe mich viel mit Einfachheit in der Entwicklung beschäftigt. Herausgekommen ist <strong>Ralley Driven Development</strong>. Wenn ihr wissen wollt, was das bedeutet, werde ich es euch gerne erklären.'}
   ];
