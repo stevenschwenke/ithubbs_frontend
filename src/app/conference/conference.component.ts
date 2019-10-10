@@ -82,6 +82,14 @@ export class ConferenceComponent implements OnInit {
           '<strong>Heimautomatisierung mit OpenHAB</strong>.'
       },
       {
+        portrait: 'helena.jpg',
+        speaker: 'Helena Schmidt',
+        text: 'Die beiden wichtigsten Programmiersprachen für <strong>moderne Datenanalysen</strong> ' +
+          'sind R und Python. Ich hätte Lust, die beiden relevantesten Bibliotheken für grafische ' +
+          'Darstellungen vorzustellen. Worin liegt die Stärke von matplotlib mit Python ' +
+          'und wo die von gglot2 mit R?'
+      },
+      {
         portrait: 'marius_seebach.jpg',
         speaker: 'Marius Seebach',
         text: 'Meine Begeisterung und jahrelange Erfahrung als Scrum-Master möchte ich gern mit euch ' +
