@@ -81,8 +81,12 @@ img {
   padding: 3rem 3rem 1rem;
 }
 
-.tickets, .team, .topics-header {
+.tickets, .team, .topics-header, .pretix-widget-compat {
   margin: 0 auto 3rem auto;
+}
+
+.hdk {
+  background-position-y: 200px;
 }
 
 .topics-header {
