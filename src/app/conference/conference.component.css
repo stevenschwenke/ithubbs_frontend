@@ -214,10 +214,13 @@ img {
 }
 
 .sponsors li {
-  max-width: 300px;
   min-height: 150px;
   flex-grow: 1;
   flex-basis: 300px;
+}
+
+.sponsors__gold li {
+  flex-basis: 50%;
 }
 
 .sponsors__silver {
