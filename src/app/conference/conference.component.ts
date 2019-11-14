@@ -69,7 +69,12 @@ export class ConferenceComponent implements OnInit {
       {
         portrait: 'JeuryTavares.png',
         speaker: 'Jeury Tavares',
-        text: `I have been helping people communicate with themselves and others for nearly a decade. I will be sharing with you key elements that make communication easy, constructive and effective. Specially when dealing with feedback. The result of this talk should give you a very good base for being the communicator that you are meant to be and help you be more successful. You will receive the most important key to communicate with anyone. You will learn about different types of personalities and how to deal with them. We will also look at how feedback should be shared in a way that can only benefit you.`
+        text: `I have been helping people <strong>communicate</strong> with themselves and others for nearly a decade. I will be sharing with you key elements that make communication easy, constructive and effective. Specially when dealing with feedback. The result of this talk should give you a very good base for being the communicator that you are meant to be and help you be more successful. You will receive the most important key to communicate with anyone. You will learn about different types of personalities and how to deal with them. We will also look at how feedback should be shared in a way that can only benefit you.`
+      },
+      {
+        portrait: 'a_luetgering.jpg',
+        speaker: 'Axel Lütgering',
+        text: `Das Thema <strong>"Agilität"</strong> treibt mich schon seit den 2000er Jahren um und motiviert mich nachhaltig in meiner Beratertätigkeit und als Scrum Master - um so schlimmer ist für mich der gefühlte Abstieg zu einem reinen Buzzword. In meinem Vortrag möchte ich gerne beleuchten, warum "Agil" dennoch toll ist, mit einigen Agilitätsmythen aufräumen und kleine Helferlein (Facilitationtechniken) vorstellen, die den täglichen Arbeitsalltag erleichtern.`
       },
       {
         portrait: 'mira_andreas.jpg',
