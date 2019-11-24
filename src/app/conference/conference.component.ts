@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
+class Image {
+  public name: string;
+  caption: string;
+}
+
+
 class Talk {
   public portrait: string;
   speaker: string;
@@ -12,11 +18,56 @@ class Talk {
   styleUrls: ['conference.component.css']
 })
 export class ConferenceComponent implements OnInit {
+  impressions: Image[];
   talksBestPractice: Talk[];
   talksExpert: Talk[];
   talksCommunity: Talk[];
 
   constructor() {
+
+    this.impressions = [
+      {
+        name: 'reception.jpg',
+        caption: 'Begrüßung der Teilnehmer'
+      },
+      {
+        name: 'food.jpg',
+        caption: 'Einer der vielen, vielen Brötchenteller'
+      },
+      {
+        name: 'keynote.jpg',
+        caption: 'Keynote über das Thema der Konferenz: IT Community'
+      },
+      {
+        name: 'agenda1.jpg',
+        caption: 'Agenda am Vormittag'
+      },
+      {
+        name: 'agenda2.jpg',
+        caption: 'Agenda zur Mittagszeit'
+      },
+      {
+        name: 'agenda3.jpg',
+        caption: 'Agenda am Nachmittag'
+      },
+      {
+        name: 'talk_tim.jpg',
+        caption: 'Tim bei seinem gut besuchten Talk'
+      },
+      {
+        name: 'talk_ithub.jpg',
+        caption: 'Der IT Hub e.V. wird vorgestellt'
+      },
+      {
+        name: 'feedback.jpg',
+        caption: 'Feedback-Karten wurden reichlich für sehr gutes Feedback genutzt'
+      },
+      {
+        name: 'stage.jpg',
+        caption: 'Hauptbühne'
+      }
+    ]
+
     this.talksBestPractice = [
       {
         portrait: 'Tim_Bourguignon.jpg',
