@@ -13,11 +13,11 @@ class Talk {
 }
 
 @Component({
-  selector: 'app-conference',
+  selector: 'app-conference-2019',
   templateUrl: './conference.component.html',
   styleUrls: ['conference.component.css']
 })
-export class ConferenceComponent implements OnInit {
+export class Conference2019Component implements OnInit {
   impressions: any[];
   talksBestPractice: Talk[];
   talksExpert: Talk[];

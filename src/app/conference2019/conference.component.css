@@ -1,0 +1,327 @@
+/* section spacing 3rem */
+/* content width 60rem */
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 0;
+  margin-top: 0;
+  padding: 0;
+}
+
+h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  font-weight: bold;
+  margin-top: 0;
+  margin-left: 10px;
+  color: black;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.banner {
+  z-index: 1;
+  width: 100%;
+}
+
+.need-to-know {
+  color: black;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+.conf-content {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  margin: 0 auto 3rem auto;
+  max-width: 60rem;
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.conf-content__tile p {
+  overflow-wrap: break-word;
+}
+
+.conf-content__tile img {
+  max-height: 5rem;
+  display: block;
+  margin: auto;
+}
+
+.conf-content__tile h3 {
+  margin-top: 1rem;
+}
+
+.single-header {
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  color: white;
+  text-align: center;
+  padding: 3rem 3rem 1rem;
+}
+
+.tickets, .team, .topics-header, .pretix-widget-compat {
+  margin: 0 auto 3rem auto;
+}
+
+.hdk {
+  background-position-y: 200px;
+}
+
+.topics-header {
+  margin-top: 3rem;
+  background-position-y: 300px;
+}
+
+.topics {
+  padding: 1rem;
+}
+
+.topics__intro {
+  max-width: 40rem;
+  text-align: center;
+  margin: auto;
+}
+
+.topics h2 {
+  margin: 3rem auto 2rem;
+  text-align: center;
+  color: black;
+}
+
+.topics__track__title h2 {
+  color: white;
+  margin-top: 1rem;
+}
+
+.topics .topics__keynote__header, .topics__track__title {
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  background-position-y: 500px;
+  color: white;
+  padding: 1rem;
+}
+
+.topics__track__title {
+  padding-bottom: 2rem;
+  margin-top: 3rem;
+}
+
+.topics__track.junior .topics__track__title {
+  background-position-y: 440px;
+}
+
+.topics__track.expert .topics__track__title {
+  background-position-y: 380px;
+}
+
+.topics__track.community .topics__track__title {
+  background-position-y: 320px;
+}
+
+.level2 {
+  filter: saturate(80%);
+}
+
+.topics__keynote {
+  display: grid;
+  grid-template:
+    "portrait title"
+    "portrait desc";
+  grid-template-columns: 2fr 3fr;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.topics__keynote figure {
+  grid-area: portrait;
+  align-self: center;
+  margin: 0;
+}
+
+.topics__keynote h3 {
+  grid-area: title;
+}
+
+.topics__keynote p {
+  grid-area: desc;
+}
+
+.topics__track__desc {
+  margin: auto;
+  max-width: 40rem;
+}
+
+.topics__keynote img {
+  max-width: 10rem;
+}
+
+.topics__track__desc {
+  font-style: italic;
+}
+
+.topics__keynote figure {
+  text-align: center;
+  font-weight: bold;
+}
+
+.sponsors__header {
+  background-position-y: 250px;
+}
+
+.sponsors {
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+}
+
+.sponsors h2 {
+  margin-bottom: 5rem;
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  color: white;
+  padding: 1rem;
+}
+
+.sponsors__gold h3 {
+  font-size: 1.45em;
+}
+
+.sponsors ol {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.sponsors li {
+  min-height: 150px;
+  flex-grow: 1;
+  flex-basis: 300px;
+}
+
+.sponsors__gold li {
+  flex-basis: 50%;
+}
+
+.sponsors__silver {
+  margin-top: 5rem;
+}
+
+.sponsors__silver li {
+  max-width: 150px;
+  flex-basis: 150px;
+}
+
+.team {
+  padding: 1rem;
+  background-image: url("/assets/images/conference/background.svg");
+  background-size: cover;
+  background-position-y: 600px;
+  color: white;
+  text-align: center;
+}
+
+.team h2 {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.team ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team li {
+  display: inline-block;
+  max-width: 20%;
+  min-width: 8rem;
+  margin: 0 1.5rem;
+}
+
+.team figure {
+  margin-bottom: 0;
+}
+
+.team figcaption {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.team img {
+  max-height: 12rem;
+}
+
+.sponsors {
+  max-width: 60rem;
+  margin: auto;
+  text-align: center;
+}
+
+@media only screen and (min-width: 577px) {
+  .conf-content {
+    grid-gap: 3rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .conf-content {
+    grid-gap-column: 8rem;
+  }
+}
+
+.talk-slider-speaker {
+  font-weight: bold;
+}
+
+.contact {
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+  max-width: 60rem;
+  margin: auto;
+  text-align: center;
+  list-style-position: inside;
+}
+
+.contact h2 {
+  color: black;
+  margin-bottom: 5rem;
+}
+
+.contact__socialmedia img {
+  max-height: 6rem;
+  margin: 1rem;
+}
+
+/* necessary so that images in gallery are scaled properly (see https://stackoverflow.com/questions/41972631/fit-image-on-p-galleria-primeng-for-angular2-application ) */
+:host ::ng-deep img.ui-panel-images {
+  object-fit: contain !important;
+  height: inherit;
+  width: inherit;
+}
