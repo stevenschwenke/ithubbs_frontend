@@ -18,55 +18,24 @@ class Talk {
   styleUrls: ['conference.component.css']
 })
 export class ConferenceComponent implements OnInit {
-  impressions: Image[];
+  impressions: any[];
   talksBestPractice: Talk[];
   talksExpert: Talk[];
   talksCommunity: Talk[];
 
   constructor() {
 
-    this.impressions = [
-      {
-        name: 'reception.jpg',
-        caption: 'Begrüßung der Teilnehmer'
-      },
-      {
-        name: 'food.jpg',
-        caption: 'Einer der vielen, vielen Brötchenteller'
-      },
-      {
-        name: 'keynote.jpg',
-        caption: 'Keynote über das Thema der Konferenz: IT Community'
-      },
-      {
-        name: 'agenda1.jpg',
-        caption: 'Agenda am Vormittag'
-      },
-      {
-        name: 'agenda2.jpg',
-        caption: 'Agenda zur Mittagszeit'
-      },
-      {
-        name: 'agenda3.jpg',
-        caption: 'Agenda am Nachmittag'
-      },
-      {
-        name: 'talk_tim.jpg',
-        caption: 'Tim bei seinem gut besuchten Talk'
-      },
-      {
-        name: 'talk_ithub.jpg',
-        caption: 'Der IT Hub e.V. wird vorgestellt'
-      },
-      {
-        name: 'feedback.jpg',
-        caption: 'Feedback-Karten wurden reichlich für sehr gutes Feedback genutzt'
-      },
-      {
-        name: 'stage.jpg',
-        caption: 'Hauptbühne'
-      }
-    ]
+    this.impressions = [];
+    this.impressions.push({source:'assets/images/conference/event/reception.jpg', title:'Begrüßung der Teilnehmer'});
+    this.impressions.push({source:'assets/images/conference/event/food.jpg', title:'Einer der vielen, vielen Brötchenteller'});
+    this.impressions.push({source:'assets/images/conference/event/keynote.jpg', title:'Keynote über das Thema der Konferenz: IT Community'});
+    this.impressions.push({source:'assets/images/conference/event/agenda1.jpg', title:'Agenda am Vormittag'});
+    this.impressions.push({source:'assets/images/conference/event/agenda2.jpg', title:'Agenda zur Mittagszeit'});
+    this.impressions.push({source:'assets/images/conference/event/agenda3.jpg', title:'Agenda am Nachmittag'});
+    this.impressions.push({source:'assets/images/conference/event/talk_tim.jpg', title:'Tim bei seinem gut besuchten Talk'});
+    this.impressions.push({source:'assets/images/conference/event/talk_ithub.jpg', title:'Der IT Hub e.V. stellt sich vor'});
+    this.impressions.push({source:'assets/images/conference/event/feedback.jpg', title:'Feedback-Karten wurden reichlich für sehr gutes Feedback genutzt'});
+    this.impressions.push({source:'assets/images/conference/event/stage.jpg', title:'Hauptbühne'});
 
     this.talksBestPractice = [
       {

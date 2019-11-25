@@ -318,3 +318,10 @@ img {
   max-height: 6rem;
   margin: 1rem;
 }
+
+/* necessary so that images in gallery are scaled properly (see https://stackoverflow.com/questions/41972631/fit-image-on-p-galleria-primeng-for-angular2-application ) */
+:host ::ng-deep img.ui-panel-images {
+  object-fit: contain !important;
+  height: inherit;
+  width: inherit;
+}

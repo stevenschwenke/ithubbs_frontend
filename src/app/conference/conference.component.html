@@ -8,22 +8,9 @@
       <h2>Impressionen</h2>
     </div>
 
-    <p-carousel headerText="Impressions" [value]="impressions">
-      <ng-template let-image pTemplate="item">
-        <div class="ui-grid ui-grid-responsive">
-          <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-              <a href="assets/images/conference/event/{{image.name}}" target="_blank">
-              <img src="assets/images/conference/event/{{image.name}}">
-              </a>
-            </div>
-          </div>
-          <div class="ui-grid-row">
-            <div class="ui-grid-col-12"><div class="talk-slider-speaker">{{image.caption}}</div></div>
-          </div>
-        </div>
-      </ng-template>
-    </p-carousel>
+<!--    TODO center -->
+    <p-galleria class="blubber2" [autoPlay]="false" [images]="impressions" panelWidth="800" panelHeight="500" [showCaption]="true"></p-galleria>
+
   </section>
 </section>
 
