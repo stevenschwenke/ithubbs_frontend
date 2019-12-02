@@ -18,24 +18,11 @@ class Talk {
   styleUrls: ['conference.component.css']
 })
 export class ConferenceComponent implements OnInit {
-  impressions: any[];
   talksBestPractice: Talk[];
   talksExpert: Talk[];
   talksCommunity: Talk[];
 
   constructor() {
-
-    this.impressions = [];
-    this.impressions.push({source: 'assets/images/conference/event/reception.jpg', title: 'Begrüßung der Teilnehmer'});
-    this.impressions.push({source: 'assets/images/conference/event/food.jpg', title: 'Einer der vielen, vielen Brötchenteller'});
-    this.impressions.push({source: 'assets/images/conference/event/keynote.jpg', title: 'Keynote über das Thema der Konferenz: IT Community'});
-    this.impressions.push({source: 'assets/images/conference/event/agenda1.jpg', title: 'Agenda am Vormittag'});
-    this.impressions.push({source: 'assets/images/conference/event/agenda2.jpg', title: 'Agenda zur Mittagszeit'});
-    this.impressions.push({source: 'assets/images/conference/event/agenda3.jpg', title: 'Agenda am Nachmittag'});
-    this.impressions.push({source: 'assets/images/conference/event/talk_tim.jpg', title: 'Tim bei seinem gut besuchten Talk'});
-    this.impressions.push({source: 'assets/images/conference/event/talk_ithub.jpg', title: 'Der IT Hub e.V. stellt sich vor'});
-    this.impressions.push({source: 'assets/images/conference/event/feedback.jpg', title: 'Feedback-Karten wurden reichlich für sehr gutes Feedback genutzt'});
-    this.impressions.push({source: 'assets/images/conference/event/stage.jpg', title: 'Hauptbühne'});
 
     this.talksBestPractice = [
       {
