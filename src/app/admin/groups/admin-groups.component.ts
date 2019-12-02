@@ -74,20 +74,22 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.value.newGroupURL,
       newGroupForm.value.newGroupDescription);
 
-      this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
-        overlay.hide();
+    this.adminGroupService.createNewGroup(newGroup).subscribe((group: Group) => {
+      overlay.hide();
 
-        newGroup.id = id;
+      newGroup.id = group.id;
+      newGroup.imageURI = group.imageURI;
+      this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
+    }, (error) => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Server-Fehler',
+        detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
+      });
+    }, () => {
+      this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+
         this.groups.push(newGroup);
-        this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
-      }, (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Server-Fehler',
-          detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
-        });
-      }, () => {
-        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
 
         // Reset form. If that is not done, the form will contain the last input when opened again.
         newGroupForm.reset();
