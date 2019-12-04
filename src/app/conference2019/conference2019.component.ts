@@ -192,6 +192,7 @@ export class Conference2019Component implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
   }
 
 }
