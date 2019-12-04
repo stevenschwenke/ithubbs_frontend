@@ -79,6 +79,7 @@ img {
   color: white;
   text-align: center;
   padding: 3rem 3rem 1rem;
+  margin-bottom: 2rem;
 }
 
 .tickets, .team, .topics-header, .pretix-widget-compat {
