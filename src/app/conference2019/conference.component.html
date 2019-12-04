@@ -2,33 +2,31 @@
   Dies ist die archivierte Event-Seite des ersten Braunschweiger IT Barcamps vom 16.11.2019
 </h2>
 
-<section class="topics">
-  <section class="topics__track junior">
-    <div class="topics__track__title level2">
-      <h2>Impressionen</h2>
-    </div>
-
-<!--    TODO center -->
-    <p-galleria class="blubber2" [autoPlay]="false" [images]="impressions" panelWidth="800" panelHeight="500" [showCaption]="true"></p-galleria>
-
-    <div class="topics__track__title level2">
-      <h2>Einige Zahlen</h2>
-    </div>
-    <div style="text-align: center; ">
-    <ul style="list-style: none">
-      <li>82 Besucher</li>
-      <li>9 Sponsoren</li>
-      <li>1 Gewinnspiel</li>
-      <li>9 Community-Gruppen</li>
-      <li>50kg Chilli</li>
-      <li>150 Brötchen</li>
-      <li>5 zerbrochene Gläser</li>
-      <li>... und ganze <b>640 €</b> gesammelte Spenden für Digitalcourage!</li>
-    </ul>
-    </div>
-  </section>
+<section class="single-header" style="margin-bottom: 2rem;">
+  <h2>Impressionen</h2>
 </section>
 
+<section class="impressions">
+  <p-galleria [autoPlay]="false"
+              [images]="impressions"
+              panelWidth="800"
+              panelHeight="500"
+              [showCaption]="true"
+              class="conf2019-galleria"></p-galleria>
+
+  <h2>Einige Zahlen</h2>
+
+  <ul style="list-style: none">
+    <li>82 Besucher</li>
+    <li>9 Sponsoren</li>
+    <li>1 Gewinnspiel</li>
+    <li>9 Community-Gruppen</li>
+    <li>50kg Chilli</li>
+    <li>150 Brötchen</li>
+    <li>5 zerbrochene Gläser</li>
+    <li>... und ganze <strong>640 €</strong> gesammelte Spenden für Digitalcourage!</li>
+  </ul>
+</section>
 
 <header>
   <img src="/assets/images/conference/conference_banner_2019.png" class="banner">
