@@ -42,6 +42,18 @@ img {
   width: 100%;
 }
 
+.impressions h2 {
+  color: black;
+  margin: 2rem;
+  text-align: center;
+}
+
+.impressions ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+
 .need-to-know {
   color: black;
   margin-top: 3rem;
@@ -79,7 +91,6 @@ img {
   color: white;
   text-align: center;
   padding: 3rem 3rem 1rem;
-  margin-bottom: 2rem;
 }
 
 .tickets, .team, .topics-header, .pretix-widget-compat {

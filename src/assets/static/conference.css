@@ -5,6 +5,10 @@ the conference component
 simple, good old, static css file is the hammer i need
  */
 
+.conf2019-galleria > div {
+  margin: auto;
+}
+
 .topics .ui-carousel {
   margin-top: 3rem;
 }
@@ -28,8 +32,11 @@ body .topics .ui-carousel .ui-carousel-viewport {
 .topics .ui-carousel .ui-carousel-viewport img {
   display: block;
   margin: auto auto 1rem;
-  border-radius: 100%;
   max-height: 10rem;
+}
+
+.round {
+  border-radius: 100%;
 }
 
 body .topics .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {

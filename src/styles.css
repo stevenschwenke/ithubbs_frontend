@@ -73,6 +73,21 @@ app-conference {
   margin: auto;
 }
 
+app-conference-2019 {
+  padding: .3rem;
+  display: block;
+}
+
+app-conference-2019 + app-footer {
+  /* hide the footer on the conference page */
+  display: none;
+}
+
+app-conference-2019 {
+  max-width: 82rem;
+  margin: auto;
+}
+
 .conference-banner-container {
   text-align: center;
   max-width: 80rem;

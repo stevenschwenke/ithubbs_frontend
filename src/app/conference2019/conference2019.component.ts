@@ -13,16 +13,41 @@ class Talk {
 }
 
 @Component({
-  selector: 'app-conference',
+  selector: 'app-conference-2019',
   templateUrl: './conference.component.html',
   styleUrls: ['conference.component.css']
 })
-export class ConferenceComponent implements OnInit {
+export class Conference2019Component implements OnInit {
+  impressions: any[];
   talksBestPractice: Talk[];
   talksExpert: Talk[];
   talksCommunity: Talk[];
 
   constructor() {
+
+    this.impressions = [];
+    this.impressions.push({source: 'assets/images/conference/event/reception.jpg', title: 'Begrüßung der Teilnehmer'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00803_klein.jpg', title: 'Begrüßung der Teilnehmer'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00853_klein.jpg', title: 'Begrüßung der Teilnehmer'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00907_klein.jpg', title: 'Begrüßung der Teilnehmer'});
+    this.impressions.push({source: 'assets/images/conference/event/keynote.jpg', title: 'Keynote über das Thema der Konferenz: IT Community'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00932_klein.jpg', title: 'Warteschlange Themenvorstellung'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00935_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00936_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00944_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00961_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00976_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC01016_klein.jpg', title: 'Speaker'});
+    this.impressions.push({source: 'assets/images/conference/event/food.jpg', title: 'Einer der vielen, vielen Brötchenteller'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC01050_klein.jpg', title: 'Ausarbeitung der Agenda'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC01051_klein.jpg', title: 'Ausarbeitung der Agenda'});
+    this.impressions.push({source: 'assets/images/conference/event/agenda1.jpg', title: 'Agenda am Vormittag'});
+    this.impressions.push({source: 'assets/images/conference/event/agenda2.jpg', title: 'Agenda zur Mittagszeit'});
+    this.impressions.push({source: 'assets/images/conference/event/agenda3.jpg', title: 'Agenda am Nachmittag'});
+    this.impressions.push({source: 'assets/images/conference/event/talk_tim.jpg', title: 'Tim bei seinem gut besuchten Talk'});
+    this.impressions.push({source: 'assets/images/conference/event/talk_ithub.jpg', title: 'Der IT Hub e.V. stellt sich vor'});
+    this.impressions.push({source: 'assets/images/conference/event/feedback.jpg', title: 'Feedback-Karten wurden reichlich für sehr gutes Feedback genutzt'});
+    this.impressions.push({source: 'assets/images/conference/event/DSC00797_klein.jpg', title: 'Hauptbühne'});
 
     this.talksBestPractice = [
       {
