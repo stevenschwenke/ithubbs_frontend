@@ -12,7 +12,7 @@ export class AdminGroupService {
   }
 
   getAllGroups() {
-    return this.http.get<Group[]>(environment.adminGroupsUrl);
+    return this.http.get<Group[]>(environment.groupsUrl);
   }
 
   createNewGroup(newGroup: Group): Observable<Group> {
