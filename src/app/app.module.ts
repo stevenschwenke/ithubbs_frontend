@@ -27,6 +27,7 @@ import {ConferenceComponent} from './conference/conference.component';
 
 import localeDE from '@angular/common/locales/de';
 import {AssociationComponent} from './association/association.component';
+import {GroupService} from './admin/shared/group.service';
 
 registerLocaleData(localeDE);
 
@@ -57,6 +58,7 @@ registerLocaleData(localeDE);
   ],
   providers: [
     EventService,
+    GroupService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
