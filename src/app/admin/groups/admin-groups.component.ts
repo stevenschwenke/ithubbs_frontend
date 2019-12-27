@@ -87,15 +87,18 @@ export class AdminGroupsComponent implements OnInit {
         detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
     }, () => {
-      this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
 
-        this.groups.push(newGroup);
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
 
-        // Reset form. If that is not done, the form will contain the last input when opened again.
-        newGroupForm.reset();
-        this.currentFileUpload = null;
-        this.logoUploaderNewGroup.clear();
-      });
+          this.groups.push(newGroup);
+
+          // Reset form. If that is not done, the form will contain the last input when opened again.
+          newGroupForm.reset();
+          this.currentFileUpload = null;
+          this.logoUploaderNewGroup.clear();
+        });
+      }
     });
   }
 
@@ -134,10 +137,13 @@ export class AdminGroupsComponent implements OnInit {
         detail: 'Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
     }, () => {
-      this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
-        this.currentFileUpload = null;
-        this.logoUploaderNewGroup.clear();
-      });
+
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+          this.currentFileUpload = null;
+          this.logoUploaderNewGroup.clear();
+        });
+      }
     });
   }
 
