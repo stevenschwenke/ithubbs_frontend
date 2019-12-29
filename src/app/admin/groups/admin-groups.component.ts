@@ -22,6 +22,7 @@ export class AdminGroupsComponent implements OnInit {
   editGroupForm: FormGroup;
 
   @ViewChild('logoUploaderNewGroup') logoUploaderNewGroup: FileUpload;
+  @ViewChild('logoUploaderExistingGroup') logoUploaderExistingGroup: FileUpload;
 
   faPlusSquare = faPlusSquare;
   faRadiation = faRadiation;
@@ -141,7 +142,7 @@ export class AdminGroupsComponent implements OnInit {
       if (this.currentFileUpload != null) {
         this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
           this.currentFileUpload = null;
-          this.logoUploaderNewGroup.clear();
+          this.logoUploaderExistingGroup.clear();
         });
       }
     });
