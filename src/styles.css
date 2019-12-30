@@ -59,7 +59,7 @@ app-association {
 }
 
 app-conference {
-  padding: 1rem;
+  padding: .3rem;
   display: block;
 }
 
@@ -69,6 +69,21 @@ app-conference + app-footer {
 }
 
 app-conference {
+  max-width: 82rem;
+  margin: auto;
+}
+
+app-conference-2019 {
+  padding: .3rem;
+  display: block;
+}
+
+app-conference-2019 + app-footer {
+  /* hide the footer on the conference page */
+  display: none;
+}
+
+app-conference-2019 {
   max-width: 82rem;
   margin: auto;
 }
@@ -197,4 +212,8 @@ p {
 .footer .logo {
   float: right;
   margin: 20px 10px;
+}
+
+.pretix-widget  h3 {
+  display: none;
 }

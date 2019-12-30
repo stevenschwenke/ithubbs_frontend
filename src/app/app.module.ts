@@ -27,6 +27,9 @@ import {ConferenceComponent} from './conference/conference.component';
 
 import localeDE from '@angular/common/locales/de';
 import {AssociationComponent} from './association/association.component';
+import {CarouselModule} from 'primeng/carousel';
+import {GalleriaModule} from 'primeng/galleria';
+import {Conference2019Component} from './conference2019/conference2019.component';
 import {GroupService} from './admin/shared/group.service';
 
 registerLocaleData(localeDE);
@@ -45,6 +48,7 @@ registerLocaleData(localeDE);
     UpcomingEventsComponent,
     FooterComponent,
     ConferenceComponent,
+    Conference2019Component,
     AssociationComponent
   ],
   imports: [
@@ -54,7 +58,9 @@ registerLocaleData(localeDE);
     CollapseModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
-    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'})
+    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'}),
+    CarouselModule,
+    GalleriaModule
   ],
   providers: [
     EventService,

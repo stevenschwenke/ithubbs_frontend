@@ -8,10 +8,12 @@ import {CurrentEverythingComponent} from './current-everything/current-everythin
 import {UsageComponent} from './usage/usage.component';
 import {ConferenceComponent} from './conference/conference.component';
 import {AssociationComponent} from './association/association.component';
+import {Conference2019Component} from './conference2019/conference2019.component';
 
 const routes = [
   { path: '', component: CurrentEverythingComponent},
   { path: 'current', component: CurrentEverythingComponent},
+  { path: 'conference2019', component: Conference2019Component},
   { path: 'conference', component: ConferenceComponent},
   { path: 'gruppen', component: LocalGroupsComponent},
   { path: 'orga', component: JourFixesComponent},
