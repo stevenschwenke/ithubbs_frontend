@@ -89,13 +89,14 @@ export class AdminGroupsComponent implements OnInit {
       });
     }, () => {
 
+      this.groups.push(newGroup);
+
+      // Reset form. If that is not done, the form will contain the last input when opened again.
+      newGroupForm.reset();
+
       if (this.currentFileUpload != null) {
         this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
 
-          this.groups.push(newGroup);
-
-          // Reset form. If that is not done, the form will contain the last input when opened again.
-          newGroupForm.reset();
           this.currentFileUpload = null;
           this.logoUploaderNewGroup.clear();
         });
