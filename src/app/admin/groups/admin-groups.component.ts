@@ -95,7 +95,11 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.reset();
 
       if (this.currentFileUpload != null) {
-        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
+
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          newGroup.imageURI = logoURI['logoURI'] += '?random+\=' + Math.random();
 
           this.currentFileUpload = null;
           this.logoUploaderNewGroup.clear();
@@ -122,11 +126,13 @@ export class AdminGroupsComponent implements OnInit {
       editGroupForm.value.existingGroupDescription);
     newGroup.id = editGroupForm.value.existingGroupId;
 
+    let changedGroup;
+
     this.adminGroupService.editGroup(newGroup).subscribe(() => {
 
       this.displayGroupEditDialog = false;
 
-      const changedGroup = this.groups.find(g => g.id === newGroup.id);
+      changedGroup = this.groups.find(g => g.id === newGroup.id);
       changedGroup.name = newGroup.name;
       changedGroup.url = newGroup.url;
       changedGroup.description = newGroup.description;
@@ -141,7 +147,11 @@ export class AdminGroupsComponent implements OnInit {
     }, () => {
 
       if (this.currentFileUpload != null) {
-        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe(() => {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
+
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          changedGroup.imageURI = logoURI['logoURI'] += '?random+\=' + Math.random();
           this.currentFileUpload = null;
           this.logoUploaderExistingGroup.clear();
         });
