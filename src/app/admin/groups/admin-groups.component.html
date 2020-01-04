@@ -165,20 +165,22 @@
     <td id="groupURL_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
     <td>
-      <button
-        id="editExistingGroupButton_{{group.id}}"
-        (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
-        class="btn btn-primary"
-        style="margin-top: -5px">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-      <button
-        id="deleteExistingGroupButton_{{group.id}}"
-        (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
-        class="btn btn-primary background-attention"
-        style="margin-top: -5px; margin-left: 10px">
-        <fa-icon [icon]="faRadiation"></fa-icon>
-      </button>
+      <div style="white-space: nowrap">
+        <button
+          id="editExistingGroupButton_{{group.id}}"
+          (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
+          class="btn btn-primary"
+          style="margin-top: -5px">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+        <button
+          id="deleteExistingGroupButton_{{group.id}}"
+          (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
+          class="btn btn-primary background-attention"
+          style="margin-top: -5px; margin-left: 10px">
+          <fa-icon [icon]="faRadiation"></fa-icon>
+        </button>
+      </div>
     </td>
   </tr>
 </table>
