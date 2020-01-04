@@ -10,6 +10,9 @@ export class AdminEventService {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   * Retrieves all events, including events in the past.
+   */
   getAllEvents() {
     return this.http.get<Event[]>(environment.adminEventsUrl);
   }

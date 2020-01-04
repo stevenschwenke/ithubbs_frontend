@@ -11,7 +11,10 @@ export class EventService {
   constructor(private http: HttpClient) {
   }
 
-  getAllIdeas() {
+  /**
+   * Retrieves current events, not including events in the past.
+   */
+  getAllCurrentEvents() {
     return this.http.get<Event[]>(this.eventUrl);
   }
 
