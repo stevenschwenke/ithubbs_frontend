@@ -77,10 +77,10 @@ export class AdminEventsComponent implements OnInit {
       newEventForm.value.newEventDate,
       newEventForm.value.newEventURL);
 
-    this.adminEventService.createNewEvent(newEvent).subscribe((id: string) => {
+    this.adminEventService.createNewEvent(newEvent).subscribe((eventFromServer: Event) => {
       overlay.hide();
 
-      newEvent.id = id;
+      newEvent.id = eventFromServer.id;
       this.events.push(newEvent);
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neues Event angelegt.'});
     }, (error) => {

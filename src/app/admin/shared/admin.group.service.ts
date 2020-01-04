@@ -28,7 +28,7 @@ export class AdminGroupService {
   }
 
   editGroup(newGroup: Group): Observable<Group> {
-    return this.http.post<Group>(environment.adminGroupsUrl + '/edit', newGroup);
+    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
 
   deleteGroup(group: Group): Observable<Group> {
@@ -40,7 +40,7 @@ export class AdminGroupService {
         id: group.id
       }
     };
-    return this.http.delete<Group>(environment.adminGroupsUrl + '/delete', options);
+    return this.http.delete<Group>(environment.adminGroupsUrl, options);
   }
 
 }
