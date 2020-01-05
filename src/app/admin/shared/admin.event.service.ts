@@ -10,16 +10,19 @@ export class AdminEventService {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   * Retrieves all events, including events in the past.
+   */
   getAllEvents() {
     return this.http.get<Event[]>(environment.adminEventsUrl);
   }
 
-  createNewEvent(newEvent: Event): Observable<String> {
-    return this.http.post<String>(environment.adminEventsUrl, newEvent);
+  createNewEvent(newEvent: Event): Observable<Event> {
+    return this.http.post<Event>(environment.adminEventsUrl, newEvent);
   }
 
   editEvent(newEvent: Event): Observable<Event> {
-    return this.http.post<Event>(environment.adminEventsUrl + '/edit', newEvent);
+    return this.http.post<Event>(environment.adminEventsUrl, newEvent);
   }
 
   deleteEvent(event: Event): Observable<Event> {
@@ -31,7 +34,7 @@ export class AdminEventService {
         id: event.id
       }
     };
-    return this.http.delete<Event>(environment.adminEventsUrl + '/delete', options);
+    return this.http.delete<Event>(environment.adminEventsUrl, options);
   }
 
 

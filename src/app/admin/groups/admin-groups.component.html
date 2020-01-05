@@ -53,6 +53,18 @@
                  title="Description"
                  placeholder="Pflichtfeld">
 
+          <label for="logoUploaderNewGroup" style="margin-top: 10px">Logo</label>
+          <p-fileUpload
+            #logoUploaderNewGroup
+            id="logoUploaderNewGroup"
+            customUpload="true"
+            (uploadHandler)="onUploadLogo($event)"
+            accept="image/*"
+            maxFileSize="10000000"
+            invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
+            auto="auto">
+          </p-fileUpload>
+
           <button
             id="newGroupSubmitButton"
             class="btn btn-primary" [disabled]="!newGroupForm.valid">
@@ -77,6 +89,7 @@
 <table class="grouptable table table-responsive">
   <tr>
     <th>id</th>
+    <th>Logo</th>
     <th>Name</th>
     <th>URL</th>
     <th>Beschreibung</th>
@@ -124,6 +137,18 @@
                title="Description"
                placeholder="Pflichtfeld">
 
+        <label for="logoUploaderExistingGroup" style="margin-top: 10px">Logo</label>
+        <p-fileUpload
+            #logoUploaderExistingGroup
+            id="logoUploaderExistingGroup"
+            customUpload="true"
+            (uploadHandler)="onUploadLogo($event)"
+            accept="image/*"
+            maxFileSize="10000000"
+            invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
+            auto="auto">
+        </p-fileUpload>
+
         <button
           id="existingGroupSubmitButton"
           class="btn btn-primary" [disabled]="!editGroupForm.valid">
@@ -135,24 +160,27 @@
 
   <tr *ngFor="let group of groups">
     <td id="groupID_{{group.id}}" class="grouptableidcolumn">{{group.id}}</td>
+    <td id="groupLogo_{{group.id}}"> <img *ngIf="group.imageURI" src="{{group.imageURI}}" height="50px"/> </td>
     <td id="groupName_{{group.id}}">{{group.name}}</td>
     <td id="groupURL_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
     <td>
-      <button
-        id="editExistingGroupButton_{{group.id}}"
-        (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
-        class="btn btn-primary"
-        style="margin-top: -5px">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-      <button
-        id="deleteExistingGroupButton_{{group.id}}"
-        (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
-        class="btn btn-primary background-attention"
-        style="margin-top: -5px; margin-left: 10px">
-        <fa-icon [icon]="faRadiation"></fa-icon>
-      </button>
+      <div style="white-space: nowrap">
+        <button
+          id="editExistingGroupButton_{{group.id}}"
+          (click)="onEditGroup($event, overlayEditGroup, editGroupForm, group)"
+          class="btn btn-primary"
+          style="margin-top: -5px">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+        <button
+          id="deleteExistingGroupButton_{{group.id}}"
+          (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
+          class="btn btn-primary background-attention"
+          style="margin-top: -5px; margin-left: 10px">
+          <fa-icon [icon]="faRadiation"></fa-icon>
+        </button>
+      </div>
     </td>
   </tr>
 </table>

@@ -12,15 +12,23 @@ export class AdminGroupService {
   }
 
   getAllGroups() {
-    return this.http.get<Group[]>(environment.adminGroupsUrl);
+    return this.http.get<Group[]>(environment.groupsUrl);
   }
 
-  createNewGroup(newGroup: Group): Observable<String> {
-    return this.http.post<String>(environment.adminGroupsUrl, newGroup);
+  createNewGroup(newGroup: Group): Observable<Group> {
+    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
+  }
+
+  postNewLogo(groupId: number, logo: File): Observable<object> {
+    const formData = new FormData();
+    formData.append('groupID', groupId + '');
+    formData.append('file', logo);
+
+    return this.http.post<object>(environment.adminGroupsUrl + '/logo', formData);
   }
 
   editGroup(newGroup: Group): Observable<Group> {
-    return this.http.post<Group>(environment.adminGroupsUrl + '/edit', newGroup);
+    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
 
   deleteGroup(group: Group): Observable<Group> {
@@ -32,7 +40,7 @@ export class AdminGroupService {
         id: group.id
       }
     };
-    return this.http.delete<Group>(environment.adminGroupsUrl + '/delete', options);
+    return this.http.delete<Group>(environment.adminGroupsUrl, options);
   }
 
 }

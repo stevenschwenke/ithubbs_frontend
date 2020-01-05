@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
@@ -10,7 +10,7 @@ import {
   faSignOutAlt as faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfirmationService, MessageService, OverlayPanel} from 'primeng/primeng';
+import {ConfirmationService, FileUpload, MessageService, OverlayPanel} from 'primeng/primeng';
 
 @Component({
   selector: 'app-admin-groups',
@@ -21,6 +21,9 @@ export class AdminGroupsComponent implements OnInit {
   newGroupForm: FormGroup;
   editGroupForm: FormGroup;
 
+  @ViewChild('logoUploaderNewGroup') logoUploaderNewGroup: FileUpload;
+  @ViewChild('logoUploaderExistingGroup') logoUploaderExistingGroup: FileUpload;
+
   faPlusSquare = faPlusSquare;
   faRadiation = faRadiation;
   faEdit = faEdit;
@@ -30,6 +33,7 @@ export class AdminGroupsComponent implements OnInit {
 
   groups: Group[];
   displayGroupEditDialog: boolean;
+  private currentFileUpload: File;
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
@@ -71,11 +75,11 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.value.newGroupURL,
       newGroupForm.value.newGroupDescription);
 
-    this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
+    this.adminGroupService.createNewGroup(newGroup).subscribe((group: Group) => {
       overlay.hide();
 
-      newGroup.id = id;
-      this.groups.push(newGroup);
+      newGroup.id = group.id;
+      newGroup.imageURI = group.imageURI;
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
     }, (error) => {
       this.messageService.add({
@@ -84,8 +88,23 @@ export class AdminGroupsComponent implements OnInit {
         detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
     }, () => {
+
+      this.groups.push(newGroup);
+
       // Reset form. If that is not done, the form will contain the last input when opened again.
       newGroupForm.reset();
+
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
+
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          newGroup.imageURI = logoURI['logoURI'] += '?random+\=' + Math.random();
+
+          this.currentFileUpload = null;
+          this.logoUploaderNewGroup.clear();
+        });
+      }
     });
   }
 
@@ -107,11 +126,13 @@ export class AdminGroupsComponent implements OnInit {
       editGroupForm.value.existingGroupDescription);
     newGroup.id = editGroupForm.value.existingGroupId;
 
+    let changedGroup;
+
     this.adminGroupService.editGroup(newGroup).subscribe(() => {
 
       this.displayGroupEditDialog = false;
 
-      const changedGroup = this.groups.find(g => g.id === newGroup.id);
+      changedGroup = this.groups.find(g => g.id === newGroup.id);
       changedGroup.name = newGroup.name;
       changedGroup.url = newGroup.url;
       changedGroup.description = newGroup.description;
@@ -123,6 +144,18 @@ export class AdminGroupsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
+    }, () => {
+
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
+
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          changedGroup.imageURI = logoURI['logoURI'] += '?random+\=' + Math.random();
+          this.currentFileUpload = null;
+          this.logoUploaderExistingGroup.clear();
+        });
+      }
     });
   }
 
@@ -145,5 +178,9 @@ export class AdminGroupsComponent implements OnInit {
         });
       }
     });
+  }
+
+  onUploadLogo(event) {
+    this.currentFileUpload = event.files[0];
   }
 }

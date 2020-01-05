@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Group} from '../shared/group';
+import {GroupService} from '../admin/shared/group.service';
 
 @Component({
   selector: 'app-local-groups',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocalGroupsComponent implements OnInit {
 
-  constructor() { }
+  groups: Group[];
+
+  constructor(private groupService: GroupService) {
+  }
 
   ngOnInit() {
+    this.groupService.getAllGroups().subscribe((groups) => {
+      this.groups = groups;
+    });
   }
 
 }

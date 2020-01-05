@@ -10,6 +10,7 @@ export const environment = {
   adminUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin',
   adminEventsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin/events',
   adminGroupsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/admin/groups',
+  groupsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/groups',
 
   eventsUrl: 'https://ithubbstestbackend.cfapps.io/ithubbs/api/events'
 };

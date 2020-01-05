@@ -15,7 +15,7 @@ export class UpcomingEventsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventService.getAllIdeas().subscribe((events: Event[]) => {
+    this.eventService.getAllCurrentEvents().subscribe((events: Event[]) => {
       events.every(event => {
         const seconds: number = <number> (<unknown> event.datetime);
         const date = new Date();

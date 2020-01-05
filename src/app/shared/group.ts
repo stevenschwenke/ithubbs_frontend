@@ -5,6 +5,7 @@ export class Group {
   name: string;
   url: string;
   description: string;
+  imageURI: string;
 
   constructor(name: string, url: string, description: string) {
     this.name = name;
