@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService, SessionStorageService} from '@rars/ngx-webstorage';
 import {AuthServerProvider} from '../auth/auth-jwt.service';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';

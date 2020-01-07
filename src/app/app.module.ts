@@ -17,7 +17,7 @@ import {CollapseModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {EventService} from './shared/event.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {LocalStorageService, Ng2Webstorage, SessionStorageService} from 'ngx-webstorage';
+import {LocalStorageService, Ng2Webstorage, SessionStorageService} from '@rars/ngx-webstorage';
 import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
 import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
 import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';

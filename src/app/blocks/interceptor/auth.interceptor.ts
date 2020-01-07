@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs';
-import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent} from '@angular/common/http';
+import {LocalStorageService, SessionStorageService} from '@rars/ngx-webstorage';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
 import {environment} from '../../../environments/environment';
 

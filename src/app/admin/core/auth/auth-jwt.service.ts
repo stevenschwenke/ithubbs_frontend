@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {LocalStorageService} from 'ngx-webstorage';
+import {LocalStorageService} from '@rars/ngx-webstorage';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
