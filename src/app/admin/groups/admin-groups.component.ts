@@ -21,8 +21,8 @@ export class AdminGroupsComponent implements OnInit {
   newGroupForm: FormGroup;
   editGroupForm: FormGroup;
 
-  @ViewChild('logoUploaderNewGroup') logoUploaderNewGroup: FileUpload;
-  @ViewChild('logoUploaderExistingGroup') logoUploaderExistingGroup: FileUpload;
+  @ViewChild('logoUploaderNewGroup', { static: true }) logoUploaderNewGroup: FileUpload;
+  @ViewChild('logoUploaderExistingGroup', { static: true }) logoUploaderExistingGroup: FileUpload;
 
   faPlusSquare = faPlusSquare;
   faRadiation = faRadiation;
