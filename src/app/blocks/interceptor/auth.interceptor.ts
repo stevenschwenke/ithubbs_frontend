@@ -1,11 +1,10 @@
 import {Observable} from 'rxjs';
-import {LocalStorageService, SessionStorageService} from '@rars/ngx-webstorage';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
 import {environment} from '../../../environments/environment';
 
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private localStorage: LocalStorageService, private sessionStorage: SessionStorageService) {
+  constructor() {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -18,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
-    const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
+    const token = localStorage.getItem('authenticationToken') || sessionStorage.retrieve('authenticationToken');
     if (!!token) {
       request = request.clone({
         setHeaders: {
