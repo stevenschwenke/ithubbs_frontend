@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {LocalStorageService, SessionStorageService} from '@rars/ngx-webstorage';
 import {AuthServerProvider} from '../auth/auth-jwt.service';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
@@ -11,14 +10,12 @@ export class LoginService {
 
   constructor(
     private authServerProvider: AuthServerProvider,
-    private localStorage: LocalStorageService,
-    private sessionStorage: SessionStorageService,
     private router: Router) {
 
     // If application refreshed with F5, the LoginService "forgets" that it has been logged in. Hence, have a look if we have a token:
     if (!!this.userLoggedIn) {
-      const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
-      this.userLoggedIn.next(token);
+      const token = localStorage.getItem('authenticationToken') || sessionStorage.getItem('authenticationToken');
+      this.userLoggedIn.next(token !== null);
     }
   }
 

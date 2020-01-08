@@ -1,25 +1,23 @@
 import {Injectable} from '@angular/core';
-import {LocalStorageService} from '@rars/ngx-webstorage';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private $localStorage: LocalStorageService, private http: HttpClient) {
+  constructor() {
   }
 
   getUsername(): string {
-    return this.$localStorage.retrieve('username');
+    return localStorage.getItem('username');
   }
 
   setUsername(username: string) {
-    this.$localStorage.store('username', username);
+    localStorage.setItem('username', username);
   }
 
   getRoles(): string[] {
-    const token = this.$localStorage.retrieve('authenticationToken');
+    const token = localStorage.getItem('authenticationToken');
     if (token !== undefined) {
       const tokenData = token.split('.')[1];
       const decodedTokenData = window.atob(tokenData);
