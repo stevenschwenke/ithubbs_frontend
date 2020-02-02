@@ -30,6 +30,7 @@ import {CarouselModule} from 'primeng/carousel';
 import {GalleriaModule} from 'primeng/galleria';
 import {Conference2019Component} from './conference2019/conference2019.component';
 import {GroupService} from './admin/shared/group.service';
+import {TooltipModule} from 'primeng/primeng';
 
 registerLocaleData(localeDE);
 
@@ -58,7 +59,8 @@ registerLocaleData(localeDE);
     AppRoutingModule,
     FontAwesomeModule,
     CarouselModule,
-    GalleriaModule
+    GalleriaModule,
+    TooltipModule
   ],
   providers: [
     EventService,

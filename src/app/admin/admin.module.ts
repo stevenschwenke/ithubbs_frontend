@@ -11,13 +11,15 @@ import {AdminGroupService} from './shared/admin.group.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
   CalendarModule,
+  CheckboxModule,
   ConfirmationService,
   ConfirmDialogModule,
   DialogModule,
   FileUploadModule,
   MessageModule,
   MessageService,
-  OverlayPanelModule
+  OverlayPanelModule,
+  TooltipModule
 } from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
 
@@ -27,20 +29,22 @@ import {ToastModule} from 'primeng/toast';
     LoginMaskComponent,
     AdminGroupsComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MessageModule,
-    ReactiveFormsModule,
-    FontAwesomeModule,
-    AdminRoutingModule,
-    OverlayPanelModule,
-    ToastModule,
-    ConfirmDialogModule,
-    DialogModule,
-    CalendarModule,
-    FileUploadModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MessageModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+        AdminRoutingModule,
+        OverlayPanelModule,
+        ToastModule,
+        ConfirmDialogModule,
+        DialogModule,
+        CalendarModule,
+        FileUploadModule,
+        CheckboxModule,
+        TooltipModule
+    ],
   providers: [
     AdminEventService,
     AdminGroupService,

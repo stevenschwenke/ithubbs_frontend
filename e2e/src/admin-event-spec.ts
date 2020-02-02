@@ -23,11 +23,11 @@ describe('Admin/event area', () => {
     browser.get('http://localhost:4200/admin/events');
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
 
-    // group to be created doesn't exist yet
+    // event to be created doesn't exist yet
 
     expect(element(by.linkText('https://newevent.com')).isPresent()).toBeFalsy();
 
-    // overlay dialog for creating new group is closed
+    // overlay dialog for creating new event is closed
 
     const newEventNameInput = element(by.id('newEventName'));
     expect(newEventNameInput.isPresent()).toBeFalsy();
@@ -38,7 +38,7 @@ describe('Admin/event area', () => {
     const newEventSubmitButton = element(by.id('newEventSubmitButton'));
     expect(newEventSubmitButton.isPresent()).toBeFalsy();
 
-    // open overlay dialog to create new group
+    // open overlay dialog to create new event
     element(by.id('createNewEventButton')).click();
 
     expect(newEventNameInput.isPresent()).toBeTruthy();
@@ -65,26 +65,26 @@ describe('Admin/event area', () => {
 
     // all values are present in table
 
-    const groupID = await extractEventIDForTableRowWithContent('New Event\'s Name');
-    expect(element(by.id('eventID_' + groupID)).getText()).not.toBe('');
-    expect(element(by.id('eventURL_' + groupID)).getText()).toBe('New Event\'s Name');
-    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Montag, 03.06.2019 11:55');
+    const eventID = await extractEventIDForTableRowWithContent('New Event\'s Name');
+    expect(element(by.id('eventID_' + eventID)).getText()).not.toBe('');
+    expect(element(by.id('eventURL_' + eventID)).getText()).toBe('New Event\'s Name');
+    expect(element(by.id('eventDate_' + eventID)).getText()).toBe('Montag, 03.06.2019 11:55');
   });
 
   it('should allow editing of existing event', async () => {
 
     browser.get('http://localhost:4200/admin/events');
 
-    // formerly created group exists with old values
+    // formerly created event exists with old values
 
-    const groupID = await extractEventIDForTableRowWithContent('New Event\'s Name');
+    const eventID = await extractEventIDForTableRowWithContent('New Event\'s Name');
 
-    expect(element(by.id('eventURL_' + groupID)).getText()).toBe('New Event\'s Name');
-    expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Montag, 03.06.2019 11:55');
+    expect(element(by.id('eventURL_' + eventID)).getText()).toBe('New Event\'s Name');
+    expect(element(by.id('eventDate_' + eventID)).getText()).toBe('Montag, 03.06.2019 11:55');
 
     // open overlay dialog
 
-    element(by.id('editExistingEventButton_' + groupID)).click();
+    element(by.id('editExistingEventButton_' + eventID)).click();
 
     // change values
 
@@ -113,8 +113,7 @@ describe('Admin/event area', () => {
 
     // all values are present in table
 
-    expect(element(by.id('eventURL_' + groupID)).getText()).toBe('Edited Event\'s Name');
-    // expect(element(by.id('eventDate_' + groupID)).getText()).toBe('Monday, 03.06.2019 11:59');
+    expect(element(by.id('eventURL_' + eventID)).getText()).toBe('Edited Event\'s Name');
   });
 
   it('should allow deleting existing event', async () => {
@@ -191,6 +190,53 @@ describe('Admin/event area', () => {
     expect(newEventNameInput.getAttribute('value')).toEqual('');
     expect(newEventURLInput.getAttribute('value')).toEqual('');
     expect(newEventDateInput.getAttribute('value')).toEqual('');
+  });
+
+  it('should allow setting and unsetting flag for public event', async () => {
+
+    browser.get('http://localhost:4200/admin/events');
+
+    // formerly created event exists with old values
+
+    const eventID = await extractEventIDForTableRowWithContent('New Event\'s Name');
+
+    expect(element(by.id('eventGeneralPublic_' + eventID)).isPresent()).toBeFalsy();
+
+    // open overlay dialog and check general public true
+
+    element(by.id('editExistingEventButton_' + eventID)).click();
+    browser.waitForAngular();
+
+    let existingEventGeneralPublicCheckbox = element(by.id('existingEventGeneralPublic'));
+    existingEventGeneralPublicCheckbox.click();
+
+    let existingEventSubmitButton = element(by.id('existingEventSubmitButton'));
+    existingEventSubmitButton.click();
+
+    // (overlay dialog is closed)
+
+    browser.waitForAngular();
+
+    expect(element(by.id('existingEventName')).isPresent()).toBeFalsy();
+    expect(element(by.id('existingEventURL')).isPresent()).toBeFalsy();
+    expect(element(by.id('existingEventDescription')).isPresent()).toBeFalsy();
+    expect(element(by.id('existingEventSubmitButton')).isPresent()).toBeFalsy();
+    expect(element(by.id('existingEventGeneralPublic')).isPresent()).toBeFalsy();
+
+    expect(element(by.id('eventGeneralPublic_' + eventID)).isPresent()).toBeTruthy();
+
+    // reopen overlay dialog and check general public false
+
+    element(by.id('editExistingEventButton_' + eventID)).click();
+    browser.waitForAngular();
+
+    existingEventGeneralPublicCheckbox = element(by.id('existingEventGeneralPublic'));
+    existingEventGeneralPublicCheckbox.click();
+
+    existingEventSubmitButton = element(by.id('existingEventSubmitButton'));
+    existingEventSubmitButton.click();
+
+    expect(element(by.id('eventGeneralPublic_' + eventID)).isPresent()).toBeFalsy();
   });
 
   /**

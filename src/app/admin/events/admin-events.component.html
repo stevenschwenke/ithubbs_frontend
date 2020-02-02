@@ -51,7 +51,8 @@
              formControlName="newEventURL"
              title="URL"
              placeholder="Pflichtfeld">
-
+      <p-checkbox value="false" formControlName="newEventGeneralPublic" label="General Public Event" binary="true"></p-checkbox>
+      <br>
       <button
         id="newEventSubmitButton"
         class="btn btn-primary" [disabled]="!newEventForm.valid">
@@ -120,7 +121,13 @@
                formControlName="existingEventURL"
                title="URL"
                placeholder="Pflichtfeld">
-
+        <p-checkbox
+          id="existingEventGeneralPublic"
+          value="false"
+          formControlName="existingEventGeneralPublic"
+          label="General Public Event"
+          binary="true"></p-checkbox>
+        <br>
         <button
           id="existingEventSubmitButton"
           class="btn btn-primary" [disabled]="!editEventForm.valid">
@@ -133,7 +140,16 @@
   <tr *ngFor="let event of events">
     <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
     <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
-    <td id="eventURL_{{event.id}}"><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
+    <td>
+      <a href="{{event.url}}" id="eventURL_{{event.id}}" target="_blank">{{event.name}}</a>
+      <span
+        *ngIf="event.generalPublic"
+        pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet."
+        style="margin-left: 10px"
+        id="eventGeneralPublic_{{event.id}}">
+        <img src="/assets/images/generalPublic.png" width="20px">
+      </span>
+    </td>
     <td>
       <button
         id="editExistingEventButton_{{event.id}}"
