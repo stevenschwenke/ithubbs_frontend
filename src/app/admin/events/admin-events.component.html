@@ -153,14 +153,14 @@
     <td>
       <button
         id="editExistingEventButton_{{event.id}}"
-        (click)="onEditEvent($event, overlayEditEvent, editEventForm, event)"
+        (click)="onEditEvent(editEventForm, event)"
         class="btn btn-primary"
         style="margin-top: -5px">
         <fa-icon [icon]="faEdit"></fa-icon>
       </button>
       <button
         id="deleteExistingEventButton_{{event.id}}"
-        (click)="onDeleteEvent($event, overlayEditEvent, editEventForm, event)"
+        (click)="onDeleteEvent(event)"
         class="btn btn-primary background-attention"
         style="margin-top: -5px; margin-left: 10px">
         <fa-icon [icon]="faRadiation"></fa-icon>

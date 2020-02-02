@@ -98,7 +98,7 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onEditEvent($event: MouseEvent, overlayEditEvent: OverlayPanel, editEventForm: FormGroup, event: Event) {
+  onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
 
     editEventForm.setValue({
@@ -138,7 +138,7 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onDeleteEvent($event: MouseEvent, overlayEditEvent: HTMLElement, editEventForm: FormGroup, event: Event) {
+  onDeleteEvent(event: Event) {
     this.confirmationService.confirm({
       message: 'Event wirklich löschen? Achtung: Sie ist dann wirklich, wirklich weg!',
       accept: () => {
