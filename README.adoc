@@ -7,14 +7,18 @@ This is the frontend to http://www.ithubbs.de[ithubbs.de]
 == Run locally
 1. build:
 
-	[curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash]
+	[cf. https://github.com/nvm-sh/nvm]
 	[nvm install node # "node" is an alias for the latest version]
-    npm install
+    
+	
+	npm install
 
 1. run:
 
 	[npm install -g @angular/cli]
-    ng serve
+    
+	
+	ng serve
 
 1. frontend available at localhost:4200
 
