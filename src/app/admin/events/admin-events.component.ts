@@ -42,14 +42,16 @@ export class AdminEventsComponent implements OnInit {
     this.newEventForm = this.formBuilder.group({
       'newEventName': new FormControl('', Validators.required),
       'newEventDate': new FormControl('', Validators.required),
-      'newEventURL': new FormControl('', Validators.required)
+      'newEventURL': new FormControl('', Validators.required),
+      'newEventGeneralPublic': new FormControl('')
     });
 
     this.editEventForm = this.formBuilder.group({
       'existingEventId': new FormControl('', Validators.required),
       'existingEventName': new FormControl('', Validators.required),
       'existingEventDate': new FormControl('', Validators.required),
-      'existingEventURL': new FormControl('', Validators.required)
+      'existingEventURL': new FormControl('', Validators.required),
+      'existingEventGeneralPublic': new FormControl('')
     });
 
     this.adminEventService.getAllEvents().subscribe((events: Event[]) => {
@@ -75,7 +77,8 @@ export class AdminEventsComponent implements OnInit {
     const newEvent = new Event(
       newEventForm.value.newEventName,
       newEventForm.value.newEventDate,
-      newEventForm.value.newEventURL);
+      newEventForm.value.newEventURL,
+      newEventForm.value.newEventGeneralPublic);
 
     this.adminEventService.createNewEvent(newEvent).subscribe((eventFromServer: Event) => {
       overlay.hide();
@@ -95,14 +98,15 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onEditEvent($event: MouseEvent, overlayEditEvent: OverlayPanel, editEventForm: FormGroup, event: Event) {
+  onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
 
     editEventForm.setValue({
       existingEventId: event.id,
       existingEventName: event.name,
       existingEventDate: event.datetime,
-      existingEventURL: event.url
+      existingEventURL: event.url,
+      existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
 
@@ -110,7 +114,8 @@ export class AdminEventsComponent implements OnInit {
     const newEvent = new Event(
       editEventForm.value.existingEventName,
       editEventForm.value.existingEventDate,
-      editEventForm.value.existingEventURL);
+      editEventForm.value.existingEventURL,
+      editEventForm.value.existingEventGeneralPublic);
     newEvent.id = editEventForm.value.existingEventId;
 
     this.adminEventService.editEvent(newEvent).subscribe(() => {
@@ -121,6 +126,7 @@ export class AdminEventsComponent implements OnInit {
       changedEvent.name = newEvent.name;
       changedEvent.datetime = newEvent.datetime;
       changedEvent.url = newEvent.url;
+      changedEvent.generalPublic = newEvent.generalPublic;
 
       this.messageService.add({severity: 'info', summary: 'Änderung erfolgreich', detail: 'Event geändert.'});
     }, (error) => {
@@ -132,7 +138,7 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onDeleteEvent($event: MouseEvent, overlayEditEvent: HTMLElement, editEventForm: FormGroup, event: Event) {
+  onDeleteEvent(event: Event) {
     this.confirmationService.confirm({
       message: 'Event wirklich löschen? Achtung: Sie ist dann wirklich, wirklich weg!',
       accept: () => {
