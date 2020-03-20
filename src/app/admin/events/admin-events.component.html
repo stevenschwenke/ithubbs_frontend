@@ -51,6 +51,16 @@
              formControlName="newEventURL"
              title="URL"
              placeholder="Pflichtfeld">
+      <label for="newEventGroup" style="margin-top: 10px">Gruppe</label>
+      <br>
+      <p-autoComplete
+        id="newEventGroup"
+        formControlName="newEventGroup"
+        [suggestions]="availableGroupsAfterFiltering"
+        (completeMethod)="search($event)"
+        field="name"
+        [dropdown]="true"></p-autoComplete>
+      <br>
       <p-checkbox value="false" formControlName="newEventGeneralPublic" label="General Public Event" binary="true"></p-checkbox>
       <br>
       <button
@@ -121,6 +131,17 @@
                formControlName="existingEventURL"
                title="URL"
                placeholder="Pflichtfeld">
+        <label for="existingEventGroup" style="margin-top: 10px">Gruppe</label>
+        <br>
+        <p-autoComplete
+          id="existingEventGroup"
+          formControlName="existingEventGroup"
+          [suggestions]="availableGroupsAfterFiltering"
+          (completeMethod)="search($event)"
+          field="name"
+          (onSelect)="selectBla($event)"
+          [dropdown]="true"></p-autoComplete>
+        <br>
         <p-checkbox
           id="existingEventGeneralPublic"
           value="false"

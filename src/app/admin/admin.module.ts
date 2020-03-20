@@ -10,6 +10,7 @@ import {AdminGroupsComponent} from './groups/admin-groups.component';
 import {AdminGroupService} from './shared/admin.group.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
+  AutoCompleteModule,
   CalendarModule,
   CheckboxModule,
   ConfirmationService,
@@ -43,7 +44,8 @@ import {ToastModule} from 'primeng/toast';
         CalendarModule,
         FileUploadModule,
         CheckboxModule,
-        TooltipModule
+        TooltipModule,
+        AutoCompleteModule
     ],
   providers: [
     AdminEventService,

@@ -7,6 +7,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {OverlayPanel} from 'primeng/primeng';
 import {Event} from '../../shared/event';
+import {Group} from '../../shared/group';
+import {GroupService} from '../shared/group.service';
 
 @Component({
   selector: 'app-events',
@@ -29,11 +31,17 @@ export class AdminEventsComponent implements OnInit {
 
   displayEventEditDialog: boolean;
 
+  // link group to event combobox
+  allGroups: Group[];
+  availableGroupsAfterFiltering: Group[];
+  selectedGroup: Group;
+
   constructor(private formBuilder: FormBuilder,
               private adminEventService: AdminEventService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
+              private groupService: GroupService,
               private confirmationService: ConfirmationService) {
   }
 
@@ -43,6 +51,7 @@ export class AdminEventsComponent implements OnInit {
       'newEventName': new FormControl('', Validators.required),
       'newEventDate': new FormControl('', Validators.required),
       'newEventURL': new FormControl('', Validators.required),
+      'newEventGroup': new FormControl(''),
       'newEventGeneralPublic': new FormControl('')
     });
 
@@ -51,6 +60,7 @@ export class AdminEventsComponent implements OnInit {
       'existingEventName': new FormControl('', Validators.required),
       'existingEventDate': new FormControl('', Validators.required),
       'existingEventURL': new FormControl('', Validators.required),
+      'existingEventGroup': new FormControl(''),
       'existingEventGeneralPublic': new FormControl('')
     });
 
@@ -64,6 +74,12 @@ export class AdminEventsComponent implements OnInit {
       });
       this.events = events;
     });
+
+    this.groupService.getAllGroups().subscribe((groups: Group[]) => {
+      this.allGroups = [...groups];
+      this.availableGroupsAfterFiltering = [...groups];
+    });
+
     this.loginUser = this.userService.getUsername();
   }
 
@@ -71,13 +87,13 @@ export class AdminEventsComponent implements OnInit {
     this.loginService.logout();
   }
 
-
   onAddNewEvent(event, newEventForm: FormGroup, overlay: OverlayPanel) {
 
     const newEvent = new Event(
       newEventForm.value.newEventName,
       newEventForm.value.newEventDate,
       newEventForm.value.newEventURL,
+      newEventForm.value.newEventGroup,
       newEventForm.value.newEventGeneralPublic);
 
     this.adminEventService.createNewEvent(newEvent).subscribe((eventFromServer: Event) => {
@@ -101,11 +117,14 @@ export class AdminEventsComponent implements OnInit {
   onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
 
+    const selectedGroup: string = event.group != null ? event.group.name : 'none';
+
     editEventForm.setValue({
       existingEventId: event.id,
       existingEventName: event.name,
       existingEventDate: event.datetime,
       existingEventURL: event.url,
+      existingEventGroup: selectedGroup,
       existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
@@ -115,6 +134,7 @@ export class AdminEventsComponent implements OnInit {
       editEventForm.value.existingEventName,
       editEventForm.value.existingEventDate,
       editEventForm.value.existingEventURL,
+      this.selectedGroup,
       editEventForm.value.existingEventGeneralPublic);
     newEvent.id = editEventForm.value.existingEventId;
 
@@ -157,5 +177,15 @@ export class AdminEventsComponent implements OnInit {
         });
       }
     });
+  }
+
+  search(event) {
+    this.availableGroupsAfterFiltering =
+      [...this.allGroups]
+        .filter((group) => group.name.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  selectBla(selectedGroup: Group) {
+    this.selectedGroup = selectedGroup;
   }
 }
