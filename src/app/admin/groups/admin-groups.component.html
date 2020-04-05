@@ -160,7 +160,7 @@
 
   <tr *ngFor="let group of groups">
     <td id="groupID_{{group.id}}" class="grouptableidcolumn">{{group.id}}</td>
-    <td id="groupLogo_{{group.id}}"> <img *ngIf="group.imageURI" src="{{group.imageURI}}" height="50px"/> </td>
+    <td id="groupLogo_{{group.id}}"> <img *ngIf="group.extractedImageURI" src="{{group.extractedImageURI}}" height="50px"/> </td>
     <td id="groupName_{{group.id}}">{{group.name}}</td>
     <td id="groupURL_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.url}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
