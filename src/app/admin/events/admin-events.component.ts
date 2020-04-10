@@ -74,7 +74,7 @@ export class AdminEventsComponent implements OnInit {
         const groupLink = event.links.find(e => e.rel === 'group');
         if (groupLink) {
           this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
-            event.extractedGroup = group;
+            event.group = group;
           });
         }
 
@@ -130,7 +130,7 @@ export class AdminEventsComponent implements OnInit {
       existingEventName: event.name,
       existingEventDate: event.datetime,
       existingEventURL: event.url,
-      existingEventGroup: event.extractedGroup,
+      existingEventGroup: event.group,
       existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
@@ -153,7 +153,7 @@ export class AdminEventsComponent implements OnInit {
       changedEvent.datetime = newEvent.datetime;
       changedEvent.url = newEvent.url;
       changedEvent.generalPublic = newEvent.generalPublic;
-      changedEvent.extractedGroup = newEvent.group;
+      changedEvent.group = newEvent.group;
 
       this.messageService.add({severity: 'info', summary: 'Änderung erfolgreich', detail: 'Event geändert.'});
     }, (error) => {

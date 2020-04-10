@@ -10,7 +10,7 @@
     </tr>
   <tr *ngFor="let event of events">
     <td>{{event.datetime | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
-    <td><a *ngIf="event.extractedGroup" href="{{event.extractedGroup.url}}" target="_blank">{{event.extractedGroup.name}}</a></td>
+    <td><a *ngIf="event.group" href="{{event.group.url}}" target="_blank">{{event.group.name}}</a></td>
     <td>
       <a href="{{event.url}}" target="_blank">{{event.name}}</a>
       <span *ngIf="event.generalPublic" pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet." style="margin-left: 10px"><img src="/assets/images/public-interest-icon.png" width="20px"></span>

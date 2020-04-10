@@ -27,7 +27,7 @@ export class UpcomingEventsComponent implements OnInit {
         const groupLink = event.links.find(e => e.rel === 'group');
         if (groupLink) {
           this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
-            event.extractedGroup = group;
+            event.group = group;
           });
         }
 
