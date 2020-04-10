@@ -86,16 +86,6 @@
     </span>
 </button>
 
-<table class="grouptable table table-responsive">
-  <tr>
-    <th>id</th>
-    <th>Logo</th>
-    <th>Name</th>
-    <th>URL</th>
-    <th>Beschreibung</th>
-    <th>Actions</th>
-  </tr>
-
   <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
   <p-dialog
@@ -158,6 +148,15 @@
     </form>
   </p-dialog>
 
+<table class="grouptable table table-responsive">
+  <tr>
+    <th>id</th>
+    <th>Logo</th>
+    <th>Name</th>
+    <th>URL</th>
+    <th>Beschreibung</th>
+    <th>Actions</th>
+  </tr>
   <tr *ngFor="let group of groups">
     <td id="groupID_{{group.id}}" class="grouptableidcolumn">{{group.id}}</td>
     <td id="groupLogo_{{group.id}}"> <img *ngIf="group.extractedImageURI" src="{{group.extractedImageURI}}" height="50px"/> </td>

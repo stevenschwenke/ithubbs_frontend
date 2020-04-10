@@ -10,6 +10,13 @@ export class Event {
   group: Group;
   generalPublic: boolean;
 
+  links: HTMLLinkElement[];
+
+  /**
+   * Not transmitted from backend, extracted after call to backend
+   */
+  extractedGroup: Group;
+
   constructor(name: string, datetime: Date, url: string, group: Group, generalPublic: boolean) {
     this.name = name;
     this.datetime = datetime;

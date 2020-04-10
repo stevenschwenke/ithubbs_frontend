@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../shared/event.service';
 import {Event} from '../shared/event';
+import {GroupService} from '../admin/shared/group.service';
+import {Group} from '../shared/group';
 
 @Component({
   selector: 'app-upcoming-events',
@@ -11,7 +13,7 @@ export class UpcomingEventsComponent implements OnInit {
 
   events: Event[];
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private groupService: GroupService) {
   }
 
   ngOnInit() {
@@ -21,6 +23,14 @@ export class UpcomingEventsComponent implements OnInit {
         const date = new Date();
         date.setTime(seconds * 1000);
         event.datetime = date;
+
+        const groupLink = event.links.find(e => e.rel === 'group');
+        if (groupLink) {
+          this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
+            event.extractedGroup = group;
+          });
+        }
+
         return true;
       });
       this.events = events;

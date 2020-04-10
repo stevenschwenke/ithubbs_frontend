@@ -84,83 +84,86 @@
     </span>
 </button>
 
+<p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-dialog
+  #overlayEditEvent
+  header="Event editieren"
+  [transitionOptions]="'0ms'"
+  [(visible)]="displayEventEditDialog">
+  <form [formGroup]="editEventForm" (ngSubmit)="onSaveEditedEvent($event, editEventForm)">
+    <div class="container">
+      <input [hidden]="true"
+             formControlName="existingEventId">
+      <label for="existingEventName" style="margin-top: 10px">Name</label>
+      <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventName'].valid&&editEventForm.controls['existingEventName'].dirty"></p-message>
+      <input class="col"
+             type="text"
+             id="existingEventName"
+             size="100"
+             formControlName="existingEventName"
+             title="Name"
+             placeholder="Pflichtfeld">
+
+      <label for="existingEventDate" style="margin-top: 10px">Datum</label>
+      <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventDate'].valid&&editEventForm.controls['existingEventDate'].dirty"></p-message>
+      <br>
+      <p-calendar class="col"
+                  id="existingEventDate"
+                  [showIcon]="true"
+                  formControlName="existingEventDate"
+                  [showTime]="true"></p-calendar>
+      <br>
+
+      <label for="existingEventURL" style="margin-top: 10px">URL</label>
+      <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventURL'].valid&&editEventForm.controls['existingEventURL'].dirty"></p-message>
+      <input class="col"
+             type="text"
+             id="existingEventURL"
+             size="300"
+             formControlName="existingEventURL"
+             title="URL"
+             placeholder="Pflichtfeld">
+      <label for="existingEventGroup" style="margin-top: 10px">Gruppe</label>
+      <br>
+      <p-autoComplete
+        id="existingEventGroup"
+        formControlName="existingEventGroup"
+        [suggestions]="availableGroupsAfterFiltering"
+        (completeMethod)="search($event)"
+        field="name"
+        (onSelect)="selectBla($event)"
+        [dropdown]="true"></p-autoComplete>
+      <br>
+      <p-checkbox
+        id="existingEventGeneralPublic"
+        value="false"
+        formControlName="existingEventGeneralPublic"
+        label="General Public Event"
+        binary="true"></p-checkbox>
+      <br>
+      <button
+        id="existingEventSubmitButton"
+        class="btn btn-primary" [disabled]="!editEventForm.valid">
+        Speichern
+      </button>
+    </div>
+  </form>
+</p-dialog>
+
 <table class="grouptable table table-responsive">
   <tr>
     <th>id</th>
     <th>Datum</th>
+    <th>Gruppe</th>
     <th>Event</th>
+    <th>Action</th>
   </tr>
-
-  <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
-  <p-dialog
-    #overlayEditEvent
-    header="Event editieren"
-    [transitionOptions]="'0ms'"
-    [(visible)]="displayEventEditDialog">
-    <form [formGroup]="editEventForm" (ngSubmit)="onSaveEditedEvent($event, editEventForm)">
-      <div class="container">
-        <input [hidden]="true"
-               formControlName="existingEventId">
-        <label for="existingEventName" style="margin-top: 10px">Name</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventName'].valid&&editEventForm.controls['existingEventName'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingEventName"
-               size="100"
-               formControlName="existingEventName"
-               title="Name"
-               placeholder="Pflichtfeld">
-
-        <label for="existingEventDate" style="margin-top: 10px">Datum</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventDate'].valid&&editEventForm.controls['existingEventDate'].dirty"></p-message>
-        <br>
-        <p-calendar class="col"
-                    id="existingEventDate"
-                    [showIcon]="true"
-                    formControlName="existingEventDate"
-                    [showTime]="true"></p-calendar>
-        <br>
-
-        <label for="existingEventURL" style="margin-top: 10px">URL</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventURL'].valid&&editEventForm.controls['existingEventURL'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingEventURL"
-               size="300"
-               formControlName="existingEventURL"
-               title="URL"
-               placeholder="Pflichtfeld">
-        <label for="existingEventGroup" style="margin-top: 10px">Gruppe</label>
-        <br>
-        <p-autoComplete
-          id="existingEventGroup"
-          formControlName="existingEventGroup"
-          [suggestions]="availableGroupsAfterFiltering"
-          (completeMethod)="search($event)"
-          field="name"
-          (onSelect)="selectBla($event)"
-          [dropdown]="true"></p-autoComplete>
-        <br>
-        <p-checkbox
-          id="existingEventGeneralPublic"
-          value="false"
-          formControlName="existingEventGeneralPublic"
-          label="General Public Event"
-          binary="true"></p-checkbox>
-        <br>
-        <button
-          id="existingEventSubmitButton"
-          class="btn btn-primary" [disabled]="!editEventForm.valid">
-          Speichern
-        </button>
-      </div>
-    </form>
-  </p-dialog>
 
   <tr *ngFor="let event of events">
     <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
     <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
+    <td><a *ngIf="event.extractedGroup" href="{{event.extractedGroup.url}}" target="_blank">{{event.extractedGroup.name}}</a></td>
     <td>
       <a href="{{event.url}}" id="eventURL_{{event.id}}" target="_blank">{{event.name}}</a>
       <span

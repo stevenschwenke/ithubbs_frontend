@@ -70,6 +70,14 @@ export class AdminEventsComponent implements OnInit {
         const date = new Date();
         date.setTime(seconds * 1000);
         event.datetime = date;
+
+        const groupLink = event.links.find(e => e.rel === 'group');
+        if (groupLink) {
+          this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
+            event.extractedGroup = group;
+          });
+        }
+
         return true;
       });
       this.events = events;
@@ -117,14 +125,12 @@ export class AdminEventsComponent implements OnInit {
   onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
 
-    const selectedGroup: string = event.group != null ? event.group.name : 'none';
-
     editEventForm.setValue({
       existingEventId: event.id,
       existingEventName: event.name,
       existingEventDate: event.datetime,
       existingEventURL: event.url,
-      existingEventGroup: selectedGroup,
+      existingEventGroup: event.extractedGroup,
       existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
@@ -147,6 +153,7 @@ export class AdminEventsComponent implements OnInit {
       changedEvent.datetime = newEvent.datetime;
       changedEvent.url = newEvent.url;
       changedEvent.generalPublic = newEvent.generalPublic;
+      changedEvent.extractedGroup = newEvent.group;
 
       this.messageService.add({severity: 'info', summary: 'Änderung erfolgreich', detail: 'Event geändert.'});
     }, (error) => {
