@@ -130,7 +130,7 @@ export class AdminEventsComponent implements OnInit {
       existingEventName: event.name,
       existingEventDate: event.datetime,
       existingEventURL: event.url,
-      existingEventGroup: event.group,
+      existingEventGroup: event.group ? event.group : 'none',
       existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
