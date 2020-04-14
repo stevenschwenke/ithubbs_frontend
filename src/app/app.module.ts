@@ -31,6 +31,7 @@ import {GalleriaModule} from 'primeng/galleria';
 import {Conference2019Component} from './conference2019/conference2019.component';
 import {GroupService} from './admin/shared/group.service';
 import {TooltipModule} from 'primeng/primeng';
+import {DataprivacystatementComponent} from './dataprivacystatement/dataprivacystatement.component';
 
 registerLocaleData(localeDE);
 
@@ -41,6 +42,7 @@ registerLocaleData(localeDE);
     CurrentCampaignsComponent,
     CurrentEverythingComponent,
     LocalGroupsComponent,
+    DataprivacystatementComponent,
     ImprintComponent,
     UsageComponent,
     JourFixesComponent,
