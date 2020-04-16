@@ -9,6 +9,7 @@ import {UsageComponent} from './usage/usage.component';
 import {ConferenceComponent} from './conference/conference.component';
 import {AssociationComponent} from './association/association.component';
 import {Conference2019Component} from './conference2019/conference2019.component';
+import {DataprivacystatementComponent} from './dataprivacystatement/dataprivacystatement.component';
 
 const routes = [
   { path: '', component: CurrentEverythingComponent},
@@ -20,6 +21,7 @@ const routes = [
   { path: 'use', component: UsageComponent},
   { path: 'mission', component: MissionStatementComponent},
   { path: 'association', component: AssociationComponent},
+  { path: 'dataprivacystatement', component: DataprivacystatementComponent},
   { path: 'impressum', component: ImprintComponent},
   {
     path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
