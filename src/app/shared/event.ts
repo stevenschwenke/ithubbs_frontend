@@ -10,7 +10,7 @@ export class Event {
   group: Group;
   generalPublic: boolean;
 
-  links: HTMLLinkElement[];
+  _links: HTMLLinkElementMap;
 
   constructor(name: string, datetime: Date, url: string, group: Group, generalPublic: boolean) {
     this.name = name;
@@ -19,4 +19,9 @@ export class Event {
     this.group = group;
     this.generalPublic = generalPublic;
   }
+}
+
+interface HTMLLinkElementMap {
+  self: HTMLLinkElement;
+  group: HTMLLinkElement;
 }

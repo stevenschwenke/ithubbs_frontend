@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService, FileUpload, MessageService, OverlayPanel} from 'primeng/primeng';
+import {GroupService} from '../shared/group.service';
 
 @Component({
   selector: 'app-admin-groups',
@@ -37,6 +38,7 @@ export class AdminGroupsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
+              private groupService: GroupService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
@@ -58,10 +60,10 @@ export class AdminGroupsComponent implements OnInit {
       'existingGroupDescription': new FormControl('', Validators.required)
     });
 
-    this.adminGroupService.getAllGroups().subscribe((groups) => {
+    this.groupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
       this.groups.forEach(group => {
-        const imageLink = group.links.find(e => e.rel === 'image');
+        const imageLink = group._links.image;
         if (imageLink) {
           group.extractedImageURI = imageLink.href;
         }
@@ -86,7 +88,7 @@ export class AdminGroupsComponent implements OnInit {
       overlay.hide();
 
       newGroup.id = group.id;
-      newGroup.links = group.links;
+      newGroup._links = group._links;
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
     }, (error) => {
       this.messageService.add({
@@ -106,7 +108,7 @@ export class AdminGroupsComponent implements OnInit {
 
           // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
           // same, however it has to change for Angular to reload it.
-          newGroup.links['image'] = logoURI['logoURI'] += '?random+\=' + Math.random();
+          newGroup._links.image.href = logoURI['logoURI'] += '?random+\=' + Math.random();
           this.currentFileUpload = null;
           this.logoUploaderNewGroup.clear();
         });

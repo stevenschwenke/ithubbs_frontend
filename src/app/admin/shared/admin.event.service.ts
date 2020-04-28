@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Event} from '../../shared/event';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AdminEventService {
@@ -14,7 +15,9 @@ export class AdminEventService {
    * Retrieves all events, including events in the past.
    */
   getAllEvents() {
-    return this.http.get<Event[]>(environment.adminEventsUrl);
+    return this.http.get<EventListData>(environment.adminEventsUrl).pipe(map(x => {
+      return x._embedded.eventModelList;
+    }));
   }
 
   createNewEvent(newEvent: Event): Observable<Event> {
@@ -36,6 +39,12 @@ export class AdminEventService {
     };
     return this.http.delete<Event>(environment.adminEventsUrl, options);
   }
+}
 
+interface EventListData {
+  _embedded: EventModelList;
+}
 
+interface EventModelList {
+  eventModelList: Event[];
 }

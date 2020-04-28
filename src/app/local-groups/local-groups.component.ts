@@ -18,7 +18,7 @@ export class LocalGroupsComponent implements OnInit {
     this.groupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
       this.groups.forEach(group => {
-        const imageLink = group.links.find(e => e.rel === 'image');
+        const imageLink = group._links.image;
         if (imageLink) {
           group.extractedImageURI = imageLink.href;
         }

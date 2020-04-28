@@ -11,10 +11,6 @@ export class AdminGroupService {
   constructor(private http: HttpClient) {
   }
 
-  getAllGroups() {
-    return this.http.get<Group[]>(environment.groupsUrl);
-  }
-
   createNewGroup(newGroup: Group): Observable<Group> {
     return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
@@ -42,5 +38,4 @@ export class AdminGroupService {
     };
     return this.http.delete<Group>(environment.adminGroupsUrl, options);
   }
-
 }

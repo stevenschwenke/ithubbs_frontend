@@ -71,7 +71,7 @@ export class AdminEventsComponent implements OnInit {
         date.setTime(seconds * 1000);
         event.datetime = date;
 
-        const groupLink = event.links.find(e => e.rel === 'group');
+        const groupLink = event._links.group;
         if (groupLink) {
           this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
             event.group = group;

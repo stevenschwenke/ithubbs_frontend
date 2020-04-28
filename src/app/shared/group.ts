@@ -5,7 +5,7 @@ export class Group {
   name: string;
   url: string;
   description: string;
-  links: HTMLLinkElement[];
+  _links: HTMLLinkElementMap;
 
   /**
    * Not transmitted from backend, extracted after call to backend
@@ -17,4 +17,9 @@ export class Group {
     this.url = url;
     this.description = description;
   }
+}
+
+interface HTMLLinkElementMap {
+  self: HTMLLinkElement;
+  image: HTMLLinkElement;
 }
