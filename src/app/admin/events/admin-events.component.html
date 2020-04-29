@@ -59,6 +59,7 @@
         [suggestions]="availableGroupsAfterFiltering"
         (completeMethod)="search($event)"
         field="name"
+        (onSelect)="selectGroup($event)"
         [dropdown]="true"></p-autoComplete>
       <br>
       <p-checkbox value="false" formControlName="newEventGeneralPublic" label="General Public Event" binary="true"></p-checkbox>
@@ -132,7 +133,7 @@
         [suggestions]="availableGroupsAfterFiltering"
         (completeMethod)="search($event)"
         field="name"
-        (onSelect)="selectBla($event)"
+        (onSelect)="selectGroup($event)"
         [dropdown]="true"></p-autoComplete>
       <br>
       <p-checkbox

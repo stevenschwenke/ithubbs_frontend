@@ -104,11 +104,12 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.reset();
 
       if (this.currentFileUpload != null) {
-        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((httpResponse) => {
 
           // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
           // same, however it has to change for Angular to reload it.
-          newGroup._links.image.href = logoURI['logoURI'] += '?random+\=' + Math.random();
+          let location = httpResponse.headers.get('Location').toString();
+          newGroup._links.image.href = location += '?random+\=' + Math.random();
           this.currentFileUpload = null;
           this.logoUploaderNewGroup.clear();
         });
@@ -155,11 +156,11 @@ export class AdminGroupsComponent implements OnInit {
     }, () => {
 
       if (this.currentFileUpload != null) {
-        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((logoURI) => {
-
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((httpResponse) => {
           // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
           // same, however it has to change for Angular to reload it.
-          changedGroup.extractedImageURI = logoURI['logoURI'] += '?random+\=' + Math.random();
+          let location = httpResponse.headers.get('Location').toString();
+          changedGroup.extractedImageURI = location += '?random+\=' + Math.random();
           this.currentFileUpload = null;
           this.logoUploaderExistingGroup.clear();
         });

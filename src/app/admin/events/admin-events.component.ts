@@ -124,6 +124,7 @@ export class AdminEventsComponent implements OnInit {
 
   onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
+    this.selectedGroup = event.group;
 
     editEventForm.setValue({
       existingEventId: event.id,
@@ -192,7 +193,7 @@ export class AdminEventsComponent implements OnInit {
         .filter((group) => group.name.toLowerCase().includes(event.query.toLowerCase()));
   }
 
-  selectBla(selectedGroup: Group) {
+  selectGroup(selectedGroup: Group) {
     this.selectedGroup = selectedGroup;
   }
 }
