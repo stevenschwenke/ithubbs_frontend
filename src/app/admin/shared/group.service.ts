@@ -14,7 +14,7 @@ export class GroupService {
 
   getAllGroups() {
     return this.http.get<GroupListData>(environment.groupsUrl).pipe(map(x => {
-      return x._embedded.groupModelList;
+      return x._embedded ? x._embedded.groupModelList : [];
     }));
   }
 

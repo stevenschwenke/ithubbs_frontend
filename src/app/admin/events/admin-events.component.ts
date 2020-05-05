@@ -9,6 +9,7 @@ import {OverlayPanel} from 'primeng/primeng';
 import {Event} from '../../shared/event';
 import {Group} from '../../shared/group';
 import {GroupService} from '../shared/group.service';
+import {EventUpdateDTO} from '../../shared/eventUpdateDTO';
 
 @Component({
   selector: 'app-events',
@@ -34,6 +35,8 @@ export class AdminEventsComponent implements OnInit {
   // link group to event combobox
   allGroups: Group[];
   availableGroupsAfterFiltering: Group[];
+
+  /** global variable to keep selected group while editing event because it cannot be saved as FormControl */
   selectedGroup: Group;
 
   constructor(private formBuilder: FormBuilder,
@@ -97,18 +100,21 @@ export class AdminEventsComponent implements OnInit {
 
   onAddNewEvent(event, newEventForm: FormGroup, overlay: OverlayPanel) {
 
-    const newEvent = new Event(
+    const newEvent = new EventUpdateDTO(
+      null,
       newEventForm.value.newEventName,
       newEventForm.value.newEventDate,
       newEventForm.value.newEventURL,
-      newEventForm.value.newEventGroup,
+      this.selectedGroup ? this.selectedGroup.id : null,
       newEventForm.value.newEventGeneralPublic);
+
+    this.selectedGroup = null;
 
     this.adminEventService.createNewEvent(newEvent).subscribe((eventFromServer: Event) => {
       overlay.hide();
 
       newEvent.id = eventFromServer.id;
-      this.events.push(newEvent);
+      this.events.push(eventFromServer);
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neues Event angelegt.'});
     }, (error) => {
       this.messageService.add({
@@ -137,13 +143,14 @@ export class AdminEventsComponent implements OnInit {
   }
 
   onSaveEditedEvent($event: {}, editEventForm: FormGroup) {
-    const newEvent = new Event(
+
+    const newEvent = new EventUpdateDTO(
+      editEventForm.value.existingEventId,
       editEventForm.value.existingEventName,
       editEventForm.value.existingEventDate,
       editEventForm.value.existingEventURL,
-      this.selectedGroup,
+      this.selectedGroup ? this.selectedGroup.id : null,
       editEventForm.value.existingEventGeneralPublic);
-    newEvent.id = editEventForm.value.existingEventId;
 
     this.adminEventService.editEvent(newEvent).subscribe(() => {
 
@@ -154,7 +161,8 @@ export class AdminEventsComponent implements OnInit {
       changedEvent.datetime = newEvent.datetime;
       changedEvent.url = newEvent.url;
       changedEvent.generalPublic = newEvent.generalPublic;
-      changedEvent.group = newEvent.group;
+      changedEvent.group = this.selectedGroup;
+      this.selectedGroup = null;
 
       this.messageService.add({severity: 'info', summary: 'Änderung erfolgreich', detail: 'Event geändert.'});
     }, (error) => {

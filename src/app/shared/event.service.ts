@@ -17,7 +17,7 @@ export class EventService {
    */
   getAllCurrentEvents() {
     return this.http.get<EventListData>(this.eventUrl).pipe(map(x => {
-      return x._embedded.eventModelList;
+      return x._embedded ? x._embedded.eventModelList : [];
     }));
   }
 
