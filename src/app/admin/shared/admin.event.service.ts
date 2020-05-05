@@ -20,7 +20,26 @@ export class AdminEventService {
    */
   getAllEvents() {
     return this.http.get<EventListData>(environment.adminEventsUrl).pipe(map(x => {
-      return x._embedded ? x._embedded.eventModelList : [];
+
+      const events: Event[] = x._embedded ? x._embedded.eventModelList : [];
+
+      events.every(event => {
+        const seconds: number = <number>(<unknown>event.datetime);
+        const date = new Date();
+        date.setTime(seconds * 1000);
+        event.datetime = date;
+
+        const groupLink = event._links.group;
+        if (groupLink) {
+          this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
+            event.group = group;
+          });
+        }
+
+        return true;
+      });
+
+      return events;
     }));
   }
 
@@ -30,6 +49,13 @@ export class AdminEventService {
 
       switchMap(eventFromServer => {
 
+        // Convert seconds into milliseconds
+        const seconds: number = <number>(<unknown>eventFromServer.datetime);
+        const date = new Date();
+        date.setTime(seconds * 1000);
+        eventFromServer.datetime = date;
+
+        // Load group information
         const groupLink = eventFromServer._links.group;
         if (groupLink) {
           this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {

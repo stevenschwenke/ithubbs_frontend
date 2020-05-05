@@ -68,21 +68,6 @@ export class AdminEventsComponent implements OnInit {
     });
 
     this.adminEventService.getAllEvents().subscribe((events: Event[]) => {
-      events.every(event => {
-        const seconds: number = <number>(<unknown>event.datetime);
-        const date = new Date();
-        date.setTime(seconds * 1000);
-        event.datetime = date;
-
-        const groupLink = event._links.group;
-        if (groupLink) {
-          this.groupService.getGroup(groupLink.href).subscribe((group: Group) => {
-            event.group = group;
-          });
-        }
-
-        return true;
-      });
       this.events = events;
     });
 
