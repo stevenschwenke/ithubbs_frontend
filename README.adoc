@@ -9,15 +9,15 @@ This is the frontend to http://www.ithubbs.de[ithubbs.de]
 
 	[cf. https://github.com/nvm-sh/nvm]
 	[nvm install node # "node" is an alias for the latest version]
-    
-	
+
+
 	npm install
 
 1. run:
 
 	[npm install -g @angular/cli]
-    
-	
+
+
 	ng serve
 
 1. frontend available at localhost:4200
@@ -26,13 +26,13 @@ This is the frontend to http://www.ithubbs.de[ithubbs.de]
 1. Open terminal in project root
 1. Transpile TypeScript to JavaScript, write to to dist-folder:
 
-    ng build --prod --output-path dist\ithubbs\public --configuration=test
+    ng build --output-path dist\ithubbs\public --configuration=test
 
 1. Login to PCF
 
-    
+
     cf login -a api.run.pivotal.io
-    
+
 1. Push from dist-folder (where index.html is)
 
     cd dist\ithubbs
