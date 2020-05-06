@@ -39,6 +39,8 @@ export class AdminEventsComponent implements OnInit {
   /** global variable to keep selected group while editing event because it cannot be saved as FormControl */
   selectedGroup: Group;
 
+  private readonly NO_GROUP_STRING = '- keine -';
+
   constructor(private formBuilder: FormBuilder,
               private adminEventService: AdminEventService,
               private userService: UserService,
@@ -72,8 +74,10 @@ export class AdminEventsComponent implements OnInit {
     });
 
     this.groupService.getAllGroups().subscribe((groups: Group[]) => {
-      this.allGroups = [...groups];
-      this.availableGroupsAfterFiltering = [...groups];
+      this.allGroups = [new Group(this.NO_GROUP_STRING, '', '')];
+      this.allGroups.push(...groups);
+      this.availableGroupsAfterFiltering = [new Group(this.NO_GROUP_STRING, '', '')];
+      this.availableGroupsAfterFiltering.push(...groups);
     });
 
     this.loginUser = this.userService.getUsername();
@@ -187,6 +191,6 @@ export class AdminEventsComponent implements OnInit {
   }
 
   selectGroup(selectedGroup: Group) {
-    this.selectedGroup = selectedGroup;
+    this.selectedGroup = selectedGroup.name === this.NO_GROUP_STRING ? null : selectedGroup;
   }
 }

@@ -329,7 +329,7 @@ describe('Admin/event area', () => {
 
 
     ////////////////////////
-    // Create Event with one of existing two groups
+    // Create Event with first one of existing two groups
     ////////////////////////
 
     browser.get('http://localhost:4200/admin/events');
@@ -362,7 +362,7 @@ describe('Admin/event area', () => {
     newEventDateInput.sendKeys('06/03/2019 11:55');
     element(by.id('newEventHeader')).click();   // to deselect date chooser and close popup
     newEventURLInput.sendKeys('https://newevent.com');
-    selectInAutocomplete('newEventGroup', 'Group', 1);
+    selectInAutocomplete('newEventGroup', 'Group 1', 1);
     element(by.id('newEventHeader')).click();   // to close autocomplete-popup
     newEventSubmitButton.click();
 
@@ -391,7 +391,7 @@ describe('Admin/event area', () => {
 
     browser.waitForAngular();
 
-    selectInAutocomplete('existingEventGroup', 'Group', 2);
+    selectInAutocomplete('existingEventGroup', 'Group 2', 1);
     element(by.id('existingEventName')).click(); // to deselect open popup
     const existingEventSubmitButton = element(by.id('existingEventSubmitButton'));
     existingEventSubmitButton.click();
@@ -413,12 +413,42 @@ describe('Admin/event area', () => {
     expect(element(by.id('eventDate_' + eventID)).getText()).toBe('Montag, 03.06.2019 11:55');
 
     ////////////////////////
+    // Edit existing event to have no group
+    ////////////////////////
+
+    element(by.id('editExistingEventButton_' + eventID)).click();
+
+    browser.waitForAngular();
+
+    selectInAutocomplete('existingEventGroup', 'keine', 1);
+    element(by.id('existingEventName')).click(); // to deselect open popup
+    existingEventSubmitButton.click();
+
+    // overlay dialog for creation is closed again
+
+    browser.waitForAngular();
+
+    expect(element(by.id('newEventName')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventURL')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventDescription')).isPresent()).toBeFalsy();
+    expect(element(by.id('newEventSubmitButton')).isPresent()).toBeFalsy();
+
+    // all values are present in table
+
+    expect(element(by.id('eventID_' + eventID)).getText()).not.toBe('');
+    expect(element(by.id('eventGroup_' + eventID)).getText()).toBe('');
+    expect(element(by.id('eventURL_' + eventID)).getText()).toBe('New Event\'s Name');
+    expect(element(by.id('eventDate_' + eventID)).getText()).toBe('Montag, 03.06.2019 11:55');
+
+
+    ////////////////////////
     // Cleanup: Delete event and groups
     ////////////////////////
 
     element(by.id('deleteExistingEventButton_' + eventID)).click();
     expect(element(by.id('confirmationDialog')).isPresent()).toBeTruthy();
     browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    browser.sleep(500);
 
     browser.get('http://localhost:4200/admin/groups');
     expect(element(by.linkText('https://group1.com')).isPresent()).toBeTruthy();
@@ -453,6 +483,7 @@ describe('Admin/event area', () => {
     newEventGroupInput.click();
     newEventGroupInput.clear();
     newEventGroupInput.sendKeys(textToTypeBeforeSelecting);
+    browser.sleep(500);
     for (let i = 0; i <= indexOfItemAfterTyping; i++) {
       browser.actions().sendKeys(protractor.Key.ARROW_DOWN).perform();
     }
