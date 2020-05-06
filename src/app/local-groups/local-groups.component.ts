@@ -17,6 +17,14 @@ export class LocalGroupsComponent implements OnInit {
   ngOnInit() {
     this.groupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
+      this.groups.forEach(group => {
+        const imageLink = group._links.image;
+        if (imageLink) {
+          group.extractedImageURI = imageLink.href;
+        }
+        return  group;
+      });
+
     });
   }
 

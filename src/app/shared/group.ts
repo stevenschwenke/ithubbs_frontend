@@ -5,11 +5,21 @@ export class Group {
   name: string;
   url: string;
   description: string;
-  imageURI: string;
+  _links: HTMLLinkElementMap;
+
+  /**
+   * Not transmitted from backend, extracted after call to backend
+   */
+  extractedImageURI: string;
 
   constructor(name: string, url: string, description: string) {
     this.name = name;
     this.url = url;
     this.description = description;
   }
+}
+
+interface HTMLLinkElementMap {
+  self: HTMLLinkElement;
+  image: HTMLLinkElement;
 }

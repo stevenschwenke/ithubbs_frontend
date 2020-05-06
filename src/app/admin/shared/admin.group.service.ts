@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Group} from '../../shared/group';
 import {Observable} from 'rxjs';
@@ -11,20 +11,18 @@ export class AdminGroupService {
   constructor(private http: HttpClient) {
   }
 
-  getAllGroups() {
-    return this.http.get<Group[]>(environment.groupsUrl);
-  }
-
   createNewGroup(newGroup: Group): Observable<Group> {
     return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
 
-  postNewLogo(groupId: number, logo: File): Observable<object> {
+  postNewLogo(groupId: number, logo: File): Observable<HttpResponse<object>> {
     const formData = new FormData();
     formData.append('groupID', groupId + '');
     formData.append('file', logo);
 
-    return this.http.post<object>(environment.adminGroupsUrl + '/logo', formData);
+    return this.http.post<HttpResponse<object>>(environment.adminGroupsUrl + '/logo', formData, {
+      observe: 'response'
+    });
   }
 
   editGroup(newGroup: Group): Observable<Group> {
@@ -42,5 +40,4 @@ export class AdminGroupService {
     };
     return this.http.delete<Group>(environment.adminGroupsUrl, options);
   }
-
 }
