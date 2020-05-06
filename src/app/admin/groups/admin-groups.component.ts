@@ -108,8 +108,9 @@ export class AdminGroupsComponent implements OnInit {
 
           // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
           // same, however it has to change for Angular to reload it.
-          let location = httpResponse.headers.get('Location').toString();
-          newGroup._links.image.href = location += '?random+\=' + Math.random();
+          newGroup._links.image = document.createElement('link');
+          newGroup._links.image.href = httpResponse.headers.get('Location').toString() + '?random+\=' + Math.random();
+          newGroup.extractedImageURI = newGroup._links.image.href;
           this.currentFileUpload = null;
           this.logoUploaderNewGroup.clear();
         });
