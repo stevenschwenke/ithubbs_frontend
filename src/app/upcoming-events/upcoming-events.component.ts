@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from '../shared/event.service';
 import {Event} from '../shared/event';
 import {GroupService} from '../admin/shared/group.service';
+import {EventStatistics} from '../shared/EventStatistics';
 
 @Component({
   selector: 'app-upcoming-events',
@@ -11,6 +12,7 @@ import {GroupService} from '../admin/shared/group.service';
 export class UpcomingEventsComponent implements OnInit {
 
   events: Event[];
+  eventStatistics: EventStatistics;
 
   constructor(private eventService: EventService, private groupService: GroupService) {
   }
@@ -19,6 +21,8 @@ export class UpcomingEventsComponent implements OnInit {
     this.eventService.getAllCurrentEvents().subscribe((events: Event[]) => {
       this.events = events;
     });
+    this.eventService.getEventStatistics().subscribe(eventStatistics => {
+      this.eventStatistics = eventStatistics;
+    });
   }
-
 }

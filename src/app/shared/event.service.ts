@@ -5,6 +5,7 @@ import {Event} from './event';
 import {map} from 'rxjs/operators';
 import {Group} from './group';
 import {GroupService} from '../admin/shared/group.service';
+import {EventStatistics} from './EventStatistics';
 
 @Injectable()
 export class EventService {
@@ -43,6 +44,9 @@ export class EventService {
     }));
   }
 
+  getEventStatistics() {
+    return this.http.get<EventStatistics>(this.eventUrl + '/statistics');
+  }
 }
 
 interface EventListData {
