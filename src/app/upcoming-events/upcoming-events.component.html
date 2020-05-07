@@ -16,8 +16,12 @@
       <span *ngIf="event.generalPublic" pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet." style="margin-left: 10px"><img src="/assets/images/public-interest-icon.png" width="20px"></span>
     </td>
   </tr>
-
 </table>
+<p>
+  Durchschnittliche Anzahl Veranstaltungen pro Monat: {{eventStatistics.averageNumberOfEventsPerMonth}}<br />
+  Anzahl künftiger Veranstaltungen: {{eventStatistics.numberOfFutureEvents}}<br />
+  Gesamtanzahl Veranstaltungen: {{eventStatistics.totalNumberOfEvents}}
+</p>
 <p>
     <b><a href="mailto:steven@stevenschwenke.de">Neue Veranstaltung melden</a></b>
 </p>

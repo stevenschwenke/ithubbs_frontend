@@ -1,18 +1,25 @@
 <h1>Gruppen</h1>
 <p>
-  Reihenfolge alphabetisch.
+  Hier findest du eine Auflistung der uns bekannten {{groupStatistics.totalNumberOfGroups}} Community-Gruppen in Braunschweig.
 </p>
 
 <table class="table table-responsive">
   <tr>
     <th></th>
-    <th>Gruppe</th>
-    <th>Beschreibung</th>
+    <th style="width: 30%">Gruppe</th>
+    <th style="width: 30%">Beschreibung</th>
+    <th style="width: 30%">Statistiken</th>
   </tr>
   <tr *ngFor="let group of groups">
-    <td id="groupLogo_{{group.id}}"> <img *ngIf="group.extractedImageURI" [src]="group.extractedImageURI" height="50px"/> </td>
+    <td id="groupLogo_{{group.id}}"><div style="text-align: center"><img *ngIf="group.extractedImageURI" [src]="group.extractedImageURI" height="50px"/></div></td>
     <td id="groupName_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.name}}</a></td>
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
+    <td id="groupStats_{{group.id}}">
+      {{group.totalNumberOfEvents}} Events organisiert.<br />
+      Erstes Event vor {{group.daysPassedSinceFirstKnownEvent}} Tagen.<br />
+      Letztes Event vor {{group.daysPassedSinceLastKnownEvent}} Tagen.<br />
+      Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
+    </td>
   </tr>
 </table>
 

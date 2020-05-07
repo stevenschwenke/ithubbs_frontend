@@ -5,6 +5,10 @@ export class Group {
   name: string;
   url: string;
   description: string;
+  totalNumberOfEvents: number;
+  averageNumberOfEventsPerMonth: number;
+  daysPassedSinceFirstKnownEvent: number;
+  daysPassedSinceLastKnownEvent: number;
   _links: HTMLLinkElementMap;
 
   /**

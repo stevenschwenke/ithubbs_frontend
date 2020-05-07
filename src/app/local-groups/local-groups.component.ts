@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Group} from '../shared/group';
 import {GroupService} from '../admin/shared/group.service';
+import {GroupStatistics} from '../shared/GroupStatistics';
 
 @Component({
   selector: 'app-local-groups',
@@ -10,6 +11,7 @@ import {GroupService} from '../admin/shared/group.service';
 export class LocalGroupsComponent implements OnInit {
 
   groups: Group[];
+  groupStatistics: GroupStatistics;
 
   constructor(private groupService: GroupService) {
   }
@@ -25,6 +27,10 @@ export class LocalGroupsComponent implements OnInit {
         return  group;
       });
 
+    });
+
+    this.groupService.getGroupStatistics().subscribe(groupsStatistics => {
+      this.groupStatistics = groupsStatistics;
     });
   }
 

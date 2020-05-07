@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Group} from '../../shared/group';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {GroupStatistics} from '../../shared/GroupStatistics';
 
 @Injectable()
 export class GroupService {
@@ -20,6 +21,10 @@ export class GroupService {
 
   getGroup(uri: string): Observable<Group> {
     return this.http.get<Group >(uri);
+  }
+
+  getGroupStatistics() {
+    return this.http.get<GroupStatistics>(environment.groupsUrl + '/statistics');
   }
 }
 
