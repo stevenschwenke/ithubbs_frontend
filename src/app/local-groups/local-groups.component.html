@@ -16,9 +16,11 @@
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
     <td id="groupStats_{{group.id}}">
       {{group.totalNumberOfEvents}} Events organisiert.<br />
-      Erstes Event {{group.daysPassedSinceFirstKnownEvent | dayRenderPipe}}.<br />
-      Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.<br />
-      Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
+      <div *ngIf="group.totalNumberOfEvents > 0">
+        Erstes Event {{group.daysPassedSinceFirstKnownEvent | dayRenderPipe}}.<br />
+        Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.<br />
+        Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
+      </div>
     </td>
   </tr>
 </table>
