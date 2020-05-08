@@ -16,8 +16,8 @@
     <td id="groupDescription_{{group.id}}">{{group.description}}</td>
     <td id="groupStats_{{group.id}}">
       {{group.totalNumberOfEvents}} Events organisiert.<br />
-      Erstes Event vor {{group.daysPassedSinceFirstKnownEvent}} Tagen.<br />
-      Letztes Event vor {{group.daysPassedSinceLastKnownEvent}} Tagen.<br />
+      Erstes Event {{group.daysPassedSinceFirstKnownEvent | dayRenderPipe}}.<br />
+      Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.<br />
       Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
     </td>
   </tr>

@@ -32,6 +32,7 @@ import {Conference2019Component} from './conference2019/conference2019.component
 import {GroupService} from './admin/shared/group.service';
 import {TooltipModule} from 'primeng/primeng';
 import {DataprivacystatementComponent} from './dataprivacystatement/dataprivacystatement.component';
+import {DayRenderPipe} from './shared/dayRenderPipe';
 
 registerLocaleData(localeDE);
 
@@ -51,7 +52,8 @@ registerLocaleData(localeDE);
     FooterComponent,
     ConferenceComponent,
     Conference2019Component,
-    AssociationComponent
+    AssociationComponent,
+    DayRenderPipe
   ],
   imports: [
     HttpClientModule,

@@ -23,12 +23,14 @@ import {
   TooltipModule
 } from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
+import {DayRenderPipe} from './shared/dayRenderPipe';
 
 @NgModule({
   declarations: [
     AdminEventsComponent,
     LoginMaskComponent,
-    AdminGroupsComponent
+    AdminGroupsComponent,
+    DayRenderPipe
   ],
     imports: [
         CommonModule,
