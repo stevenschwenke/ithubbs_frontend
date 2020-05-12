@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../shared/event.service';
 import {Event} from '../shared/event';
-import {GroupService} from '../admin/shared/group.service';
 import {EventStatistics} from '../shared/EventStatistics';
 
 @Component({
@@ -14,7 +13,7 @@ export class UpcomingEventsComponent implements OnInit {
   events: Event[];
   eventStatistics: EventStatistics;
 
-  constructor(private eventService: EventService, private groupService: GroupService) {
+  constructor(private eventService: EventService) {
   }
 
   ngOnInit() {

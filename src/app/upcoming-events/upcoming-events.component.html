@@ -17,7 +17,7 @@
     </td>
   </tr>
 </table>
-<p>
+<p *ngIf="eventStatistics">
   Durchschnittliche Anzahl Veranstaltungen pro Monat: {{eventStatistics.averageNumberOfEventsPerMonth}}<br />
   Anzahl künftiger Veranstaltungen: {{eventStatistics.numberOfFutureEvents}}<br />
   Gesamtanzahl Veranstaltungen: {{eventStatistics.totalNumberOfEvents}}
