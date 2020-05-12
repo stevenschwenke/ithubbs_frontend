@@ -23,32 +23,32 @@ import {
   TooltipModule
 } from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
-import {DayRenderPipe} from './shared/dayRenderPipe';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     AdminEventsComponent,
     LoginMaskComponent,
-    AdminGroupsComponent,
-    DayRenderPipe
+    AdminGroupsComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        MessageModule,
-        ReactiveFormsModule,
-        FontAwesomeModule,
-        AdminRoutingModule,
-        OverlayPanelModule,
-        ToastModule,
-        ConfirmDialogModule,
-        DialogModule,
-        CalendarModule,
-        FileUploadModule,
-        CheckboxModule,
-        TooltipModule,
-        AutoCompleteModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MessageModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    AdminRoutingModule,
+    OverlayPanelModule,
+    ToastModule,
+    ConfirmDialogModule,
+    DialogModule,
+    CalendarModule,
+    FileUploadModule,
+    CheckboxModule,
+    TooltipModule,
+    AutoCompleteModule,
+    SharedModule
+  ],
   providers: [
     AdminEventService,
     AdminGroupService,
