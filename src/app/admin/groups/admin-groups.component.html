@@ -189,6 +189,7 @@
           <fa-icon [icon]="faEdit"></fa-icon>
         </button>
         <button
+          *ngIf="group.totalNumberOfEvents === 0"
           id="deleteExistingGroupButton_{{group.id}}"
           (click)="onDeleteGroup($event, overlayEditGroup, editGroupForm, group)"
           class="btn btn-primary background-attention"
