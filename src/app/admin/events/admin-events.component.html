@@ -1,18 +1,25 @@
 <p-toast></p-toast>
 
-<p align="right">
-  <button
-    id="logoutbutton"
-    (click)="logout()"
-    class="btn btn-primary background-attention"
-    style="margin-right: 10px"
-  >
-    <span style="font-weight: bold">
-      <fa-icon [icon]="faSignOutAlt"></fa-icon>
-      Logout {{loginUser}}
-    </span>
-  </button>
-</p>
+<div>
+  <div>
+    Administer
+    <a href="/admin/events">Events here</a> and <a href="/admin/groups">Groups here</a>.
+  </div>
+
+  <div style="float: right">
+    <button
+      id="logoutbutton"
+      (click)="logout()"
+      class="btn btn-primary background-attention"
+      style="margin-right: 10px"
+    >
+      <span style="font-weight: bold">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        Logout {{loginUser}}
+      </span>
+    </button>
+  </div>
+</div>
 
 <h1>Admin-Ansicht der Events</h1>
 
