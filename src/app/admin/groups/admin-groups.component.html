@@ -175,7 +175,11 @@
       {{group.totalNumberOfEvents}} Events organisiert.<br />
       <div *ngIf="group.totalNumberOfEvents > 0">
         Erstes Event {{group.daysPassedSinceFirstKnownEvent | dayRenderPipe}}.<br />
-        Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.<br />
+        Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.
+        <span *ngIf="group.daysPassedSinceLastKnownEvent > 90">
+          <fa-icon class="attention" [icon]="faExclamationTriangle" pTooltip="Gruppe hat mehr als 90 Monate kein Event organisiert!"></fa-icon>
+        </span>
+        <br />
         Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
       </div>
     </td>

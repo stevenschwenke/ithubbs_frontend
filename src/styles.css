@@ -134,6 +134,10 @@ a:hover {
   border: 1px solid #237c4c;
 }
 
+.attention {
+  color: #6e160b;
+}
+
 .background-attention {
   background-color: #6e160b;
 }

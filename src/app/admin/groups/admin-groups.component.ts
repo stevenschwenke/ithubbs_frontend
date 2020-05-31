@@ -5,6 +5,7 @@ import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
 import {
   faEdit as faEdit,
+  faExclamationTriangle as faExclamationTriangle,
   faPlusSquare as faPlusSquare,
   faRadiation as faRadiation,
   faSignOutAlt as faSignOutAlt
@@ -29,6 +30,7 @@ export class AdminGroupsComponent implements OnInit {
   faRadiation = faRadiation;
   faEdit = faEdit;
   faSignOutAlt = faSignOutAlt;
+  faExclamationTriangle = faExclamationTriangle;
 
   loginUser: string;
 
