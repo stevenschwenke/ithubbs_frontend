@@ -5,12 +5,15 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {CurrentCampaignsComponent} from './current-campaigns/current-campaigns.component';
+import {CampaignsComponent} from './campaigns/campaigns.component';
 import {CurrentEverythingComponent} from './current-everything/current-everything.component';
 import {ImprintComponent} from './imprint/imprint.component';
 import {JourFixesComponent} from './jour-fixes/jour-fixes.component';
 import {LocalGroupsComponent} from './local-groups/local-groups.component';
 import {MissionStatementComponent} from './mission-statement/mission-statement.component';
 import {UpcomingEventsComponent} from './upcoming-events/upcoming-events.component';
+import {EventsComponent} from './events/events.component';
+import {ParticipateComponent} from './participate/participate.component';
 import {FooterComponent} from './footer/footer.component';
 import {UsageComponent} from './usage/usage.component';
 import {CollapseModule} from 'ngx-bootstrap';
@@ -39,6 +42,7 @@ registerLocaleData(localeDE);
     AppComponent,
     NavbarComponent,
     CurrentCampaignsComponent,
+    CampaignsComponent,
     CurrentEverythingComponent,
     LocalGroupsComponent,
     ImprintComponent,
@@ -46,6 +50,8 @@ registerLocaleData(localeDE);
     JourFixesComponent,
     MissionStatementComponent,
     UpcomingEventsComponent,
+    EventsComponent,
+    ParticipateComponent,
     FooterComponent,
     ConferenceComponent,
     Conference2019Component,

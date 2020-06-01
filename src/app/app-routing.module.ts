@@ -5,6 +5,9 @@ import {MissionStatementComponent} from './mission-statement/mission-statement.c
 import {JourFixesComponent} from './jour-fixes/jour-fixes.component';
 import {LocalGroupsComponent} from './local-groups/local-groups.component';
 import {CurrentEverythingComponent} from './current-everything/current-everything.component';
+import {CampaignsComponent} from './campaigns/campaigns.component';
+import {EventsComponent} from './events/events.component';
+import {ParticipateComponent} from './participate/participate.component';
 import {UsageComponent} from './usage/usage.component';
 import {ConferenceComponent} from './conference/conference.component';
 import {AssociationComponent} from './association/association.component';
@@ -15,6 +18,9 @@ const routes = [
   { path: 'current', component: CurrentEverythingComponent},
   { path: 'conference2019', component: Conference2019Component},
   { path: 'conference', component: ConferenceComponent},
+  { path: 'campaigns', component: CampaignsComponent},
+  { path: 'events', component: EventsComponent},
+  { path: 'participate', component: ParticipateComponent},
   { path: 'gruppen', component: LocalGroupsComponent},
   { path: 'orga', component: JourFixesComponent},
   { path: 'use', component: UsageComponent},
