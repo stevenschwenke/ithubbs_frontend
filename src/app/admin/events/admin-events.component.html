@@ -1,10 +1,14 @@
-<p-toast></p-toast>
+<section class="pb-0 border-top">
+  <div class="container">
+    <div class="row section-title justify-content-center text-center mb-5">
+      <div class="col-md-9 col-lg-8 col-xl-12">
+        <p-toast></p-toast>
 
 <p align="right">
   <button
     id="logoutbutton"
     (click)="logout()"
-    class="btn btn-primary background-attention"
+    class="btn btn-success background-attention"
     style="margin-right: 10px"
   >
     <span style="font-weight: bold">
@@ -16,52 +20,6 @@
 
 <h1>Admin-Ansicht der Events</h1>
 
-<p-overlayPanel
-  #overlay
-  [showCloseIcon]="true"
-  [dismissable]="true">
-  <h1 id="newEventHeader">Neues Event</h1>
-  <form [formGroup]="newEventForm" (ngSubmit)="onAddNewEvent($event, newEventForm, overlay)">
-    <div class="container">
-      <label for="newEventName" style="margin-top: 10px">Name</label>
-      <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventName'].valid&&newEventForm.controls['newEventName'].dirty"></p-message>
-      <input class="col"
-             type="text"
-             id="newEventName"
-             size="100"
-             formControlName="newEventName"
-             title="Name"
-             placeholder="Pflichtfeld">
-
-      <label for="newEventDate" style="margin-top: 10px">Datum</label>
-      <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventDate'].valid&&newEventForm.controls['newEventDate'].dirty"></p-message>
-      <br>
-      <p-calendar class="col"
-                  id="newEventDate"
-                  [showIcon]="true"
-                  formControlName="newEventDate"
-                  [showTime]="true"></p-calendar>
-      <br>
-      <label for="newEventURL" style="margin-top: 10px">URL</label>
-      <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventURL'].valid&&newEventForm.controls['newEventURL'].dirty"></p-message>
-      <input class="col"
-             type="text"
-             id="newEventURL"
-             size="300"
-             formControlName="newEventURL"
-             title="URL"
-             placeholder="Pflichtfeld">
-      <p-checkbox value="false" formControlName="newEventGeneralPublic" label="General Public Event" binary="true"></p-checkbox>
-      <br>
-      <button
-        id="newEventSubmitButton"
-        class="btn btn-primary" [disabled]="!newEventForm.valid">
-        Speichern
-      </button>
-    </div>
-  </form>
-</p-overlayPanel>
-
 <button
   id="createNewEventButton"
   (click)="overlay.toggle($event)"
@@ -69,105 +27,167 @@
 
   <fa-icon [icon]="faPlusSquare"></fa-icon>
 
-  <span style="font-weight: bold">
-      Neues Event anlegen
+  <span class="ml-1" style="font-weight: bold">
+   Neues Event anlegen
     </span>
 </button>
+        <p-overlayPanel
+          #overlay
+          [showCloseIcon]="true"
+          [dismissable]="true"
+          class="p-5">
+          <h1 id="newEventHeader">Neues Event</h1>
+          <form [formGroup]="newEventForm" (ngSubmit)="onAddNewEvent($event, newEventForm, overlay)">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 pb-2"><label for="newEventName" style="margin-top: 10px">Name</label>
+                  <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventName'].valid&&newEventForm.controls['newEventName'].dirty"></p-message>
+                  <input class="col"
+                         type="text"
+                         id="newEventName"
+                         size="100"
+                         formControlName="newEventName"
+                         title="Name"
+                         placeholder="Pflichtfeld">
+                </div>
+                <div class="col-lg-6 pb-2">
+                  <label for="newEventURL" style="margin-top: 10px">URL</label>
+                  <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventURL'].valid&&newEventForm.controls['newEventURL'].dirty"></p-message>
+                  <input class="col"
+                         type="text"
+                         id="newEventURL"
+                         size="300"
+                         formControlName="newEventURL"
+                         title="URL"
+                         placeholder="Pflichtfeld">
+                </div>
+                <div class="col-lg-12 pb-5">
+                  <label for="newEventDate" style="margin-top: 10px">Datum</label>
+                  <p-message severity="error" text="darf nicht leer sein" *ngIf="!newEventForm.controls['newEventDate'].valid&&newEventForm.controls['newEventDate'].dirty"></p-message>
+                  <br>
+                  <p-calendar class="col"
+                              id="newEventDate"
+                              [showIcon]="true"
+                              formControlName="newEventDate"
+                              [showTime]="true"></p-calendar>
+                </div>
+                <div class="col-lg-12 pb-2">
+                  <p-checkbox  value="false" formControlName="newEventGeneralPublic" label="General Public Event" binary="true"></p-checkbox>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <button
+                  id="newEventSubmitButton"
+                  class="btn btn-primary float-right mb-5" [disabled]="!newEventForm.valid">
+                  Speichern
+                </button>
+              </div>
 
-<table class="grouptable table table-responsive">
-  <tr>
-    <th>id</th>
-    <th>Datum</th>
-    <th>Event</th>
-  </tr>
+            </div>
+          </form>
+        </p-overlayPanel>
+        <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-  <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+        <p-dialog
+          #overlayEditEvent
+          header="Event editieren"
+          [transitionOptions]="'0ms'"
+          [(visible)]="displayEventEditDialog">
+          <form [formGroup]="editEventForm" (ngSubmit)="onSaveEditedEvent($event, editEventForm)">
+            <div class="container">
+              <input [hidden]="true"
+                     formControlName="existingEventId">
+              <label for="existingEventName" style="margin-top: 10px">Name</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventName'].valid&&editEventForm.controls['existingEventName'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="existingEventName"
+                     size="100"
+                     formControlName="existingEventName"
+                     title="Name"
+                     placeholder="Pflichtfeld">
 
-  <p-dialog
-    #overlayEditEvent
-    header="Event editieren"
-    [transitionOptions]="'0ms'"
-    [(visible)]="displayEventEditDialog">
-    <form [formGroup]="editEventForm" (ngSubmit)="onSaveEditedEvent($event, editEventForm)">
-      <div class="container">
-        <input [hidden]="true"
-               formControlName="existingEventId">
-        <label for="existingEventName" style="margin-top: 10px">Name</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventName'].valid&&editEventForm.controls['existingEventName'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingEventName"
-               size="100"
-               formControlName="existingEventName"
-               title="Name"
-               placeholder="Pflichtfeld">
+              <label for="existingEventDate" style="margin-top: 10px">Datum</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventDate'].valid&&editEventForm.controls['existingEventDate'].dirty"></p-message>
+              <br>
+              <p-calendar class="col"
+                          id="existingEventDate"
+                          [showIcon]="true"
+                          formControlName="existingEventDate"
+                          [showTime]="true"></p-calendar>
+              <br>
 
-        <label for="existingEventDate" style="margin-top: 10px">Datum</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventDate'].valid&&editEventForm.controls['existingEventDate'].dirty"></p-message>
-        <br>
-        <p-calendar class="col"
-                    id="existingEventDate"
-                    [showIcon]="true"
-                    formControlName="existingEventDate"
-                    [showTime]="true"></p-calendar>
-        <br>
+              <label for="existingEventURL" style="margin-top: 10px">URL</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventURL'].valid&&editEventForm.controls['existingEventURL'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="existingEventURL"
+                     size="300"
+                     formControlName="existingEventURL"
+                     title="URL"
+                     placeholder="Pflichtfeld">
+              <p-checkbox
+                id="existingEventGeneralPublic"
+                value="false"
+                formControlName="existingEventGeneralPublic"
+                label="General Public Event"
+                binary="true"></p-checkbox>
+              <br>
+              <button
+                id="existingEventSubmitButton"
+                class="btn btn-primary" [disabled]="!editEventForm.valid">
+                Speichern
+              </button>
+            </div>
+          </form>
+        </p-dialog>
 
-        <label for="existingEventURL" style="margin-top: 10px">URL</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editEventForm.controls['existingEventURL'].valid&&editEventForm.controls['existingEventURL'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingEventURL"
-               size="300"
-               formControlName="existingEventURL"
-               title="URL"
-               placeholder="Pflichtfeld">
-        <p-checkbox
-          id="existingEventGeneralPublic"
-          value="false"
-          formControlName="existingEventGeneralPublic"
-          label="General Public Event"
-          binary="true"></p-checkbox>
-        <br>
-        <button
-          id="existingEventSubmitButton"
-          class="btn btn-primary" [disabled]="!editEventForm.valid">
-          Speichern
-        </button>
-      </div>
-    </form>
-  </p-dialog>
+        <table class="grouptable table table-responsive mt-5">
+          <tr>
+            <th>id</th>
+            <th>Datum</th>
+            <th>Event</th>
+          </tr>
 
-  <tr *ngFor="let event of events">
-    <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
-    <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
-    <td>
-      <a href="{{event.url}}" id="eventURL_{{event.id}}" target="_blank">{{event.name}}</a>
-      <span
-        *ngIf="event.generalPublic"
-        pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet."
-        style="margin-left: 10px"
-        id="eventGeneralPublic_{{event.id}}">
+
+
+          <tr *ngFor="let event of events">
+            <td id="eventID_{{event.id}}" class="eventtableidcolumn">{{event.id}}</td>
+            <td id="eventDate_{{event.id}}">{{event.datetime  | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
+            <td>
+              <a href="{{event.url}}" id="eventURL_{{event.id}}" target="_blank">{{event.name}}</a>
+              <span
+                *ngIf="event.generalPublic"
+                pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet."
+                style="margin-left: 10px"
+                id="eventGeneralPublic_{{event.id}}">
         <img src="/assets/images/public-interest-icon.png" width="20px">
       </span>
-    </td>
-    <td>
-      <button
-        id="editExistingEventButton_{{event.id}}"
-        (click)="onEditEvent(editEventForm, event)"
-        class="btn btn-primary"
-        style="margin-top: -5px">
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </button>
-      <button
-        id="deleteExistingEventButton_{{event.id}}"
-        (click)="onDeleteEvent(event)"
-        class="btn btn-primary background-attention"
-        style="margin-top: -5px; margin-left: 10px">
-        <fa-icon [icon]="faRadiation"></fa-icon>
-      </button>
-    </td>
-  </tr>
+            </td>
+            <td>
+              <button
+                id="editExistingEventButton_{{event.id}}"
+                (click)="onEditEvent(editEventForm, event)"
+                class="btn btn-primary"
+                style="margin-top: -5px">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button
+                id="deleteExistingEventButton_{{event.id}}"
+                (click)="onDeleteEvent(event)"
+                class="btn btn-primary background-attention"
+                style="margin-top: -5px; margin-left: 10px">
+                <fa-icon [icon]="faRadiation"></fa-icon>
+              </button>
+            </td>
+          </tr>
 
-</table>
-<p>
-</p>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+

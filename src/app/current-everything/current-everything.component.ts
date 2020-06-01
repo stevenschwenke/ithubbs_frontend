@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-current-everything',
   templateUrl: './current-everything.component.html',
-  styles: []
+  styleUrls: ['current-everything.component.css']
 })
 export class CurrentEverythingComponent implements OnInit {
 

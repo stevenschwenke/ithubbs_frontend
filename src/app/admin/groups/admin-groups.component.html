@@ -1,10 +1,14 @@
-<p-toast></p-toast>
+<section class="pb-0 border-top">
+  <div class="container">
+    <div class="row section-title justify-content-center text-center mb-5">
+      <div class="col-md-9 col-lg-8 col-xl-12">
+        <p-toast></p-toast>
 
 <p align="right">
   <button
     id="logoutbutton"
     (click)="logout()"
-    class="btn btn-primary background-attention"
+    class="btn btn-success background-attention"
     style="margin-right: 10px"
   >
     <span style="font-weight: bold">
@@ -13,66 +17,66 @@
     </span>
   </button>
 </p>
+        <p-overlayPanel
+          #overlay
+          [showCloseIcon]="true"
+          [dismissable]="true">
+          <h1>Neue Gruppe</h1>
+          <form [formGroup]="newGroupForm" (ngSubmit)="onAddNewGroup($event, newGroupForm, overlay)">
+            <div class="container">
+              <label for="newGroupName" style="margin-top: 10px">Name</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupName'].valid&&newGroupForm.controls['newGroupName'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="newGroupName"
+                     size="100"
+                     formControlName="newGroupName"
+                     title="Name"
+                     placeholder="Pflichtfeld">
 
+              <label for="newGroupURL" style="margin-top: 10px">URL</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupURL'].valid&&newGroupForm.controls['newGroupURL'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="newGroupURL"
+                     size="300"
+                     formControlName="newGroupURL"
+                     title="URL"
+                     placeholder="Pflichtfeld">
+
+              <label for="newGroupDescription" style="margin-top: 10px">Beschreibung</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupDescription'].valid&&newGroupForm.controls['newGroupDescription'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="newGroupDescription"
+                     size="2000"
+                     formControlName="newGroupDescription"
+                     title="Description"
+                     placeholder="Pflichtfeld">
+
+              <label for="logoUploaderNewGroup" style="margin-top: 10px">Logo</label>
+              <p-fileUpload
+                #logoUploaderNewGroup
+                id="logoUploaderNewGroup"
+                customUpload="true"
+                (uploadHandler)="onUploadLogo($event)"
+                accept="image/*"
+                maxFileSize="10000000"
+                invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
+                auto="auto">
+              </p-fileUpload>
+
+              <button
+                id="newGroupSubmitButton"
+                class="btn btn-primary" [disabled]="!newGroupForm.valid">
+                Speichern
+              </button>
+            </div>
+          </form>
+        </p-overlayPanel>
 <h1>Admin-Ansicht der Gruppen</h1>
 
-<p-overlayPanel
-  #overlay
-  [showCloseIcon]="true"
-  [dismissable]="true">
-    <h1>Neue Gruppe</h1>
-      <form [formGroup]="newGroupForm" (ngSubmit)="onAddNewGroup($event, newGroupForm, overlay)">
-        <div class="container">
-          <label for="newGroupName" style="margin-top: 10px">Name</label>
-          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupName'].valid&&newGroupForm.controls['newGroupName'].dirty"></p-message>
-          <input class="col"
-                 type="text"
-                 id="newGroupName"
-                 size="100"
-                 formControlName="newGroupName"
-                 title="Name"
-                 placeholder="Pflichtfeld">
 
-          <label for="newGroupURL" style="margin-top: 10px">URL</label>
-          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupURL'].valid&&newGroupForm.controls['newGroupURL'].dirty"></p-message>
-          <input class="col"
-                 type="text"
-                 id="newGroupURL"
-                 size="300"
-                 formControlName="newGroupURL"
-                 title="URL"
-                 placeholder="Pflichtfeld">
-
-          <label for="newGroupDescription" style="margin-top: 10px">Beschreibung</label>
-          <p-message severity="error" text="darf nicht leer sein" *ngIf="!newGroupForm.controls['newGroupDescription'].valid&&newGroupForm.controls['newGroupDescription'].dirty"></p-message>
-          <input class="col"
-                 type="text"
-                 id="newGroupDescription"
-                 size="2000"
-                 formControlName="newGroupDescription"
-                 title="Description"
-                 placeholder="Pflichtfeld">
-
-          <label for="logoUploaderNewGroup" style="margin-top: 10px">Logo</label>
-          <p-fileUpload
-            #logoUploaderNewGroup
-            id="logoUploaderNewGroup"
-            customUpload="true"
-            (uploadHandler)="onUploadLogo($event)"
-            accept="image/*"
-            maxFileSize="10000000"
-            invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
-            auto="auto">
-          </p-fileUpload>
-
-          <button
-            id="newGroupSubmitButton"
-            class="btn btn-primary" [disabled]="!newGroupForm.valid">
-            Speichern
-          </button>
-        </div>
-    </form>
-</p-overlayPanel>
 
 <button
   id="createNewGroupButton"
@@ -81,12 +85,13 @@
 
   <fa-icon [icon]="faPlusSquare"></fa-icon>
 
-  <span style="font-weight: bold">
+  <span class="ml-2" style="font-weight: bold">
       Neue Gruppe anlegen
     </span>
 </button>
 
-<table class="grouptable table table-responsive">
+
+<table class="grouptable table table-responsive mt-5">
   <tr>
     <th>id</th>
     <th>Logo</th>
@@ -95,68 +100,6 @@
     <th>Beschreibung</th>
     <th>Actions</th>
   </tr>
-
-  <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
-  <p-dialog
-    #overlayEditGroup
-    header="Gruppe editieren"
-    [transitionOptions]="'0ms'"
-    [(visible)]="displayGroupEditDialog">
-    <form [formGroup]="editGroupForm" (ngSubmit)="onSaveEditedGroup($event, editGroupForm, overlayEditGroup)">
-      <div class="container">
-        <input [hidden]="true"
-              formControlName="existingGroupId">
-        <label for="existingGroupName" style="margin-top: 10px">Name</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupName'].valid&&editGroupForm.controls['existingGroupName'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingGroupName"
-               size="100"
-               formControlName="existingGroupName"
-               title="Name"
-               placeholder="Pflichtfeld">
-
-        <label for="existingGroupURL" style="margin-top: 10px">URL</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupURL'].valid&&editGroupForm.controls['existingGroupURL'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingGroupURL"
-               size="300"
-               formControlName="existingGroupURL"
-               title="URL"
-               placeholder="Pflichtfeld">
-
-        <label for="existingGroupDescription" style="margin-top: 10px">Beschreibung</label>
-        <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupDescription'].valid&&editGroupForm.controls['existingGroupDescription'].dirty"></p-message>
-        <input class="col"
-               type="text"
-               id="existingGroupDescription"
-               size="2000"
-               formControlName="existingGroupDescription"
-               title="Description"
-               placeholder="Pflichtfeld">
-
-        <label for="logoUploaderExistingGroup" style="margin-top: 10px">Logo</label>
-        <p-fileUpload
-            #logoUploaderExistingGroup
-            id="logoUploaderExistingGroup"
-            customUpload="true"
-            (uploadHandler)="onUploadLogo($event)"
-            accept="image/*"
-            maxFileSize="10000000"
-            invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
-            auto="auto">
-        </p-fileUpload>
-
-        <button
-          id="existingGroupSubmitButton"
-          class="btn btn-primary" [disabled]="!editGroupForm.valid">
-          Speichern
-        </button>
-      </div>
-    </form>
-  </p-dialog>
 
   <tr *ngFor="let group of groups">
     <td id="groupID_{{group.id}}" class="grouptableidcolumn">{{group.id}}</td>
@@ -184,5 +127,70 @@
     </td>
   </tr>
 </table>
-<p>
-</p>
+
+        <p-confirmDialog id="confirmationDialog" header="DANGER ZONE" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+        <p-dialog
+          #overlayEditGroup
+          header="Gruppe editieren"
+          [transitionOptions]="'0ms'"
+          [(visible)]="displayGroupEditDialog">
+          <form [formGroup]="editGroupForm" (ngSubmit)="onSaveEditedGroup($event, editGroupForm, overlayEditGroup)">
+            <div class="container">
+              <input [hidden]="true"
+                     formControlName="existingGroupId">
+              <label for="existingGroupName" style="margin-top: 10px">Name</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupName'].valid&&editGroupForm.controls['existingGroupName'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="existingGroupName"
+                     size="100"
+                     formControlName="existingGroupName"
+                     title="Name"
+                     placeholder="Pflichtfeld">
+
+              <label for="existingGroupURL" style="margin-top: 10px">URL</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupURL'].valid&&editGroupForm.controls['existingGroupURL'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="existingGroupURL"
+                     size="300"
+                     formControlName="existingGroupURL"
+                     title="URL"
+                     placeholder="Pflichtfeld">
+
+              <label for="existingGroupDescription" style="margin-top: 10px">Beschreibung</label>
+              <p-message severity="error" text="darf nicht leer sein" *ngIf="!editGroupForm.controls['existingGroupDescription'].valid&&editGroupForm.controls['existingGroupDescription'].dirty"></p-message>
+              <input class="col"
+                     type="text"
+                     id="existingGroupDescription"
+                     size="2000"
+                     formControlName="existingGroupDescription"
+                     title="Description"
+                     placeholder="Pflichtfeld">
+
+              <label for="logoUploaderExistingGroup" style="margin-top: 10px">Logo</label>
+              <p-fileUpload
+                #logoUploaderExistingGroup
+                id="logoUploaderExistingGroup"
+                customUpload="true"
+                (uploadHandler)="onUploadLogo($event)"
+                accept="image/*"
+                maxFileSize="10000000"
+                invalidFileTypeMessageDetail="Nur Bilddateien erlaubt"
+                auto="auto">
+              </p-fileUpload>
+
+              <button
+                id="existingGroupSubmitButton"
+                class="btn btn-primary" [disabled]="!editGroupForm.valid">
+                Speichern
+              </button>
+            </div>
+          </form>
+        </p-dialog>
+      </div>
+
+    </div>
+  </div>
+</section>

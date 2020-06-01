@@ -1,32 +1,48 @@
-<p-toast></p-toast>
+<section class="pb-0 border-top">
+  <div class="container">
+    <div class="row section-title justify-content-center mb-5">
+      <div class="col-md-9 col-lg-8 col-xl-12">
+
+        <p-toast></p-toast>
 <form (ngSubmit)="onLogin(f)" #f="ngForm">
   <div class="container">
+    <div class="row">
+      <div class="col-lg-12 pb-5 text-center">
+        <h1>Please log in</h1>
+      </div>
+      <div class="col-lg-6 pb-5">
+        <label for="username">Username</label>
+        <input class="col"
+               type="text"
+               id="username"
+               size="30"
+               pInputText name="username"
+               title="Benutzername"
+               autocomplete="username"
+               ngModel>
+      </div>
+      <div class="col-lg-6 pb-5">
+        <label for="password">Password</label>
+        <input class="col"
+               type="password"
+               id="password"
+               size="30"
+               pInputText name="password"
+               title="Passwort"
+               autocomplete="current-password"
+               ngModel>
+      </div>
 
-    <h1>Please log in</h1>
-
-    <label for="username">Username</label>
-    <input class="col"
-           type="text"
-           id="username"
-           size="30"
-           pInputText name="username"
-           title="Benutzername"
-           autocomplete="username"
-           ngModel>
-
-    <label for="password" style="margin-top: 10px">Password</label>
-    <input class="col"
-           type="password"
-           id="password"
-           size="30"
-           pInputText name="password"
-           title="Passwort"
-           autocomplete="current-password"
-           ngModel>
-    <button id="loginbutton" class="btn btn-primary">
-      Login
-    </button>
+      <div class="col-lg-12 pb-5">
+        <button id="loginbutton" class="btn btn-primary float-right">
+          Login
+        </button>
+      </div>
+    </div>
+    </div>
+  </form>
+      </div>
+    </div>
   </div>
-</form>
-
+</section>
 
