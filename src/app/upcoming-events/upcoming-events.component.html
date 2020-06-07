@@ -2,6 +2,14 @@
 <p>
     Hier findest du eine Übersicht der anstehenden Veranstaltungen aller Gruppen in Braunschweig.
 </p>
+
+<div class="btn-group-toggle" role="group">
+  <span *ngFor="let year of years">
+    <button type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
+  </span>
+  <button type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
+</div>
+
 <table class="table table-responsive">
     <tr>
         <th>Datum</th>
