@@ -161,9 +161,9 @@
 
 <div class="btn-group-toggle" role="group">
   <span *ngFor="let year of years">
-    <button type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
+    <button id="yearFilter_{{year}}" type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
   </span>
-  <button type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
+  <button id="yearFilterFuture" type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
 </div>
 
 <table class="grouptable table table-responsive">

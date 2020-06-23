@@ -5,9 +5,9 @@
 
 <div class="btn-group-toggle" role="group">
   <span *ngFor="let year of years">
-    <button type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
+    <button id="yearFilter_{{year}}" type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
   </span>
-  <button type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
+  <button id="yearFilterFuture" type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
 </div>
 
 <table class="table table-responsive">
@@ -17,7 +17,7 @@
         <th>Event</th>
     </tr>
   <tr *ngFor="let event of events">
-    <td>{{event.datetime | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
+    <td id="eventDate_{{event.id}}">{{event.datetime | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
     <td id="eventGroup_{{event.id}}"><a *ngIf="event.group" href="{{event.group.url}}" target="_blank">{{event.group.name}}</a></td>
     <td>
       <a href="{{event.url}}" target="_blank">{{event.name}}</a>
