@@ -10,6 +10,7 @@ import {Event} from '../../shared/event';
 import {Group} from '../../shared/group';
 import {GroupService} from '../shared/group.service';
 import {EventUpdateDTO} from '../../shared/eventUpdateDTO';
+import {EventService} from '../../shared/event.service';
 
 @Component({
   selector: 'app-events',
@@ -29,6 +30,7 @@ export class AdminEventsComponent implements OnInit {
   loginUser: string;
 
   events: Event[];
+  years: number[];
 
   displayEventEditDialog: boolean;
 
@@ -43,6 +45,7 @@ export class AdminEventsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private adminEventService: AdminEventService,
+              private eventService: EventService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
@@ -71,6 +74,10 @@ export class AdminEventsComponent implements OnInit {
 
     this.adminEventService.getAllEvents().subscribe((events: Event[]) => {
       this.events = events;
+    });
+
+    this.eventService.getEventYears().subscribe((years: number[]) => {
+      this.years = years;
     });
 
     this.groupService.getAllGroups().subscribe((groups: Group[]) => {
@@ -192,5 +199,17 @@ export class AdminEventsComponent implements OnInit {
 
   selectGroup(selectedGroup: Group) {
     this.selectedGroup = selectedGroup.name === this.NO_GROUP_STRING ? null : selectedGroup;
+  }
+
+  selectYear(year: number) {
+    if (year !== 0) {
+      this.eventService.getEventsOfYear(year).subscribe((events: Event[]) => {
+        this.events = events;
+      });
+    } else {
+      this.eventService.getAllCurrentEvents().subscribe((events: Event[]) => {
+        this.events = events;
+      });
+    }
   }
 }

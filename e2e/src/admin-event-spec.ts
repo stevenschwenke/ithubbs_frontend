@@ -18,7 +18,7 @@ describe('Admin/event area', () => {
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
   });
 
-  it('should allow creation of new event', async function () {
+  xit('should allow creation of new event', async function () {
 
     browser.get('http://localhost:4200/admin/events');
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
@@ -73,7 +73,7 @@ describe('Admin/event area', () => {
     expect(element(by.id('eventDate_' + eventID)).getText()).toBe('Montag, 03.06.2019 11:55');
   });
 
-  it('should allow editing of existing event', async () => {
+  xit('should allow editing of existing event', async () => {
 
     browser.get('http://localhost:4200/admin/events');
 
@@ -118,7 +118,7 @@ describe('Admin/event area', () => {
     expect(element(by.id('eventURL_' + eventID)).getText()).toBe('Edited Event\'s Name');
   });
 
-  it('should allow deleting existing event', async () => {
+  xit('should allow deleting existing event', async () => {
 
     browser.get('http://localhost:4200/admin/events');
 
@@ -137,7 +137,7 @@ describe('Admin/event area', () => {
     expect(element(by.linkText('Edited Event\'s Name')).isPresent()).toBeFalsy();
   });
 
-  it('should clear form for adding new event after usage', async function () {
+  xit('should clear form for adding new event after usage', async function () {
 
     browser.get('http://localhost:4200/admin/events');
     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
@@ -194,7 +194,7 @@ describe('Admin/event area', () => {
     expect(newEventDateInput.getAttribute('value')).toEqual('');
   });
 
-  it('should allow setting and unsetting flag for public event', async () => {
+  xit('should allow setting and unsetting flag for public event', async () => {
 
     browser.get('http://localhost:4200/admin/events');
 
@@ -241,7 +241,7 @@ describe('Admin/event area', () => {
     expect(element(by.id('eventGeneralPublic_' + eventID)).isPresent()).toBeFalsy();
   });
 
-  it('should allow linking events and groups', async function () {
+  xit('should allow linking events and groups', async function () {
 
     ////////////////////////
     // Create two groups
@@ -462,6 +462,153 @@ describe('Admin/event area', () => {
     browser.actions().sendKeys(protractor.Key.ENTER).perform();
     expect(element(by.linkText('https://group2.com')).isPresent()).toBeFalsy();
   }, 120000);
+
+  it('should show only events set by the year-filter in both admin-view and public view', async () => {
+
+    ////////////////////////
+    // Create two events in different years
+    ////////////////////////
+
+    browser.get('http://localhost:4200/admin/events');
+    expect(browser.getCurrentUrl()).toBe('http://localhost:4200/admin/events');
+
+    // open overlay dialog to create new event
+    element(by.id('createNewEventButton')).click();
+
+    let newEventNameInput = element(by.id('newEventName'));
+    let newEventURLInput = element(by.id('newEventURL'));
+    let newEventDateInput = element(by.id('newEventDate')).element(by.tagName('span')).element(by.tagName('input'));
+    let newEventSubmitButton = element(by.id('newEventSubmitButton'));
+
+    newEventNameInput.sendKeys('Event 2019');
+    newEventDateInput.sendKeys('06/03/2019 11:55');
+    element(by.id('newEventHeader')).click();   // to deselect date chooser and close popup
+    newEventURLInput.sendKeys('https://event2019.com');
+    newEventSubmitButton.click();
+    browser.waitForAngular();
+
+    element(by.id('createNewEventButton')).click();
+
+    newEventNameInput = element(by.id('newEventName'));
+    newEventURLInput = element(by.id('newEventURL'));
+    newEventDateInput = element(by.id('newEventDate')).element(by.tagName('span')).element(by.tagName('input'));
+    newEventSubmitButton = element(by.id('newEventSubmitButton'));
+
+    newEventNameInput.sendKeys('Event 2050');
+    newEventDateInput.sendKeys('06/03/2050 11:55');
+    element(by.id('newEventHeader')).click();   // to deselect date chooser and close popup
+    newEventURLInput.sendKeys('https://event2050.com');
+    newEventSubmitButton.click();
+    browser.waitForAngular();
+
+    // Refresh page to show filter-buttons
+    browser.get('http://localhost:4200/admin/events');
+
+    ////////////////////////
+    // Test year-filter in admin-event-view
+    ////////////////////////
+
+    // Both events show in admin-table without any filters
+
+    const eventID2019 = await extractEventIDForTableRowWithContent('Event 2019');
+    expect(element(by.id('eventID_' + eventID2019)).getText()).not.toBe('');
+    expect(element(by.id('eventURL_' + eventID2019)).getText()).toBe('Event 2019');
+    expect(element(by.id('eventDate_' + eventID2019)).getText()).toBe('Montag, 03.06.2019 11:55');
+
+    const eventID2050 = await extractEventIDForTableRowWithContent('Event 2050');
+    expect(element(by.id('eventID_' + eventID2050)).getText()).not.toBe('');
+    expect(element(by.id('eventURL_' + eventID2050)).getText()).toBe('Event 2050');
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+    // Only 2019 event shows in admin-table with 2019 filter
+
+    let yearFilterButton2019 = element(by.id('yearFilter_2019'));
+    expect(yearFilterButton2019).toBeTruthy();
+
+    yearFilterButton2019.click();
+
+    expect(element(by.id('eventDate_' + eventID2019)).getText()).toBe('Montag, 03.06.2019 11:55');
+    expect(element(by.id('eventDate_' + eventID2050)).isPresent()).toBeFalsy();
+
+    // Only 2050 event shows in admin-table with 2050 filter
+
+    let yearFilterButton2050 = element(by.id('yearFilter_2050'));
+    expect(yearFilterButton2050).toBeTruthy();
+
+    yearFilterButton2050.click();
+
+    expect(element(by.id('eventDate_' + eventID2019)).isPresent()).toBeFalsy();
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+    // Future event shows in admin-table with future-filter
+
+    let yearFilterButtonFuture = element(by.id('yearFilterFuture'));
+    expect(yearFilterButtonFuture).toBeTruthy();
+
+    yearFilterButtonFuture.click();
+
+    expect(element(by.id('eventDate_' + eventID2019)).isPresent()).toBeFalsy();
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+
+    ////////////////////////
+    // Test year-filter in public event-view
+    ////////////////////////
+
+    browser.get('http://localhost:4200/current');
+
+    // Only future event shows in table without any filters
+
+    expect(element(by.id('eventDate_' + eventID2019)).isPresent()).toBeFalsy();
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+    // Only 2019 event shows in table with 2019 filter
+
+    yearFilterButton2019 = element(by.id('yearFilter_2019'));
+    expect(yearFilterButton2019).toBeTruthy();
+
+    yearFilterButton2019.click();
+    browser.waitForAngular();
+
+    expect(element(by.id('eventDate_' + eventID2019)).getText()).toBe('Montag, 03.06.2019 11:55');
+    expect(element(by.id('eventDate_' + eventID2050)).isPresent()).toBeFalsy();
+
+    // Only 2050 event shows in table with 2050 filter
+
+    yearFilterButton2050 = element(by.id('yearFilter_2050'));
+    expect(yearFilterButton2050).toBeTruthy();
+
+    yearFilterButton2050.click();
+
+    expect(element(by.id('eventDate_' + eventID2019)).isPresent()).toBeFalsy();
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+    // Only future event shows in table with future-filter
+
+    yearFilterButtonFuture = element(by.id('yearFilterFuture'));
+    expect(yearFilterButtonFuture).toBeTruthy();
+
+    yearFilterButtonFuture.click();
+
+    expect(element(by.id('eventDate_' + eventID2019)).isPresent()).toBeFalsy();
+    expect(element(by.id('eventDate_' + eventID2050)).getText()).toBe('Freitag, 03.06.2050 11:55');
+
+    ////////////////////////
+    // Cleanup: Delete events
+    ////////////////////////
+
+    browser.get('http://localhost:4200/admin/events');
+
+    element(by.id('deleteExistingEventButton_' + eventID2019)).click();
+    expect(element(by.id('confirmationDialog')).isPresent()).toBeTruthy();
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    browser.sleep(500);
+    element(by.id('deleteExistingEventButton_' + eventID2050)).click();
+    expect(element(by.id('confirmationDialog')).isPresent()).toBeTruthy();
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+    browser.sleep(500);
+  });
+
 
   /**
    * @param content of event

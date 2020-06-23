@@ -159,6 +159,13 @@
   </form>
 </p-dialog>
 
+<div class="btn-group-toggle" role="group">
+  <span *ngFor="let year of years">
+    <button id="yearFilter_{{year}}" type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
+  </span>
+  <button id="yearFilterFuture" type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
+</div>
+
 <table class="grouptable table table-responsive">
   <tr>
     <th>id</th>
