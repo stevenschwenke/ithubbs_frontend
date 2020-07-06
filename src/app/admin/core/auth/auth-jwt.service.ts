@@ -2,12 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {LocalStorageService} from 'ngx-webstorage';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class AuthServerProvider {
-  constructor(private http: HttpClient, private $localStorage: LocalStorageService) {
+  constructor(private http: HttpClient) {
   }
 
   login(credentials): Observable<any> {
@@ -19,20 +18,15 @@ export class AuthServerProvider {
 
     function authenticateSuccess(resp) {
       const idToken = resp.body['id_token'];
-      this.storeAuthenticationToken(idToken);
+      localStorage.setItem('authenticationToken', idToken);
       return idToken;
     }
   }
 
-
-  storeAuthenticationToken(jwt) {
-    this.$localStorage.store('authenticationToken', jwt);
-  }
-
   logout(): Observable<any> {
     return new Observable(observer => {
-      this.$localStorage.clear('authenticationToken');
-      this.$localStorage.clear('username');
+      localStorage.removeItem('authenticationToken');
+      localStorage.removeItem('username');
       observer.complete();
     });
   }

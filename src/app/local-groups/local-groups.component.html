@@ -1,204 +1,29 @@
 <h1>Gruppen</h1>
 <p>
-  Reihenfolge alphabetisch.
+  Hier findest du eine Auflistung der uns bekannten <span *ngIf="groupStatistics">{{groupStatistics.totalNumberOfGroups}}</span> Community-Gruppen in Braunschweig.
 </p>
 
 <table class="table table-responsive">
   <tr>
     <th></th>
-    <th>Gruppe</th>
-    <th>Beschreibung</th>
+    <th style="width: 30%">Gruppe</th>
+    <th style="width: 30%">Beschreibung</th>
+    <th style="width: 30%">Statistiken</th>
   </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/AWS-User-Group-Braunschweig2/" target="_blank">AWS User Group Braunschweig</a>
-    </td>
-    <td>
-      Lokale AWS User Group.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/Logo_dotnet-bs_450x50.png" width="225" height="25" >
-    </td>
-    <td>
-      <a href="http://dotnet-bs.de" target="_blank">.NET Developer Group Braunschweig</a>
-    </td>
-    <td>
-      Lokale .NET User Group. Monatliche Vorträge.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/Braunschweig-Artificial-Intelligence-Meetup/" target="_blank">Braunschweig Artificial Intelligence Meetup</a>
-    </td>
-    <td>
-      "Fairly technical discussions regarding latest trends in artificial intelligence, with a clear focus on deep learning technologies."
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/Braunschweig-C-Meetup/" target="_blank">Braunschweig C++ Meetup</a>
-    </td>
-    <td>
-      "This meetup is about people interested in C++ sharing their thoughts and findings on the subject."
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/Braunschweig-Innovation-Meetup/?_locale=de-DE" target="_blank">Braunschweig Kubernetes Meetup</a>
-    </td>
-    <td>
-      "Dieses Meetup behandelt alle Themen rund um Kubernetes, Docker und Cloud-Technologien."
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/Braunschweiger-Technology-Meetup/" target="_blank">Braunschweiger Technology Meetup</a>
-    </td>
-    <td>
-      "Unser Meetup ist vor allem eins: Technologisch! Wir wollen Macher, Entwickler, Denker und Erfinder zusammen bringen."
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/logo_digitalcourage.png" width="170" height="25">
-    </td>
-    <td>
-      <a href="https://digitalcourage.de/treffen-vor-ort/braunschweig" target="_blank">Digitalcourage Ortsgruppe Braunschweig</a>
-    </td>
-    <td>
-      Ortsgruppe des <a href="https://digitalcourage.de" target="_blank">Digitalcourage e.V.</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/Logo_Freifunk_Braunschweig.svg" width="109" height="50">
-    </td>
-    <td>
-      <a href="https://freifunk-bs.de" target="_blank">Freifunk Braunschweig</a>
-    </td>
-    <td>
-      Aufbau eines regionalen und kostenfrei nutzbaren Datennetzes mit WLAN.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/GDG-Braunschweig/" target="_blank">GDG Braunschweig</a>
-    </td>
-    <td>
-      Google Developer Group mit Fokus auf App-Entwicklung.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/logo_hacktalk_bs_klein.png" width="81" height="50">
-    </td>
-    <td>
-      <a href="https://hacktalk.de/" target="_blank">HackTalk</a>
-    </td>
-    <td>
-      Monatlich stattfindende Treffen in kleinem Kreis mit 4 bis 15 Besuchern. Es gibt immer einen oder zwei Vorträge, über die im Anschluss geredet wird. Besonderheit: "Lean Forward", im Mittelpunkt steht der Austausch miteinander.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/jug_final_small.png" width="80" height="50">
-    </td>
-    <td>
-      <a href="http://www.jug-ostfalen.de" target="_blank">JUG Ostfalen</a>
-    </td>
-    <td>
-      Lokale Java User Group. Monatliche Vorträge mit teilweise vielen Besuchern (> 60).
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="https://www.meetup.com/de-DE/Kotlin-User-Group-Brunswick/" target="_blank">Kotlin User Group Brunswick</a>
-    </td>
-    <td>
-      User Group der Programmiersprache Kotlin.
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      <!-- noch kein Logo erhaeltlich -->
-    </td>
-    <td>
-      <a href="http://royaljs.de" target="_blank">Royal JS</a>
-    </td>
-    <td>
-      Lokale Java Script User Group. Treffen alle drei Monate.
-    </td>
-  </tr>
-  <!--<tr>-->
-  <!--<td>-->
-  <!--&lt;!&ndash; noch kein Logo erhaeltlich &ndash;&gt;-->
-  <!--</td>-->
-  <!--<td>-->
-  <!--<a href="https://www.meetup.com/de-DE/Software-Craftsmanship-Brunswick/" target="_blank">Software Craftsmanship Brunswick</a>-->
-  <!--</td>-->
-  <!--<td>-->
-  <!--Regelmäßig stattfindende Coding Katas.-->
-  <!--</td>-->
-  <!--</tr>-->
-  <tr>
-    <td>
-      <img src="../../assets/images/443px-Sanduhr_final.svg.png" width="184" height="50">
-    </td>
-    <td>
-      <a href="https://stratum0.org/" target="_blank">Stratum0</a>
-    </td>
-    <td>
-      Lokaler Hackerspace mit sehr vielen Initiativen und Veranstaltungen.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/bsSpeaks.png" width="183" height="34">
-    </td>
-    <td>
-      <a href="https://bsspeaks.de" target="_blank">Braunschweig Toastmasters</a>
-    </td>
-    <td>
-      Unser Ziel ist es die öffentliche Rede zu fördern und zu trainieren. Wir sind einer von zahlreichen Clubs innerhalb von Toastmasters. Schon seit 1924 unterstützt Toastmasters die Entwicklung rhetorischer Fähigkeiten mit speziellen Trainingsprogrammen.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="../../assets/images/logo_wetryagile.jpg" width="100" height="50">
-    </td>
-    <td>
-      <a href="https://www.eventbrite.de/o/we-try-agile-18551287317" target="_blank">We Try Agile</a>
-    </td>
-    <td>
-      We try Agile wird organisiert von Lea und Marius, zwei agile Coaches aus dem Raum Braunschweig, die in der Region nach Agilisten zum Austausch suchen.
+  <tr *ngFor="let group of groups">
+    <td id="groupLogo_{{group.id}}"><div style="text-align: center"><img *ngIf="group.extractedImageURI" [src]="group.extractedImageURI" height="50px"/></div></td>
+    <td id="groupName_{{group.id}}"><a href="{{group.url}}" target="_blank">{{group.name}}</a></td>
+    <td id="groupDescription_{{group.id}}">{{group.description}}</td>
+    <td id="groupStats_{{group.id}}">
+      {{group.totalNumberOfEvents}} Events organisiert.<br />
+      <div *ngIf="group.totalNumberOfEvents > 0">
+        Erstes Event {{group.daysPassedSinceFirstKnownEvent | dayRenderPipe}}.<br />
+        Letztes Event {{group.daysPassedSinceLastKnownEvent | dayRenderPipe}}.<br />
+        Im Schnitt {{group.averageNumberOfEventsPerMonth}} Events pro Monat.
+      </div>
     </td>
   </tr>
 </table>
-
 
 <p>
   <b><a href="mailto:steven@stevenschwenke.de">Neue Gruppe melden</a></b>

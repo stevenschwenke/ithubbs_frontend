@@ -2,17 +2,34 @@
 <p>
     Hier findest du eine Übersicht der anstehenden Veranstaltungen aller Gruppen in Braunschweig.
 </p>
+
+<div class="btn-group-toggle" role="group">
+  <span *ngFor="let year of years">
+    <button id="yearFilter_{{year}}" type="button" class="btn btn-default" (click)="selectYear(year)">{{year}}</button>
+  </span>
+  <button id="yearFilterFuture" type="button" class="btn btn-default" (click)="selectYear(0)">künftige</button>
+</div>
+
 <table class="table table-responsive">
     <tr>
         <th>Datum</th>
+        <th>Gruppe</th>
         <th>Event</th>
     </tr>
   <tr *ngFor="let event of events">
-    <td>{{event.datetime | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
-    <td><a href="{{event.url}}" target="_blank">{{event.name}}</a></td>
+    <td id="eventDate_{{event.id}}">{{event.datetime | date:'EEEE, dd.MM.yyyy HH:mm'}}</td>
+    <td id="eventGroup_{{event.id}}"><a *ngIf="event.group" href="{{event.group.url}}" target="_blank">{{event.group.name}}</a></td>
+    <td>
+      <a href="{{event.url}}" target="_blank">{{event.name}}</a>
+      <span *ngIf="event.generalPublic" pTooltip="Event ist nicht zu technisch und damit für die breite Öffentlichkeit geeignet." style="margin-left: 10px"><img src="/assets/images/public-interest-icon.png" width="20px"></span>
+    </td>
   </tr>
-
 </table>
+<p *ngIf="eventStatistics">
+  Durchschnittliche Anzahl Veranstaltungen pro Monat: {{eventStatistics.averageNumberOfEventsPerMonth}}<br />
+  Anzahl künftiger Veranstaltungen: {{eventStatistics.numberOfFutureEvents}}<br />
+  Gesamtanzahl Veranstaltungen: {{eventStatistics.totalNumberOfEvents}}
+</p>
 <p>
     <b><a href="mailto:steven@stevenschwenke.de">Neue Veranstaltung melden</a></b>
 </p>

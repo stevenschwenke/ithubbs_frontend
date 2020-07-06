@@ -17,7 +17,6 @@ import {CollapseModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {EventService} from './shared/event.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {LocalStorageService, Ng2Webstorage, SessionStorageService} from 'ngx-webstorage';
 import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
 import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
 import {LoginMaskInterceptor} from './blocks/interceptor/login-mask.interceptor';
@@ -28,6 +27,12 @@ import {ConferenceComponent} from './conference/conference.component';
 import localeDE from '@angular/common/locales/de';
 import {AssociationComponent} from './association/association.component';
 import {CarouselModule} from 'primeng/carousel';
+import {GalleriaModule} from 'primeng/galleria';
+import {Conference2019Component} from './conference2019/conference2019.component';
+import {GroupService} from './admin/shared/group.service';
+import {TooltipModule} from 'primeng/primeng';
+import {DataprivacystatementComponent} from './dataprivacystatement/dataprivacystatement.component';
+import {SharedModule} from './shared/shared.module';
 
 registerLocaleData(localeDE);
 
@@ -38,6 +43,7 @@ registerLocaleData(localeDE);
     CurrentCampaignsComponent,
     CurrentEverythingComponent,
     LocalGroupsComponent,
+    DataprivacystatementComponent,
     ImprintComponent,
     UsageComponent,
     JourFixesComponent,
@@ -45,6 +51,7 @@ registerLocaleData(localeDE);
     UpcomingEventsComponent,
     FooterComponent,
     ConferenceComponent,
+    Conference2019Component,
     AssociationComponent
   ],
   imports: [
@@ -54,16 +61,18 @@ registerLocaleData(localeDE);
     CollapseModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule,
-    Ng2Webstorage.forRoot({prefix: 'ithubbs', separator: '-'}),
-    CarouselModule
+    CarouselModule,
+    GalleriaModule,
+    TooltipModule,
+    SharedModule
   ],
   providers: [
     EventService,
+    GroupService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
-      deps: [LocalStorageService, SessionStorageService]
+      multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminEventsComponent} from './events/admin-events.component';
@@ -10,15 +10,20 @@ import {AdminGroupsComponent} from './groups/admin-groups.component';
 import {AdminGroupService} from './shared/admin.group.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
+  AutoCompleteModule,
   CalendarModule,
+  CheckboxModule,
   ConfirmationService,
   ConfirmDialogModule,
   DialogModule,
+  FileUploadModule,
   MessageModule,
   MessageService,
-  OverlayPanelModule
+  OverlayPanelModule,
+  TooltipModule
 } from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import {ToastModule} from 'primeng/toast';
     ToastModule,
     ConfirmDialogModule,
     DialogModule,
-    CalendarModule
+    CalendarModule,
+    FileUploadModule,
+    CheckboxModule,
+    TooltipModule,
+    AutoCompleteModule,
+    SharedModule
   ],
   providers: [
     AdminEventService,

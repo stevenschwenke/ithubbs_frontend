@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Group} from '../../shared/group';
 import {Observable} from 'rxjs';
@@ -11,16 +11,22 @@ export class AdminGroupService {
   constructor(private http: HttpClient) {
   }
 
-  getAllGroups() {
-    return this.http.get<Group[]>(environment.adminGroupsUrl);
+  createNewGroup(newGroup: Group): Observable<Group> {
+    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
 
-  createNewGroup(newGroup: Group): Observable<String> {
-    return this.http.post<String>(environment.adminGroupsUrl, newGroup);
+  postNewLogo(groupId: number, logo: File): Observable<HttpResponse<object>> {
+    const formData = new FormData();
+    formData.append('groupID', groupId + '');
+    formData.append('file', logo);
+
+    return this.http.post<HttpResponse<object>>(environment.adminGroupsUrl + '/logo', formData, {
+      observe: 'response'
+    });
   }
 
   editGroup(newGroup: Group): Observable<Group> {
-    return this.http.post<Group>(environment.adminGroupsUrl + '/edit', newGroup);
+    return this.http.post<Group>(environment.adminGroupsUrl, newGroup);
   }
 
   deleteGroup(group: Group): Observable<Group> {
@@ -32,7 +38,6 @@ export class AdminGroupService {
         id: group.id
       }
     };
-    return this.http.delete<Group>(environment.adminGroupsUrl + '/delete', options);
+    return this.http.delete<Group>(environment.adminGroupsUrl, options);
   }
-
 }

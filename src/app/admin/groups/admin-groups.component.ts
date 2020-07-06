@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../shared/user.service';
 import {LoginService} from '../core/login/login.service';
 import {Group} from '../../shared/group';
 import {AdminGroupService} from '../shared/admin.group.service';
 import {
   faEdit as faEdit,
+  faExclamationTriangle as faExclamationTriangle,
   faPlusSquare as faPlusSquare,
   faRadiation as faRadiation,
   faSignOutAlt as faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ConfirmationService, MessageService, OverlayPanel} from 'primeng/primeng';
+import {ConfirmationService, FileUpload, MessageService, OverlayPanel} from 'primeng/primeng';
+import {GroupService} from '../shared/group.service';
 
 @Component({
   selector: 'app-admin-groups',
@@ -21,18 +23,24 @@ export class AdminGroupsComponent implements OnInit {
   newGroupForm: FormGroup;
   editGroupForm: FormGroup;
 
+  @ViewChild('logoUploaderNewGroup', { static: true }) logoUploaderNewGroup: FileUpload;
+  @ViewChild('logoUploaderExistingGroup', { static: true }) logoUploaderExistingGroup: FileUpload;
+
   faPlusSquare = faPlusSquare;
   faRadiation = faRadiation;
   faEdit = faEdit;
   faSignOutAlt = faSignOutAlt;
+  faExclamationTriangle = faExclamationTriangle;
 
   loginUser: string;
 
   groups: Group[];
   displayGroupEditDialog: boolean;
+  private currentFileUpload: File;
 
   constructor(private formBuilder: FormBuilder,
               private adminGroupService: AdminGroupService,
+              private groupService: GroupService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
@@ -54,8 +62,15 @@ export class AdminGroupsComponent implements OnInit {
       'existingGroupDescription': new FormControl('', Validators.required)
     });
 
-    this.adminGroupService.getAllGroups().subscribe((groups) => {
+    this.groupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
+      this.groups.forEach(group => {
+        const imageLink = group._links.image;
+        if (imageLink) {
+          group.extractedImageURI = imageLink.href;
+        }
+        return  group;
+      });
     });
     this.loginUser = this.userService.getUsername();
   }
@@ -71,11 +86,11 @@ export class AdminGroupsComponent implements OnInit {
       newGroupForm.value.newGroupURL,
       newGroupForm.value.newGroupDescription);
 
-    this.adminGroupService.createNewGroup(newGroup).subscribe((id: string) => {
+    this.adminGroupService.createNewGroup(newGroup).subscribe((group: Group) => {
       overlay.hide();
 
-      newGroup.id = id;
-      this.groups.push(newGroup);
+      newGroup.id = group.id;
+      newGroup._links = group._links;
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neue Gruppe angelegt.'});
     }, (error) => {
       this.messageService.add({
@@ -84,8 +99,24 @@ export class AdminGroupsComponent implements OnInit {
         detail: 'Neue Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
     }, () => {
+
+      this.groups.push(newGroup);
+
       // Reset form. If that is not done, the form will contain the last input when opened again.
       newGroupForm.reset();
+
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((httpResponse) => {
+
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          newGroup._links.image = document.createElement('link');
+          newGroup._links.image.href = httpResponse.headers.get('Location').toString() + '?random+\=' + Math.random();
+          newGroup.extractedImageURI = newGroup._links.image.href;
+          this.currentFileUpload = null;
+          this.logoUploaderNewGroup.clear();
+        });
+      }
     });
   }
 
@@ -107,11 +138,13 @@ export class AdminGroupsComponent implements OnInit {
       editGroupForm.value.existingGroupDescription);
     newGroup.id = editGroupForm.value.existingGroupId;
 
+    let changedGroup: Group;
+
     this.adminGroupService.editGroup(newGroup).subscribe(() => {
 
       this.displayGroupEditDialog = false;
 
-      const changedGroup = this.groups.find(g => g.id === newGroup.id);
+      changedGroup = this.groups.find(g => g.id === newGroup.id);
       changedGroup.name = newGroup.name;
       changedGroup.url = newGroup.url;
       changedGroup.description = newGroup.description;
@@ -123,6 +156,18 @@ export class AdminGroupsComponent implements OnInit {
         summary: 'Server-Fehler',
         detail: 'Gruppe konnte nicht gespeichert werden: \n' + error.message
       });
+    }, () => {
+
+      if (this.currentFileUpload != null) {
+        this.adminGroupService.postNewLogo(Number(newGroup.id), this.currentFileUpload).subscribe((httpResponse) => {
+          // Force reloading the logo image in the template via call to server with randomized URI. URI of image is the
+          // same, however it has to change for Angular to reload it.
+          let location = httpResponse.headers.get('Location').toString();
+          changedGroup.extractedImageURI = location += '?random+\=' + Math.random();
+          this.currentFileUpload = null;
+          this.logoUploaderExistingGroup.clear();
+        });
+      }
     });
   }
 
@@ -145,5 +190,9 @@ export class AdminGroupsComponent implements OnInit {
         });
       }
     });
+  }
+
+  onUploadLogo(event) {
+    this.currentFileUpload = event.files[0];
   }
 }

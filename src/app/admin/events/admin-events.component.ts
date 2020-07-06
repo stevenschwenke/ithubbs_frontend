@@ -7,6 +7,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {OverlayPanel} from 'primeng/primeng';
 import {Event} from '../../shared/event';
+import {Group} from '../../shared/group';
+import {GroupService} from '../shared/group.service';
+import {EventUpdateDTO} from '../../shared/eventUpdateDTO';
+import {EventService} from '../../shared/event.service';
 
 @Component({
   selector: 'app-events',
@@ -26,14 +30,26 @@ export class AdminEventsComponent implements OnInit {
   loginUser: string;
 
   events: Event[];
+  years: number[];
 
   displayEventEditDialog: boolean;
 
+  // link group to event combobox
+  allGroups: Group[];
+  availableGroupsAfterFiltering: Group[];
+
+  /** global variable to keep selected group while editing event because it cannot be saved as FormControl */
+  selectedGroup: Group;
+
+  private readonly NO_GROUP_STRING = '- keine -';
+
   constructor(private formBuilder: FormBuilder,
               private adminEventService: AdminEventService,
+              private eventService: EventService,
               private userService: UserService,
               private messageService: MessageService,
               private loginService: LoginService,
+              private groupService: GroupService,
               private confirmationService: ConfirmationService) {
   }
 
@@ -42,26 +58,35 @@ export class AdminEventsComponent implements OnInit {
     this.newEventForm = this.formBuilder.group({
       'newEventName': new FormControl('', Validators.required),
       'newEventDate': new FormControl('', Validators.required),
-      'newEventURL': new FormControl('', Validators.required)
+      'newEventURL': new FormControl('', Validators.required),
+      'newEventGroup': new FormControl(''),
+      'newEventGeneralPublic': new FormControl('')
     });
 
     this.editEventForm = this.formBuilder.group({
       'existingEventId': new FormControl('', Validators.required),
       'existingEventName': new FormControl('', Validators.required),
       'existingEventDate': new FormControl('', Validators.required),
-      'existingEventURL': new FormControl('', Validators.required)
+      'existingEventURL': new FormControl('', Validators.required),
+      'existingEventGroup': new FormControl(''),
+      'existingEventGeneralPublic': new FormControl('')
     });
 
     this.adminEventService.getAllEvents().subscribe((events: Event[]) => {
-      events.every(event => {
-        const seconds: number = <number>(<unknown>event.datetime);
-        const date = new Date();
-        date.setTime(seconds * 1000);
-        event.datetime = date;
-        return true;
-      });
       this.events = events;
     });
+
+    this.eventService.getEventYears().subscribe((years: number[]) => {
+      this.years = years;
+    });
+
+    this.groupService.getAllGroups().subscribe((groups: Group[]) => {
+      this.allGroups = [new Group(this.NO_GROUP_STRING, '', '')];
+      this.allGroups.push(...groups);
+      this.availableGroupsAfterFiltering = [new Group(this.NO_GROUP_STRING, '', '')];
+      this.availableGroupsAfterFiltering.push(...groups);
+    });
+
     this.loginUser = this.userService.getUsername();
   }
 
@@ -69,19 +94,23 @@ export class AdminEventsComponent implements OnInit {
     this.loginService.logout();
   }
 
-
   onAddNewEvent(event, newEventForm: FormGroup, overlay: OverlayPanel) {
 
-    const newEvent = new Event(
+    const newEvent = new EventUpdateDTO(
+      null,
       newEventForm.value.newEventName,
       newEventForm.value.newEventDate,
-      newEventForm.value.newEventURL);
+      newEventForm.value.newEventURL,
+      this.selectedGroup ? this.selectedGroup.id : null,
+      newEventForm.value.newEventGeneralPublic);
 
-    this.adminEventService.createNewEvent(newEvent).subscribe((id: string) => {
+    this.selectedGroup = null;
+
+    this.adminEventService.createNewEvent(newEvent).subscribe((eventFromServer: Event) => {
       overlay.hide();
 
-      newEvent.id = id;
-      this.events.push(newEvent);
+      newEvent.id = eventFromServer.id;
+      this.events.push(eventFromServer);
       this.messageService.add({severity: 'info', summary: 'Anlegen erfolgreich', detail: 'Neues Event angelegt.'});
     }, (error) => {
       this.messageService.add({
@@ -95,23 +124,29 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onEditEvent($event: MouseEvent, overlayEditEvent: OverlayPanel, editEventForm: FormGroup, event: Event) {
+  onEditEvent(editEventForm: FormGroup, event: Event) {
     this.displayEventEditDialog = true;
+    this.selectedGroup = event.group;
 
     editEventForm.setValue({
       existingEventId: event.id,
       existingEventName: event.name,
       existingEventDate: event.datetime,
-      existingEventURL: event.url
+      existingEventURL: event.url,
+      existingEventGroup: event.group ? event.group : 'none',
+      existingEventGeneralPublic: event.generalPublic ? event.generalPublic : false
     });
   }
 
   onSaveEditedEvent($event: {}, editEventForm: FormGroup) {
-    const newEvent = new Event(
+
+    const newEvent = new EventUpdateDTO(
+      editEventForm.value.existingEventId,
       editEventForm.value.existingEventName,
       editEventForm.value.existingEventDate,
-      editEventForm.value.existingEventURL);
-    newEvent.id = editEventForm.value.existingEventId;
+      editEventForm.value.existingEventURL,
+      this.selectedGroup ? this.selectedGroup.id : null,
+      editEventForm.value.existingEventGeneralPublic);
 
     this.adminEventService.editEvent(newEvent).subscribe(() => {
 
@@ -121,6 +156,9 @@ export class AdminEventsComponent implements OnInit {
       changedEvent.name = newEvent.name;
       changedEvent.datetime = newEvent.datetime;
       changedEvent.url = newEvent.url;
+      changedEvent.generalPublic = newEvent.generalPublic;
+      changedEvent.group = this.selectedGroup;
+      this.selectedGroup = null;
 
       this.messageService.add({severity: 'info', summary: 'Änderung erfolgreich', detail: 'Event geändert.'});
     }, (error) => {
@@ -132,7 +170,7 @@ export class AdminEventsComponent implements OnInit {
     });
   }
 
-  onDeleteEvent($event: MouseEvent, overlayEditEvent: HTMLElement, editEventForm: FormGroup, event: Event) {
+  onDeleteEvent(event: Event) {
     this.confirmationService.confirm({
       message: 'Event wirklich löschen? Achtung: Sie ist dann wirklich, wirklich weg!',
       accept: () => {
@@ -151,5 +189,27 @@ export class AdminEventsComponent implements OnInit {
         });
       }
     });
+  }
+
+  search(event) {
+    this.availableGroupsAfterFiltering =
+      [...this.allGroups]
+        .filter((group) => group.name.toLowerCase().includes(event.query.toLowerCase()));
+  }
+
+  selectGroup(selectedGroup: Group) {
+    this.selectedGroup = selectedGroup.name === this.NO_GROUP_STRING ? null : selectedGroup;
+  }
+
+  selectYear(year: number) {
+    if (year !== 0) {
+      this.eventService.getEventsOfYear(year).subscribe((events: Event[]) => {
+        this.events = events;
+      });
+    } else {
+      this.eventService.getAllCurrentEvents().subscribe((events: Event[]) => {
+        this.events = events;
+      });
+    }
   }
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Group} from '../shared/group';
+import {GroupService} from '../admin/shared/group.service';
+import {GroupStatistics} from '../shared/GroupStatistics';
 
 @Component({
   selector: 'app-local-groups',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocalGroupsComponent implements OnInit {
 
-  constructor() { }
+  groups: Group[];
+  groupStatistics: GroupStatistics;
+
+  constructor(private groupService: GroupService) {
+  }
 
   ngOnInit() {
+    this.groupService.getAllGroups().subscribe((groups) => {
+      this.groups = groups;
+      this.groups.forEach(group => {
+        const imageLink = group._links.image;
+        if (imageLink) {
+          group.extractedImageURI = imageLink.href;
+        }
+        return  group;
+      });
+
+    });
+
+    this.groupService.getGroupStatistics().subscribe(groupsStatistics => {
+      this.groupStatistics = groupsStatistics;
+    });
   }
 
 }
