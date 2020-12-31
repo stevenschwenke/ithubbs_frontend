@@ -1838,19 +1838,19 @@ fieldset:disabled a.btn {
   box-shadow: none; }
   .btn-success:hover {
     color: #fff;
-    background-color: #0b6e38;
-    border-color: #00684c; }
+    background-color: #9bc325;
+    border-color: #9bc325; }
   .btn-success:focus, .btn-success.focus {
     box-shadow: none, 0 0 0 0.2rem rgba(38, 170, 135, 0.5); }
   .btn-success.disabled, .btn-success:disabled {
     color: #fff;
-    background-color: #0b6e38;
-    border-color: #0b6e38; }
+    background-color: #9bc325;
+    border-color: #9bc325; }
   .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
   .show > .btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #00684c;
-    border-color: #005b43; }
+    background-color: #9bc325;
+    border-color: #9bc325; }
     .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
     .show > .btn-success.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(38, 170, 135, 0.5); }
@@ -13517,8 +13517,53 @@ body a{
     color: #0b6e38;
   }
 
- .mw-400{
+@media (min-width: 1201px) {
+ .mw-lg-400{
   min-width:400px;
   }
+}
 
+.footer ul.nav li{
+  display: block;
+  width: 100%;
+}
 
+.intro {
+  background-image: url(assets/images/index/BarcampIntro.png);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: left;
+}
+
+.intro .divider{
+  z-index: 50;
+}
+@media (max-width: 1200px) {
+.navbar-brand img{
+  width: 100px;
+  height: auto;
+  }
+}
+@media (max-width: 1500px) {
+.intro {
+ background-size: 65%;
+ background-position: -20%;
+ }
+
+}
+
+@media (max-width: 1200px) {
+.intro {
+ background-image: url(assets/images/index/BarcampIntroMobile.jpg);
+ background-size: cover !important;
+ background-position: center;
+ background-color: #9bc325;
+ }
+
+ .intro h1, .intro p{
+  color: white !important;
+  z-index: 25;
+  position: relative;
+  text-align: center;
+ }
+}

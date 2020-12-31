@@ -58,7 +58,12 @@ img {
   grid-gap: 1rem;
   padding: 1rem;
 }
-
+@media only screen and (min-width: 992px) {
+  .conf-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap-column: 8rem;
+  }
+}
 .conf-content__tile p {
   overflow-wrap: break-word;
 }
@@ -66,7 +71,7 @@ img {
 .conf-content__tile img {
   max-height: 5rem;
   display: block;
-  margin: auto;
+  margin: 0 auto 3rem auto;
 }
 
 .conf-content__tile h3 {
@@ -284,19 +289,6 @@ img {
   text-align: center;
 }
 
-@media only screen and (min-width: 577px) {
-  .conf-content {
-    grid-gap: 3rem;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media only screen and (min-width: 993px) {
-  .conf-content {
-    grid-gap-column: 8rem;
-  }
-}
-
 .talk-slider-speaker {
   font-weight: bold;
 }
@@ -316,8 +308,8 @@ img {
 }
 
 .contact__socialmedia img {
-  max-height: 6rem;
-  margin: 1rem;
+  max-height: 5rem;
+  margin: 2rem 1rem;
 }
 
 /* necessary so that images in gallery are scaled properly (see https://stackoverflow.com/questions/41972631/fit-image-on-p-galleria-primeng-for-angular2-application ) */

@@ -67,9 +67,9 @@ img {
 }
 
 .conf-content__tile img {
-  max-height: 5rem;
+  max-height: 4.5rem;
   display: block;
-  margin: auto;
+  margin: 0 auto 2.5rem auto;
 }
 
 .conf-content__tile h3 {
