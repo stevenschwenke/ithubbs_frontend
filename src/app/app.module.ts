@@ -16,6 +16,8 @@ import {EventsComponent} from './events/events.component';
 import {ParticipateComponent} from './participate/participate.component';
 import {FooterComponent} from './footer/footer.component';
 import {UsageComponent} from './usage/usage.component';
+import {KnowledgeComponent} from './knowledge/knowledge.component';
+import {KnowledgeArticleComponent} from './knowledge-article/knowledge-article.component';
 import {CollapseModule} from 'ngx-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {EventService} from './shared/event.service';
@@ -52,6 +54,8 @@ registerLocaleData(localeDE);
     UpcomingEventsComponent,
     EventsComponent,
     ParticipateComponent,
+    KnowledgeComponent,
+    KnowledgeArticleComponent,
     FooterComponent,
     ConferenceComponent,
     Conference2019Component,

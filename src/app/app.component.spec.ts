@@ -15,6 +15,7 @@ import {RegionalConferencesComponent} from './regional-conferences/regional-conf
 import {UpcomingEventsComponent} from './upcoming-events/upcoming-events.component';
 import {EventsComponent} from './events/events.component';
 import {ParticipateComponent} from './participate/participate.component';
+import {KnowledgeComponent} from './knowledge/knowledge.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {CollapseModule} from 'ngx-bootstrap';
@@ -47,6 +48,8 @@ describe('AppComponent', () => {
         RegionalConferencesComponent,
         UpcomingEventsComponent,
         EventsComponent,
+        KnowledgeComponent,
+        KnowledgeArticleComponent,
         FooterComponent
       ],
       providers: [
